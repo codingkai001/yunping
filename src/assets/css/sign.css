@@ -1,0 +1,52 @@
+body {
+    background-image: url("../img/background.jpg");
+    background-attachment: fixed;
+    background-size: 100%;
+}
+
+.sign-container {
+    width: 300px;
+    margin: 130px auto;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    padding: 50px;
+    background-color: #409EFF;
+}
+
+.el-input__inner {
+    border-radius: 20px;
+}
+
+.el-form-item__label {
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+}
+
+.sign-container h2 {
+    text-align: center;
+}
+
+/*登录按钮*/
+.sign-container > .el-button {
+    position: relative;
+    width: 100px;
+    left: 110px;
+    height: 40px;
+    font-size: 18px;
+}
+
+.el-row {
+    width: 100%;
+    margin-bottom: 30px;
+    left: 20px;
+
+
+}
+
+/*登录注册标签*/
+.el-row > .el-button {
+    width: 45%;
+    height: 45px;
+    font-size: 20px;
+}
