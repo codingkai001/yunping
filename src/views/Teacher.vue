@@ -62,7 +62,7 @@
 				date: '2016-05-02',
 				name: '王小虎',
 				address: '上海市普陀区金沙江路 1518 弄'
-			}
+            };
 			return {
 				tableData: Array(15).fill(item),
 				name: '汪老师'
@@ -74,7 +74,7 @@
 	}
 </script>
 
-<style>
+<style scoped>
 	* {
 		margin: 0;
 		padding: 0;
@@ -82,7 +82,10 @@
 
 	#teacher {
 
-		background: url("../assets/img/bgd3.jpg");
+        /*background: url("../assets/img/bgd1.jpg") no-repeat;*/
+        /*background-attachment: fixed;*/
+        /*background-size: 100%;*/
+        /*background-color: white;*/
 	}
 
 	#teacher, #all-panel {
@@ -92,7 +95,7 @@
 	}
 
 	#all-panel {
-		opacity: 0.9;
+        /*opacity: 0.9;*/
 	}
 
 	#all-panel > .el-aside {
