@@ -54,9 +54,9 @@
 
 <script>
 	//导入状态栏和主面板组件
-	import TopStatusBar from '../components/TopStatusBar'
-	import SideStatusBar from '../components/SideStatusBar'
-	import MainContainer from '../components/MainContainer'
+	// import TopStatusBar from '../components/TopStatusBar'
+	// import SideStatusBar from '../components/SideStatusBar'
+	// import MainContainer from '../components/MainContainer'
 
 	export default {
 		name: 'Teacher',
