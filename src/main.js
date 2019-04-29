@@ -5,8 +5,10 @@ import axios from 'axios'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
+axios.defaults.baseURL = '/api';
+axios.defaults.withCredentials = true;
+global.axios = axios;
 Vue.use(ElementUI);
-Vue.prototype.$http = axios;
 Vue.config.productionTip = false;
 
 new Vue({

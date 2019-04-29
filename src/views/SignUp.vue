@@ -36,7 +36,8 @@
                     pwd2: '',
                     user_school: '',
                     user_role: 1
-                }
+                },
+                authenticated: false
             }
         },
         methods: {
@@ -48,10 +49,34 @@
             to_sign_up() {
                 this.$router.push({path: '/sign_up',})
             },
+            //注册字段验证
+            auth_params() {
+                if (this.reg_stu.pwd1 === this.reg_stu.pwd2) {
+                    this.authenticated = true;
+                } else {
+                    this.authenticated = false;
+                }
+            },
             //注册验证
             sign_up() {
-                alert(this.user.username);
-                alert(this.user.pwd1);
+                this.auth_params();
+                if (this.authenticated) {
+                    axios.post('/user/register', {
+                        "userAccount": this.reg_stu.user_account,
+                        "userName": this.reg_stu.username,
+                        "userPass": this.reg_stu.pwd1,
+                        "userRole": this.reg_stu.user_role,
+                        "userSchool": this.reg_stu.user_school
+                    }).then(function (response) {
+                        var res_body = response['data'];
+                        console.log(res_body.data);
+                    }).catch(function (error) {
+                        console.log(error);
+                        alert("服务异常，请稍后重试！");
+                    });
+                } else {
+                    alert("注册信息有误！");
+                }
             }
         },
 

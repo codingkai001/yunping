@@ -3,10 +3,10 @@ import Router from 'vue-router'
 import SignIn from './views/SignIn'
 import SignUp from './views/SignUp'
 import Teacher from './views/Teacher'
-import Test from './components/Test'
-import QuestionBank from './components/Test'
+// import Test from './components/Test'
+// import QuestionBank from './components/Test'
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
 	mode: 'history',
@@ -31,11 +31,11 @@ export default new Router({
 			name: 'teacher',
 			component: Teacher
 		},
-        {
-            path: '/test',
-            name: 'Test.vue',
-            component: Test
-        }
+        // {
+        //     path: '/test',
+        //     name: 'Test.vue',
+        //     component: Test
+        // }
 
 	]
 })

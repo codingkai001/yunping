@@ -1,5 +1,5 @@
 <template>
-	<div id="sign-in">
+    <div id="sign-in">
         <transition name="el-zoom-in-top">
             <div v-show="show" class="sign-container">
                 <div class="top-button">
@@ -15,22 +15,22 @@
                 <el-button type="info" round @click="sign_in" class="to-sign">登录</el-button>
             </div>
         </transition>
-	</div>
+    </div>
 </template>
 
 <script>
-	export default {
-		name: 'SignIn',
-		data () {
-			return {
+    export default {
+        name: 'SignIn',
+        data() {
+            return {
                 show: false,
-				user: {
+                user: {
                     user_account: '',
-					pwd: ''
-				}
-			}
-		},
-		methods: {
+                    pwd: ''
+                }
+            }
+        },
+        methods: {
             //跳转到登录页面
             to_sign_in() {
                 this.$router.push({path: '/sign_in',})
@@ -39,19 +39,26 @@
             to_sign_up() {
                 this.$router.push({path: '/sign_up',})
             },
-			//登录验证
-			sign_in () {
-                alert(this.user.username);
-                alert(this.user.pwd);
-
-			}
+            //登录验证
+            sign_in() {
+                axios.post('/user/login', {
+                    "userAccount": this.user.user_account,
+                    "userPass": this.user.pwd
+                }).then(function (response) {
+                    var res_body = response['data'];
+                    console.log(res_body.data);
+                }).catch(function (error) {
+                    console.log(error);
+                    alert("服务异常，请稍后重试！");
+                });
+            }
         },
         mounted() {
             //组件挂载后过渡动画载入登录注册框
             this.show = true;
         }
 
-	}
+    }
 </script>
 
 <style>
