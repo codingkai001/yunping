@@ -1,5 +1,5 @@
 <template>
-    <div id="NewClass">
+    <div id="new-class">
         <el-form :model="form" label-width="80px" ref="form">
             <el-form-item label="班级名称">
                 <el-input placeholder="请输入班级名称" v-model="form.className"></el-input>
@@ -53,7 +53,7 @@
 
 <script>
     export default {
-        name: 'Test',
+        name: 'NewClass',
         data () {
             return {
                 form: {
