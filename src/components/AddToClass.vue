@@ -1,5 +1,5 @@
 <template>
-    <div id="teacher">
+    <div id="add-to-class">
         <el-form :model="form" label-width="80px" ref="form">
             <el-form-item label="作业名称">
                 <el-input placeholder="请输入作业名称" v-model="homeworkName"></el-input>
