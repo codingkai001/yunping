@@ -16,6 +16,7 @@
                 <!--        修改成功        <new-class></new-class>-->
                 <class-detail></class-detail>
                 <!--        修改成功                        <join-class></join-class>-->
+                <!--  <new-dimension></new-dimension>-->
             </div>
         </div>
 	</div>
@@ -27,6 +28,7 @@
     import NewClass from '../components/NewClass';
     import JoinClass from '../components/JoinClass';
     import ClassDetail from '../components/ClassDetail';
+    import NewDimension from '../components/NewDimension'
 
 
 	export default {
@@ -42,6 +44,7 @@
             'new-class': NewClass,
             'join-class': JoinClass,
             'class-detail': ClassDetail,
+            'new-dimension': NewDimension
 		}
 	}
 </script>
