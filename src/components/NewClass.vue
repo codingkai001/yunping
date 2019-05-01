@@ -74,7 +74,8 @@
             },
 
             showInput () {
-                this.form.inputVisible = true
+                // console.log();
+                this.form.inputVisible = true;
                 this.$nextTick(_ => {
                     this.$refs.saveTagInput.$refs.input.focus()
                 })
@@ -85,8 +86,11 @@
                 if (inputValue) {
                     this.form.dynamicTags.push(inputValue)
                 }
-                this.form.inputVisible = false
+                this.form.inputVisible = false;
                 this.form.inputValue = ''
+            },
+            onSubmit() {
+                alert(this.form.dynamicTags);
             }
         },
         components: {}

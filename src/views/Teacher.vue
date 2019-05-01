@@ -1,146 +1,129 @@
 <template>
 	<div id="teacher">
-		<el-container id="all-panel">
-			<el-aside>
-				<div></div>
-				<el-menu>
-					<el-menu-item index="1">
-						<i class="el-icon-s-home"></i>
-						<span slot="title">首页</span>
-					</el-menu-item>
-					<el-menu-item index="2">
-						<i class="el-icon-menu"></i>
-						<span slot="title">题库</span>
-					</el-menu-item>
-					<el-menu-item index="3">
-						<i class="el-icon-folder-add"></i>
-						<span slot="title">新建作业</span>
-					</el-menu-item>
-					<el-menu-item index="4">
-						<i class="el-icon-folder"></i>
-						<span slot="title">查看作业</span>
-					</el-menu-item>
-					<el-menu-item index="5">
-						<i class="el-icon-edit-outline"></i>
-						<span slot="title">作业评分</span>
-					</el-menu-item>
-					<el-menu-item index="6">
-						<i class="el-icon-circle-plus"></i>
-						<span slot="title">新建班级</span>
-					</el-menu-item>
-
-				</el-menu>
-			</el-aside>
-			<el-header>
-				<h2>云评-高校学生成绩综合评估级可视化分析平台</h2>
-				<i class="el-icon-s-home"></i>
-				<span>{{name}}</span>
-			</el-header>
-			<el-container id="main-box">
-				<el-main>
-					<el-table :data="tableData">
-						<el-table-column prop="date" label="日期" width="140">
-						</el-table-column>
-						<el-table-column prop="name" label="姓名" width="120">
-						</el-table-column>
-						<el-table-column prop="address" label="地址">
-						</el-table-column>
-					</el-table>
-				</el-main>
-			</el-container>
-		</el-container>
+        <div class="top-info">
+            <h1>云评-高校学生成绩综合评估及可视化分析平台</h1>
+            <!--            <span>{{name}}</span>-->
+        </div>
+        <div class="menu-content">
+            <div class="side-menu">
+                <div class="menu-item">云班级</div>
+                <div class="menu-item">云团队</div>
+                <div class="menu-item">云作业</div>
+            </div>
+            <div class="content">
+                <class-list></class-list>
+                <!--                <new-homework></new-homework>-->
+                <!--                <new-class></new-class>-->
+                <!--                <class-detail></class-detail>-->
+                <add-to-class></add-to-class>
+            </div>
+        </div>
 	</div>
 </template>
 
 <script>
+    import ClassList from '../components/ClassList';
+    import NewHomework from '../components/NewHomework';
+    import NewClass from '../components/NewClass';
+    import AddToClass from '../components/AddToClass';
+    import ClassDetail from '../components/ClassDetail';
 
 
 	export default {
 		name: 'Teacher',
 		data () {
-			const item = {
-				date: '2016-05-02',
-				name: '王小虎',
-				address: '上海市普陀区金沙江路 1518 弄'
-            };
 			return {
-				tableData: Array(15).fill(item),
-				name: '汪老师'
+                name: '汪老师'
 			}
 		},
 		components: {
+            'class-list': ClassList,
+            'new-homework': NewHomework,
+            'new-class': NewClass,
+            'add-to-class': AddToClass,
+            'class-detail': ClassDetail,
+
 
 		}
 	}
 </script>
 
 <style scoped>
-	* {
-		margin: 0;
-		padding: 0;
-	}
+    #teacher {
+        position: absolute;
+        background: url("../assets/img/FZULibrary.jpg") no-repeat;
+        background-attachment: fixed;
+        background-size: 100%;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
 
-	#teacher {
+    #teacher .top-info {
+        width: 80%;
+        /*height: 10%;*/
+        padding: 5px;
+        margin: 50px auto;
+        /*border: 1px solid red;*/
+        box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+        background-color: rgba(106, 216, 216, 0.5);
+        border-radius: 20px;
 
-        /*background: url("../assets/img/bgd1.jpg") no-repeat;*/
-        /*background-attachment: fixed;*/
-        /*background-size: 100%;*/
-        /*background-color: white;*/
-	}
+    }
 
-	#teacher, #all-panel {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-	}
+    #teacher .top-info h1 {
+        color: rgb(35, 40, 44);
+        /*padding-left: 50px;*/
+        font-size: 35px;
+        text-align: center;
+    }
 
-	#all-panel {
-        /*opacity: 0.9;*/
-	}
+    /*#teacher .top-info span{*/
+    /*    float: right;*/
+    /*    display: inline-block;*/
+    /*}*/
 
-	#all-panel > .el-aside {
-		position: fixed;
-		width: 12% !important;
-		height: 93%;
-		top: 7%;
-		background-color: white;
-		color: #333;
-		font-weight: 600;
-		/*overflow: scroll;*/
-	}
 
-	#main-box {
-		position: fixed;
-		width: 88%;
-		right: 0;
-		height: 93%;
-		top: 7%;
-		background-color: white;
-	}
+    #teacher .menu-content {
+        width: 80%;
+        height: 70%;
+        margin: 50px auto;
+        /*border: 1px solid red;*/
+    }
 
-	.el-header {
-		font-size: 15px;
-		position: fixed;
-		background-color: white;
-		width: 100%;
-		right: 0;
-		color: #333;
-		height: 7% !important;
-	}
+    #teacher .menu-content .side-menu {
+        float: left;
+        margin: 2%;
+        width: 15%;
+        height: 90%;
+        /*border: 1px solid red;*/
+        box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+        background-color: rgba(255, 255, 255, 0.6);
+        border-radius: 20px;
+    }
 
-	.el-header > h2 {
-		text-align: center;
-		font-size: 25px;
-		line-height: 60px;
-	}
+    #teacher .menu-content .side-menu .menu-item {
+        float: top;
+        width: 60%;
+        margin: 20px auto;
+        padding: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+        background-color: rgba(106, 216, 216, 0.9);
+        border-radius: 20px;
+        color: white;
+        font-size: 25px;
+        font-weight: 800;
+        text-align: center;
+        /*line-height: 20px;*/
+    }
 
-	.el-header > span {
-		position: absolute;
-		text-align: right;
-	}
-
-	#main-box > .el-main {
-		padding: 0;
-	}
-
+    #teacher .menu-content .content {
+        float: left;
+        margin: 2%;
+        width: 75%;
+        height: 90%;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+        background-color: rgba(255, 255, 255, 0.6);
+        border-radius: 20px;
+    }
 </style>
