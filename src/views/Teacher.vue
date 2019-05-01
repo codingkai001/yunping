@@ -11,11 +11,11 @@
                 <div class="menu-item">云作业</div>
             </div>
             <div class="content">
-                <class-list></class-list>
-                <!--                <new-homework></new-homework>-->
-                <!--                <new-class></new-class>-->
-                <!--                <class-detail></class-detail>-->
-                <add-to-class></add-to-class>
+                <!--                <class-list></class-list>-->
+                <!--                                <new-homework></new-homework>-->
+                <new-class></new-class>
+                <!--                                <class-detail></class-detail>-->
+                <!--                <join-class></join-class>-->
             </div>
         </div>
 	</div>
@@ -25,7 +25,7 @@
     import ClassList from '../components/ClassList';
     import NewHomework from '../components/NewHomework';
     import NewClass from '../components/NewClass';
-    import AddToClass from '../components/AddToClass';
+    import JoinClass from '../components/JoinClass';
     import ClassDetail from '../components/ClassDetail';
 
 
@@ -40,15 +40,13 @@
             'class-list': ClassList,
             'new-homework': NewHomework,
             'new-class': NewClass,
-            'add-to-class': AddToClass,
+            'join-class': JoinClass,
             'class-detail': ClassDetail,
-
-
 		}
 	}
 </script>
 
-<style scoped>
+<style>
     #teacher {
         position: absolute;
         background: url("../assets/img/FZULibrary.jpg") no-repeat;
@@ -60,7 +58,7 @@
     }
 
     #teacher .top-info {
-        width: 80%;
+        width: 70%;
         /*height: 10%;*/
         padding: 5px;
         margin: 50px auto;
@@ -121,9 +119,12 @@
         float: left;
         margin: 2%;
         width: 75%;
-        height: 90%;
+        height: 100%;
         box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
         background-color: rgba(255, 255, 255, 0.6);
         border-radius: 20px;
+        overflow: auto;
+        /*border: 1px solid red;*/
+        /*padding: 50px;*/
     }
 </style>

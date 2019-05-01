@@ -95,13 +95,12 @@
         background-size: 100%;
         width: 100%;
         height: 100%;
-        overflow: hidden;
+        overflow: auto;
     }
 
     #sign-up .sign-container {
         width: 20%;
-        height: 42%;
-        margin: 15% auto;
+        margin: 15% auto 10% auto;
         box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
         border-radius: 20px;
         padding: 20px;
@@ -132,14 +131,14 @@
         box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
     }
 
-    .sign-up-form {
+    #sign-up .sign-up-form {
         padding: 20px;
     }
 
     #sign-up .el-input .el-input__inner {
         border-radius: 18px;
-        width: 80%;
-        margin: 5px 10%;
+        width: 70%;
+        margin: 5px 15%;
         background-color: rgba(255, 255, 255, 0.7);
         color: rgb(117, 121, 125);
         font-weight: 600;
@@ -149,9 +148,7 @@
     #sign-up .to-sign {
         width: 30%;
         margin: 0 35%;
-        height: 40px;
         font-size: 20px;
-        line-height: 16px;
         font-weight: 800;
         background-color: rgba(106, 216, 216, 0.9);
         color: white;

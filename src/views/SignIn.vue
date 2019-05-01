@@ -69,12 +69,11 @@
         background-size: 100%;
         width: 100%;
         height: 100%;
-        overflow: hidden;
+        overflow: auto;
     }
 
     #sign-in .sign-container {
         width: 20%;
-        height: 35%;
         margin: 15% auto;
         box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
         border-radius: 20px;
@@ -106,7 +105,7 @@
         color: rgb(117, 121, 125);
     }
 
-    .sign-in-form {
+    #sign-in .sign-in-form {
         padding: 20px;
     }
 
@@ -123,9 +122,7 @@
     #sign-in .to-sign {
         width: 30%;
         margin: 0 35%;
-        height: 40px;
         font-size: 20px;
-        line-height: 16px;
         font-weight: 800;
         background-color: rgba(106, 216, 216, 0.9);
         color: white;
