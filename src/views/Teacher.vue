@@ -13,9 +13,9 @@
             <div class="content">
                 <!--                <class-list></class-list>-->
                 <!--                                <new-homework></new-homework>-->
-                <new-class></new-class>
-                <!--                                <class-detail></class-detail>-->
-                <!--                <join-class></join-class>-->
+                <!--        修改成功        <new-class></new-class>-->
+                <class-detail></class-detail>
+                <!--        修改成功                        <join-class></join-class>-->
             </div>
         </div>
 	</div>
@@ -54,7 +54,7 @@
         background-size: 100%;
         width: 100%;
         height: 100%;
-        overflow: hidden;
+        overflow: auto;
     }
 
     #teacher .top-info {
@@ -115,6 +115,11 @@
         /*line-height: 20px;*/
     }
 
+    #teacher .menu-content .side-menu .menu-item:hover {
+        cursor: pointer;
+        background-color: rgb(103, 204, 204);
+        /*border: 0.5px solid white;*/
+    }
     #teacher .menu-content .content {
         float: left;
         margin: 2%;
