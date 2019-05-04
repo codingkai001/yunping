@@ -1,10 +1,10 @@
 <template>
     <div id="sign-in">
         <transition name="el-zoom-in-top">
-            <div v-show="show" class="sign-container">
+            <div v-show="show" class="sign-container" v-loading="loading">
                 <div class="top-button">
                     <el-button round id="in-button">登录</el-button>
-                    <el-button round id="up-button" @click="toSignUp">注册</el-button>
+                    <el-button round id="up-button" @click="toRegister">注册</el-button>
                 </div>
                 <div class="sign-in-form">
                     <el-form ref="form" :model="user">
@@ -12,14 +12,15 @@
                         <el-input v-model="user.userPass" placeholder="密码" type="password"></el-input>
                     </el-form>
                 </div>
-                <el-button type="info" round @click="signIn" class="to-sign">登录</el-button>
+                <el-button type="info" round @click="login" html-type="submit" class="to-sign">登录</el-button>
             </div>
         </transition>
     </div>
 </template>
 
 <script>
-import axios from 'axios'
+import { login } from '../../api/user'
+import UserStore from '../../store/user'
 
 export default {
   name: 'SignIn',
@@ -29,18 +30,25 @@ export default {
       user: {
         userAccount: '',
         userPass: ''
-      }
+      },
+      loading: false
     }
   },
   methods: {
-    // 跳转到注册页面
-    toSignUp () {
-      this.$router.push({ path: '/signup' })
+    toRegister () {
+      this.$router.push({ path: '/user/register' })
     },
     // 登录验证
-    signIn () {
-      axios.post('/user/login', this.user).then(res => {
-        console.log(res.data)
+    login () {
+      this.loading = true
+      login(this.user).then(res => {
+        console.log(res)
+        UserStore.commit('setUser', res)
+        this.loading = false
+      }).catch(e => {
+        this.$message.error(e.message)
+        console.log(e)
+        this.loading = false
       })
     }
   },
@@ -55,7 +63,7 @@ export default {
 <style>
     #sign-in {
         position: absolute;
-        background: url("../assets/img/FZULibrary.jpg") no-repeat;
+        background: url("../../assets/img/FZULibrary.jpg") no-repeat;
         background-attachment: fixed;
         background-size: 100%;
         width: 100%;

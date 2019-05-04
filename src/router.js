@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import SignIn from './views/SignIn'
-import SignUp from './views/SignUp'
+import UserLogin from './views/User/Login'
+import UserRegister from './views/User/Register'
 import Teacher from './views/Teacher'
+import Layout from './views/Layout'
 // import Test from './components/Test'
 // import QuestionBank from './components/Test'
 
@@ -14,22 +15,27 @@ export default new Router({
   routes: [
     {
       path: '/',
-      redirect: 'signin'
+      redirect: 'user/login'
     },
     {
-      path: '/signin',
-      name: 'signin',
-      component: SignIn
+      path: '/user/login',
+      name: 'user-login',
+      component: UserLogin
     },
     {
-      path: '/signup',
-      name: 'signup',
-      component: SignUp
+      path: '/user/register',
+      name: 'register',
+      component: UserRegister
     },
     {
       path: '/teacher',
       name: 'teacher',
       component: Teacher
+    },
+    {
+      path: '/layout',
+      name: 'layout',
+      component: Layout
     }
     // {
     //     path: '/test',

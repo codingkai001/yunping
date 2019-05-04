@@ -1,28 +1,28 @@
 <template>
     <div id="sign-up">
         <transition name="el-zoom-in-top">
-            <div v-show="show" class="sign-container">
+            <div v-show="show" class="sign-container" v-loading="loading">
                 <div class="top-button">
-                    <el-button round id="in-button" @click="toSignIn">登录</el-button>
+                    <el-button round id="in-button" @click="toLogin">登录</el-button>
                     <el-button round id="up-button">注册</el-button>
                 </div>
                 <div class="sign-up-form">
                     <el-form ref="form" :model="user">
-                        <el-input v-model="user.userAccount" placeholder="学号"></el-input>
-                        <el-input v-model="user.userName" placeholder="姓名"></el-input>
+                        <el-input v-model="user.userAccount" placeholder="学号/工号"></el-input>
+                        <el-input v-model="user.userName" placeholder="真实姓名"></el-input>
                         <el-input v-model="user.userPass" placeholder="密码" type="password"></el-input>
                         <el-input v-model="user.userPassword2" placeholder="确认密码" type="password"></el-input>
                         <el-input v-model="user.userSchool" placeholder="学校"></el-input>
                     </el-form>
                 </div>
-                <el-button type="info" round @click="signUp" class="to-sign">注册</el-button>
+                <el-button type="info" round @click="register" html-type="submit" class="to-sign">注册</el-button>
             </div>
         </transition>
     </div>
 </template>
 
 <script>
-import axios from 'axios'
+import { register } from '../../api/user'
 
 export default {
   name: 'SignUp',
@@ -37,21 +37,28 @@ export default {
         userSchool: '',
         userRole: 1
       },
-      authenticated: false
+      authenticated: false,
+      loading: false
     }
   },
   methods: {
     // 跳转到登录页面
-    toSignIn () {
-      this.$router.push({ path: '/signin' })
+    toLogin () {
+      this.$router.push({ path: '/user/login' })
     },
     // 注册验证
-    signUp () {
+    register () {
       if (this.user.userPass !== this.user.userPassword2) {
         return
       }
-      axios.post('/user/register', this.user).then((res) => {
+      this.loading = true
+      register(this.user).then((res) => {
         console.log(res.data)
+        this.loading = false
+      }).catch(e => {
+        this.$message.error(e.message)
+        console.log(e)
+        this.loading = false
       })
     }
   },
@@ -66,7 +73,7 @@ export default {
 <style>
     #sign-up {
         position: absolute;
-        background: url("../assets/img/FZULibrary.jpg") no-repeat;
+        background: url("../../assets/img/FZULibrary.jpg") no-repeat;
         background-attachment: fixed;
         background-size: 100%;
         width: 100%;
