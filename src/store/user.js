@@ -13,6 +13,11 @@ const store = new Vuex.Store({
       state.token = userWithTokenObject.token
       state.user = userWithTokenObject.user
       localStorage.setItem('user', JSON.stringify(userWithTokenObject))
+    },
+    logout (state) {
+      state.token = ''
+      state.user = {}
+      localStorage.removeItem('user')
     }
   }
 })

@@ -1,4 +1,4 @@
 export const UserRole = {
-  teacher: 0,
-  student: 1
+  teacher: 1,
+  student: 0
 }

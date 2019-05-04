@@ -61,6 +61,8 @@ export default {
       register(this.user).then((res) => {
         console.log(res.data)
         this.loading = false
+        this.$message.success('注册成功')
+        this.$router.push({ path: '/user/login' })
       }).catch(e => {
         this.$message.error(e.message)
         console.log(e)

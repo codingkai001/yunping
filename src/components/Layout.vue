@@ -7,7 +7,7 @@
       <span class="user-info">
         <span>欢迎，{{user.userName}}</span>
         <span class="actions">
-            <el-link type="primary">注销</el-link>
+            <el-link type="primary" @click="logout">注销</el-link>
         </span>
       </span>
     </div>
@@ -16,12 +16,12 @@
   <el-container class="main-container">
 
     <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-      <el-menu :default-openeds="[]" v-if="user.userRole === 0">
-        <el-menu-item index="class-management">班级管理</el-menu-item>
-        <el-menu-item index="rank-dimension">评分维度管理</el-menu-item>
+      <el-menu :default-openeds="[]" v-if="user.userRole === 1" :default-active="activedMenu">
+        <el-menu-item index="class" @click="$router.push({ path: '/class/list' })">班级管理</el-menu-item>
+        <el-menu-item index="dimension" @click="$router.push({ path: '/dimension/list' })">评分维度管理</el-menu-item>
       </el-menu>
-      <el-menu :default-openeds="[]" v-if="user.userRole === 1">
-        <el-menu-item index="class-management">班级管理</el-menu-item>
+      <el-menu :default-openeds="[]" v-if="user.userRole === 0" :default-active="activedMenu">
+        <el-menu-item index="class" @click="$router.push({ path: '/class/list' })">班级管理</el-menu-item>
       </el-menu>
     </el-aside>
 
@@ -37,7 +37,27 @@
 import UserStore from '../store/user'
 export default {
   computed: {
-    user: () => UserStore.state.user
+    user: () => UserStore.state.user,
+    activedMenu () {
+      const routes = this.$route.name.split('-')
+      /*
+      const ret = []
+      let currentRoute = ''
+      routes.forEach((item, index) => {
+        if (index !== 0) currentRoute += '-'
+        currentRoute += item
+        ret.push(currentRoute)
+      })
+      return JSON.stringify(ret)
+      */
+      return routes[0]
+    }
+  },
+  methods: {
+    logout () {
+      UserStore.commit('logout')
+      this.$router.push({ path: '/' })
+    }
   }
 }
 </script>

@@ -1,7 +1,7 @@
 <template>
   <Layout>
-    <el-button type='primary' @click="showCreateClass = true">新建班级</el-button>
-    <el-table v-loading="loading" :data="classList" stripe>
+    <el-button type='primary' @click="$router.push({ path: '/dimension/edit/0' })">新建维度</el-button>
+    <el-table v-loading="loading" :data="dimensionList" stripe>
       <el-table-column
         prop="classId"
         label="ID"
@@ -19,29 +19,22 @@
         </template>
       </el-table-column>
     </el-table>
-    <CreateClass
-      v-on:done="createClassDone"
-      v-bind:show.sync="showCreateClass"
-    />
   </Layout>
 </template>
 
 <script>
 import Layout from '../../../components/Layout'
-import CreateClass from './CreateClass'
-import { classSearch } from '../../../api/class'
+import { dimensionSearch } from '../../../api/dimension'
 
 export default {
   data () {
     return {
       loading: false,
-      classList: [],
-      showCreateClass: false
+      dimensionList: []
     }
   },
   components: {
-    Layout,
-    CreateClass
+    Layout
   },
   mounted () {
     this.reloadList()
@@ -49,15 +42,10 @@ export default {
   methods: {
     reloadList () {
       this.loading = true
-      classSearch().then(p => {
-        this.classList = p.classVOList
+      dimensionSearch({}).then(p => {
         console.log(p)
         this.loading = false
       })
-    },
-    createClassDone () {
-      this.showCreateClass = false
-      this.reloadList()
     },
     editClass (row) {
       console.log(row)

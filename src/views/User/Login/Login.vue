@@ -42,8 +42,8 @@ export default {
     login () {
       this.loading = true
       login(this.user).then(res => {
-        console.log(res)
         UserStore.commit('setUser', res)
+        this.$router.push({ path: '/class/list' })
         this.loading = false
       }).catch(e => {
         this.$message.error(e.message)

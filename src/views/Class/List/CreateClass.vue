@@ -2,7 +2,7 @@
   <el-dialog title="新建班级" :visible.sync="show" :show-close="false" :close-on-click-modal="false">
     <div v-loading="loading">
       <el-form>
-        <el-form-item label="活动名称">
+        <el-form-item label="班级名称">
           <el-input v-model="className" autocomplete="off"></el-input>
         </el-form-item>
       </el-form>

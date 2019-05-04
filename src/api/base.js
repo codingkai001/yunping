@@ -4,20 +4,22 @@ import UserStore from '../store/user'
 export const apiUrl = '/api/'
 export const instance = axios.create({
   baseURL: apiUrl,
-  withCredentials: true,
-  headers: {
-    get 'S-TOKEN' () {
-      return UserStore.state.token
-    }
-  }
+  withCredentials: true
 })
 
 export function request (config) {
-  return instance(config).then((res) => {
+  const headers = config.headers ? config.headers : {}
+  return instance({
+    ...config,
+    headers: {
+      ...headers,
+      'S-TOKEN': UserStore.state.token
+    }
+  }).then((res) => {
     if (res.data.status !== 0) {
       throw new APIError(res.data)
     }
-    return res.data
+    return res.data.data
   }).catch((e) => {
     if (e.response) {
       throw new APIError(e.response.data)
