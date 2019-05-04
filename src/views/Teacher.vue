@@ -11,9 +11,9 @@
                 <div class="menu-item">云作业</div>
             </div>
             <div class="content">
-                <!--                <class-list></class-list>-->
-                <!--                                <new-homework></new-homework>-->
-                <!--        修改成功        <new-class></new-class>-->
+              <!--                                <class-list></class-list>-->
+              <!--                                                <new-homework></new-homework>-->
+              <!--                                <new-class></new-class>-->
                 <class-detail></class-detail>
                 <!--        修改成功                        <join-class></join-class>-->
                 <!--  <new-dimension></new-dimension>-->
@@ -121,6 +121,7 @@ export default {
         background-color: rgb(103, 204, 204);
         /*border: 0.5px solid white;*/
     }
+
     #teacher .menu-content .content {
         float: left;
         margin: 2%;
