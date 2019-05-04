@@ -13,6 +13,10 @@
                         <el-input v-model="user.userPass" placeholder="密码" type="password"></el-input>
                         <el-input v-model="user.userPassword2" placeholder="确认密码" type="password"></el-input>
                         <el-input v-model="user.userSchool" placeholder="学校"></el-input>
+                        <el-radio-group v-model="user.userRole">
+                          <el-radio-button :label="UserRole.teacher">教师</el-radio-button>
+                          <el-radio-button :label="UserRole.student">学生</el-radio-button>
+                        </el-radio-group>
                     </el-form>
                 </div>
                 <el-button type="info" round @click="register" html-type="submit" class="to-sign">注册</el-button>
@@ -23,6 +27,7 @@
 
 <script>
 import { register } from '../../api/user'
+import { UserRole } from '../../models/User'
 
 export default {
   name: 'SignUp',
@@ -38,7 +43,8 @@ export default {
         userRole: 1
       },
       authenticated: false,
-      loading: false
+      loading: false,
+      UserRole
     }
   },
   methods: {
