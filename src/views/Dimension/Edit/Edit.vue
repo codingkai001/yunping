@@ -14,7 +14,7 @@
       </el-form-item>
       <el-form-item>
         <el-button @click="onSubmit" round type="primary">保存维度</el-button>
-        <el-button round>取消</el-button>
+        <el-button @click="$router.back()" round>取消</el-button>
       </el-form-item>
     </el-form>
   </Layout>

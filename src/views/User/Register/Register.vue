@@ -26,56 +26,56 @@
 </template>
 
 <script>
-  import {register} from '../../../api/user'
-  import {UserRole} from '../../../models/User'
+import { register } from '../../../api/user'
+import { UserRole } from '../../../models/User'
 
-  export default {
-    name: 'SignUp',
-    data() {
-      return {
-        show: false,
-        user: {
-          userAccount: '',
-          userName: '',
-          userPass: '',
-          userPassword2: '',
-          userSchool: '',
-          userRole: 1
-        },
-        authenticated: false,
-        loading: false,
-        UserRole
-      }
-    },
-    methods: {
-      // 跳转到登录页面
-      toLogin() {
-        this.$router.push({path: '/user/login'})
+export default {
+  name: 'SignUp',
+  data () {
+    return {
+      show: false,
+      user: {
+        userAccount: '',
+        userName: '',
+        userPass: '',
+        userPassword2: '',
+        userSchool: '',
+        userRole: 1
       },
-      // 注册验证
-      register() {
-        if (this.user.userPass !== this.user.userPassword2) {
-          return
-        }
-        this.loading = true
-        register(this.user).then((res) => {
-          console.log(res.data)
-          this.loading = false
-          this.$message.success('注册成功')
-          this.$router.push({path: '/user/login'})
-        }).catch(e => {
-          this.$message.error(e.message)
-          console.log(e)
-          this.loading = false
-        })
-      }
-    },
-
-    mounted() {
-      // 组件挂载后过渡动画载入登录注册框
-      this.show = true
+      authenticated: false,
+      loading: false,
+      UserRole
     }
+  },
+  methods: {
+    // 跳转到登录页面
+    toLogin () {
+      this.$router.push({ path: '/user/login' })
+    },
+    // 注册验证
+    register () {
+      if (this.user.userPass !== this.user.userPassword2) {
+        return
+      }
+      this.loading = true
+      register(this.user).then((res) => {
+        console.log(res.data)
+        this.loading = false
+        this.$message.success('注册成功')
+        this.$router.push({ path: '/user/login' })
+      }).catch(e => {
+        this.$message.error(e.message)
+        console.log(e)
+        this.loading = false
+      })
+    }
+  },
+
+  mounted () {
+    // 组件挂载后过渡动画载入登录注册框
+    this.show = true
   }
+}
 </script>
 
 <style>
