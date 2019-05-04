@@ -1,14 +1,14 @@
 <template>
   <Layout>
-    <el-form :model="form" label-width="80px" ref="form">
+    <el-form :model="form" label-width="80px" ref="form" v-loading="loading">
       <el-form-item label="维度名称">
-        <el-input placeholder="请输入维度名称" v-model="form.dimensionName"></el-input>
+        <el-input placeholder="请输入维度名称" v-model="form.skillName"></el-input>
       </el-form-item>
       <el-form-item label="代号">
-        <el-input placeholder="请输入代号" v-model="form.codeName"></el-input>
+        <el-input placeholder="请输入代号" v-model="form.skillShortName"></el-input>
       </el-form-item>
       <el-form-item label="维度类别">
-        <el-radio-group v-model="dimensionType">
+        <el-radio-group v-model="form.skillType">
           <el-radio :key="item.value" :label="item.label" :value="item.value" v-for="item in dimensionTypeOptions">{{item.label}}</el-radio>
         </el-radio-group>
       </el-form-item>
@@ -22,7 +22,7 @@
 
 <script>
 import Layout from '../../../components/Layout'
-import { dimensionAdd } from '../../../api/dimension'
+import { dimensionAdd, dimensionDetail, dimensionUpdate } from '../../../api/dimension'
 
 export default {
   data () {
@@ -30,29 +30,52 @@ export default {
       loading: false,
       dimensionList: [],
       form: {
-        dimensionName: '',
-        codeName: ''
+        skillName: '',
+        skillShortName: '',
+        skillType: '工程能力'
       },
       dimensionTypeOptions: [{
-        value: '选项1',
+        value: '工程能力',
         label: '工程能力'
       }, {
-        value: '选项2',
-        label: '选题报告得分'
+        value: '选题报告',
+        label: '选题报告'
       }, {
-        value: '选项3',
+        value: '现场答辩',
         label: '现场答辩'
-      }],
-      dimensionType: []
+      }]
     }
   },
   components: {
     Layout
   },
   mounted () {
-    this.reloadList()
+    const id = this.$route.params.id
+    if (id !== '0') {
+      this.loading = true
+      dimensionDetail(id).then(p => {
+        this.form = p
+        this.loading = false
+      })
+    }
   },
   methods: {
+    async onSubmit () {
+      const id = this.$route.params.id
+      this.loading = true
+      try {
+        if (id !== '0') {
+          await dimensionUpdate(this.form)
+        } else {
+          await dimensionAdd(this.form)
+        }
+        this.loading = false
+        this.$router.push({ path: '/dimension/list' })
+      } catch (e) {
+        this.loading = false
+        this.$message.error(e.message)
+      }
+    }
   }
 }
 </script>

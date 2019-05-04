@@ -3,19 +3,26 @@
     <el-button type='primary' @click="$router.push({ path: '/dimension/edit/0' })">新建维度</el-button>
     <el-table v-loading="loading" :data="dimensionList" stripe>
       <el-table-column
-        prop="classId"
+        prop="skillId"
         label="ID"
         width="180">
       </el-table-column>
       <el-table-column
-        prop="className"
-        label="班级"
-        width="180">
+        prop="skillName"
+        label="能力名">
+      </el-table-column>
+      <el-table-column
+        prop="skillShortName"
+        label="能力代号">
+      </el-table-column>
+      <el-table-column
+        prop="skillType"
+        label="能力类别">
       </el-table-column>
       <el-table-column
         label="操作">
         <template slot-scope="scope">
-          <el-button size="mini" @click="editClass(scope.row)">编辑</el-button>
+          <el-button size="mini" @click="editDimension(scope.row)">编辑</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -43,12 +50,12 @@ export default {
     reloadList () {
       this.loading = true
       dimensionSearch({}).then(p => {
-        console.log(p)
+        this.dimensionList = p.skillVOList
         this.loading = false
       })
     },
-    editClass (row) {
-      console.log(row)
+    editDimension (row) {
+      this.$router.push({ path: `/dimension/edit/${row.skillId}` })
     }
   }
 }
