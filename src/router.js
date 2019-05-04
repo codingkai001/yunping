@@ -3,7 +3,6 @@ import Router from 'vue-router'
 import UserLogin from './views/User/Login'
 import UserRegister from './views/User/Register'
 import Teacher from './views/Teacher'
-import Layout from './views/Layout'
 // import Test from './components/Test'
 // import QuestionBank from './components/Test'
 
@@ -31,11 +30,6 @@ export default new Router({
       path: '/teacher',
       name: 'teacher',
       component: Teacher
-    },
-    {
-      path: '/layout',
-      name: 'layout',
-      component: Layout
     }
     // {
     //     path: '/test',

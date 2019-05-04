@@ -12,8 +12,20 @@ const store = new Vuex.Store({
     setUser (state, userWithTokenObject) {
       state.token = userWithTokenObject.token
       state.user = userWithTokenObject.user
+      localStorage.setItem('user', JSON.stringify(userWithTokenObject))
     }
   }
 })
+
+;(() => {
+  try {
+    const lsUser = localStorage.getItem('user')
+    if (!lsUser) return
+    const user = JSON.parse(lsUser)
+    store.commit('setUser', user)
+  } catch (e) {
+    // do nothing yet
+  }
+})()
 
 export default store
