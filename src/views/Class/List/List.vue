@@ -1,28 +1,31 @@
 <template>
   <Layout>
-    <el-button type='primary' @click="showCreateClass = true">新建班级</el-button>
-    <el-table v-loading="loading" :data="classList" stripe>
-      <el-table-column
-        prop="classId"
-        label="ID"
-        width="180">
-      </el-table-column>
-      <el-table-column
-        prop="className"
-        label="班级"
-        width="180">
-      </el-table-column>
-      <el-table-column
-        label="操作">
-        <template slot-scope="scope">
-          <el-button size="mini" @click="editClass(scope.row)">编辑</el-button>
-        </template>
-      </el-table-column>
-    </el-table>
-    <CreateClass
-      v-on:done="createClassDone"
-      v-bind:show.sync="showCreateClass"
-    />
+    <div v-loading="loading">
+      <el-button type='primary' @click="showCreateClass = true" v-if="user.userRole === UserRole.teacher">新建班级</el-button>
+      <el-button v-if="user.userRole === UserRole.teacher">作为助教加入班级</el-button>
+      <el-button type='primary' v-if="user.userRole === UserRole.student">加入班级</el-button>
+      <el-table :data="classList" stripe>
+        <el-table-column
+          prop="classId"
+          label="ID"
+          width="180">
+        </el-table-column>
+        <el-table-column
+          prop="className"
+          label="班级">
+        </el-table-column>
+        <el-table-column
+          label="操作">
+          <template slot-scope="scope">
+            <el-button size="mini" @click="editClass(scope.row)">编辑</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+      <CreateClass
+        v-on:done="createClassDone"
+        v-bind:show.sync="showCreateClass"
+      />
+    </div>
   </Layout>
 </template>
 
@@ -30,6 +33,8 @@
 import Layout from '../../../components/Layout'
 import CreateClass from './CreateClass'
 import { classSearch } from '../../../api/class'
+import UserStorage from '../../../store/user'
+import { UserRole } from '../../../models/User'
 
 export default {
   data () {
@@ -38,6 +43,10 @@ export default {
       classList: [],
       showCreateClass: false
     }
+  },
+  computed: {
+    user: () => UserStorage.state.user,
+    UserRole: () => UserRole
   },
   components: {
     Layout,
