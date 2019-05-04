@@ -18,23 +18,23 @@
 </template>
 
 <script>
-    export default {
-        name: 'JoinClass',
-        data() {
-            return {
-                class_params: {
-                    token: '',
-                    name: '',
-                    blog_address: '',
-                    github_address: '',
-                    email: ''
-                },
+export default {
+  name: 'JoinClass',
+  data () {
+    return {
+      class_params: {
+        token: '',
+        name: '',
+        blog_address: '',
+        github_address: '',
+        email: ''
+      }
 
-            }
-        },
-        methods: {},
-        components: {}
     }
+  },
+  methods: {},
+  components: {}
+}
 </script>
 
 <style>

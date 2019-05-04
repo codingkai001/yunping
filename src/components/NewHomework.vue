@@ -70,73 +70,73 @@
 </template>
 
 <script>
-    export default {
-        name: 'NewHomework',
-        data () {
-            return {
-                form: {
-                    homeworkName: '',
-                },
-                homeworkTypeOptions: [{
-                    value: '选项1',
-                    label: '个人'
-                }, {
-                    value: '选项2',
-                    label: '结对'
-                }, {
-                    value: '选项3',
-                    label: '团队'
-                }],
-                homeworkType: [],
-                testAbilityOptions: [{
-                    value: '选项1',
-                    label: '基础编程类'
-                }, {
-                    value: '选项2',
-                    label: '结对编程类'
-                }, {
-                    value: '选项3',
-                    label: '团队项目类'
-                }],
-                testAbility: [],
-                difficultyOptions: [{
-                    value: '选项1',
-                    label: 'A'
-                }, {
-                    value: '选项2',
-                    label: 'B'
-                }, {
-                    value: '选项3',
-                    label: 'C'
-                }, {
-                    value: '选项4',
-                    label: 'D'
-                }, {
-                    value: '选项5',
-                    label: 'E'
-                }],
-                difficulty: [],
-                publicDegreeOptions: [{
-                    value: '选项1',
-                    label: '全系统公开'
-                }, {
-                    value: '选项2',
-                    label: '全学校公开'
-                }, {
-                    value: '选项3',
-                    label: '加入班级公开'
-                }, {
-                    value: '选项4',
-                    label: '私有'
-                }],
-                publicDegree: [],
-                value1: '',
+export default {
+  name: 'NewHomework',
+  data () {
+    return {
+      form: {
+        homeworkName: ''
+      },
+      homeworkTypeOptions: [{
+        value: '选项1',
+        label: '个人'
+      }, {
+        value: '选项2',
+        label: '结对'
+      }, {
+        value: '选项3',
+        label: '团队'
+      }],
+      homeworkType: [],
+      testAbilityOptions: [{
+        value: '选项1',
+        label: '基础编程类'
+      }, {
+        value: '选项2',
+        label: '结对编程类'
+      }, {
+        value: '选项3',
+        label: '团队项目类'
+      }],
+      testAbility: [],
+      difficultyOptions: [{
+        value: '选项1',
+        label: 'A'
+      }, {
+        value: '选项2',
+        label: 'B'
+      }, {
+        value: '选项3',
+        label: 'C'
+      }, {
+        value: '选项4',
+        label: 'D'
+      }, {
+        value: '选项5',
+        label: 'E'
+      }],
+      difficulty: [],
+      publicDegreeOptions: [{
+        value: '选项1',
+        label: '全系统公开'
+      }, {
+        value: '选项2',
+        label: '全学校公开'
+      }, {
+        value: '选项3',
+        label: '加入班级公开'
+      }, {
+        value: '选项4',
+        label: '私有'
+      }],
+      publicDegree: [],
+      value1: ''
 
-            }
-        },
-        methods: {},
-        components: {}
     }
+  },
+  methods: {},
+  components: {}
+}
 </script>
 
 <style scoped>

@@ -41,45 +41,45 @@
 </template>
 
 <script>
-    export default {
-        name: 'NewClass',
-        data() {
-            return {
-                class_form: {
-                    name: '',
-                    school: '',
-                    college: '',
-                    major: '',
-                    notice: '',
-                    tags: ['姓名', '博客园地址', 'Github地址', '邮箱'],
-                    inputVisible: false,
-                    inputValue: ''
-                }
-            }
-        },
-        methods: {
-            handleClose(tag) {
-                this.class_form.tags.splice(this.class_form.tags.indexOf(tag), 1)
-            },
-
-            showInput() {
-                this.class_form.inputVisible = true;
-                this.$nextTick(_ => {
-                    this.$refs.saveTagInput.$refs.input.focus()
-                })
-            },
-
-            handleInputConfirm() {
-                let inputValue = this.class_form.inputValue;
-                if (inputValue) {
-                    this.class_form.tags.push(inputValue)
-                }
-                this.class_form.inputVisible = false;
-                this.class_form.inputValue = '';
-            },
-        },
-        components: {}
+export default {
+  name: 'NewClass',
+  data () {
+    return {
+      class_form: {
+        name: '',
+        school: '',
+        college: '',
+        major: '',
+        notice: '',
+        tags: ['姓名', '博客园地址', 'Github地址', '邮箱'],
+        inputVisible: false,
+        inputValue: ''
+      }
     }
+  },
+  methods: {
+    handleClose (tag) {
+      this.class_form.tags.splice(this.class_form.tags.indexOf(tag), 1)
+    },
+
+    showInput () {
+      this.class_form.inputVisible = true
+      this.$nextTick(_ => {
+        this.$refs.saveTagInput.$refs.input.focus()
+      })
+    },
+
+    handleInputConfirm () {
+      let inputValue = this.class_form.inputValue
+      if (inputValue) {
+        this.class_form.tags.push(inputValue)
+      }
+      this.class_form.inputVisible = false
+      this.class_form.inputValue = ''
+    }
+  },
+  components: {}
+}
 </script>
 
 <style>

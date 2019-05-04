@@ -3,62 +3,53 @@
         <transition name="el-zoom-in-top">
             <div v-show="show" class="sign-container">
                 <div class="top-button">
-                    <el-button round id="in-button" @click="to_sign_in">登录</el-button>
-                    <el-button round id="up-button" @click="to_sign_up">注册</el-button>
+                    <el-button round id="in-button">登录</el-button>
+                    <el-button round id="up-button" @click="toSignUp">注册</el-button>
                 </div>
                 <div class="sign-in-form">
                     <el-form ref="form" :model="user">
-                        <el-input v-model="user.user_account" placeholder="用户名"></el-input>
-                        <el-input v-model="user.pwd" placeholder="密码" type="password"></el-input>
+                        <el-input v-model="user.userAccount" placeholder="用户名"></el-input>
+                        <el-input v-model="user.userPass" placeholder="密码" type="password"></el-input>
                     </el-form>
                 </div>
-                <el-button type="info" round @click="sign_in" class="to-sign">登录</el-button>
+                <el-button type="info" round @click="signIn" class="to-sign">登录</el-button>
             </div>
         </transition>
     </div>
 </template>
 
 <script>
-    export default {
-        name: 'SignIn',
-        data() {
-            return {
-                show: false,
-                user: {
-                    user_account: '',
-                    pwd: ''
-                }
-            }
-        },
-        methods: {
-            //跳转到登录页面
-            to_sign_in() {
-                this.$router.push({path: '/sign_in',})
-            },
-            //跳转到注册页面
-            to_sign_up() {
-                this.$router.push({path: '/sign_up',})
-            },
-            //登录验证
-            sign_in() {
-                axios.post('/user/login', {
-                    "userAccount": this.user.user_account,
-                    "userPass": this.user.pwd
-                }).then(function (response) {
-                    var res_body = response['data'];
-                    console.log(res_body.data);
-                }).catch(function (error) {
-                    console.log(error);
-                    alert("服务异常，请稍后重试！");
-                });
-            }
-        },
-        mounted() {
-            //组件挂载后过渡动画载入登录注册框
-            this.show = true;
-        }
+import axios from 'axios'
 
+export default {
+  name: 'SignIn',
+  data () {
+    return {
+      show: false,
+      user: {
+        userAccount: '',
+        userPass: ''
+      }
     }
+  },
+  methods: {
+    // 跳转到注册页面
+    toSignUp () {
+      this.$router.push({ path: '/signup' })
+    },
+    // 登录验证
+    signIn () {
+      axios.post('/user/login', this.user).then(res => {
+        console.log(res.data)
+      })
+    }
+  },
+  mounted () {
+    // 组件挂载后过渡动画载入登录注册框
+    this.show = true
+  }
+
+}
 </script>
 
 <style>

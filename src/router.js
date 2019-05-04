@@ -6,36 +6,36 @@ import Teacher from './views/Teacher'
 // import Test from './components/Test'
 // import QuestionBank from './components/Test'
 
-Vue.use(Router);
+Vue.use(Router)
 
 export default new Router({
-	mode: 'history',
-	base: process.env.BASE_URL,
-	routes: [
-		{
-			path: '/',
-			redirect: 'sign_in'
-		},
-		{
-			path: '/sign_in',
-			name: 'sign_in',
-			component: SignIn
-		},
-		{
-			path: '/sign_up',
-			name: 'sign_up',
-			component: SignUp
-		},
-		{
-			path: '/teacher',
-			name: 'teacher',
-			component: Teacher
-		},
-        // {
-        //     path: '/test',
-        //     name: 'Test.vue',
-        //     component: Test
-        // }
+  mode: 'history',
+  base: process.env.BASE_URL,
+  routes: [
+    {
+      path: '/',
+      redirect: 'signin'
+    },
+    {
+      path: '/signin',
+      name: 'signin',
+      component: SignIn
+    },
+    {
+      path: '/signup',
+      name: 'signup',
+      component: SignUp
+    },
+    {
+      path: '/teacher',
+      name: 'teacher',
+      component: Teacher
+    }
+    // {
+    //     path: '/test',
+    //     name: 'Test.vue',
+    //     component: Test
+    // }
 
-	]
+  ]
 })

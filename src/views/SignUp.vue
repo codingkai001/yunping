@@ -3,88 +3,64 @@
         <transition name="el-zoom-in-top">
             <div v-show="show" class="sign-container">
                 <div class="top-button">
-                    <el-button round id="in-button" @click="to_sign_in">登录</el-button>
-                    <el-button round id="up-button" @click="to_sign_up">注册</el-button>
+                    <el-button round id="in-button" @click="toSignIn">登录</el-button>
+                    <el-button round id="up-button">注册</el-button>
                 </div>
                 <div class="sign-up-form">
-                    <el-form ref="form" :model="reg_stu">
-                        <el-input v-model="reg_stu.user_account" placeholder="学号"></el-input>
-                        <el-input v-model="reg_stu.username" placeholder="姓名"></el-input>
-                        <el-input v-model="reg_stu.pwd1" placeholder="密码" type="password"></el-input>
-                        <el-input v-model="reg_stu.pwd2" placeholder="确认密码" type="password"></el-input>
-                        <el-input v-model="reg_stu.user_school" placeholder="学校"></el-input>
+                    <el-form ref="form" :model="user">
+                        <el-input v-model="user.userAccount" placeholder="学号"></el-input>
+                        <el-input v-model="user.userName" placeholder="姓名"></el-input>
+                        <el-input v-model="user.userPass" placeholder="密码" type="password"></el-input>
+                        <el-input v-model="user.userPassword2" placeholder="确认密码" type="password"></el-input>
+                        <el-input v-model="user.userSchool" placeholder="学校"></el-input>
                     </el-form>
                 </div>
-                <el-button type="info" round @click="sign_up" class="to-sign">注册</el-button>
+                <el-button type="info" round @click="signUp" class="to-sign">注册</el-button>
             </div>
         </transition>
     </div>
 </template>
 
-
 <script>
+import axios from 'axios'
 
-    export default {
-        name: 'SignUp',
-        data() {
-            return {
-                show: false,
-                reg_stu: {
-                    user_account: '',
-                    username: '',
-                    pwd1: '',
-                    pwd2: '',
-                    user_school: '',
-                    user_role: 1
-                },
-                authenticated: false
-            }
-        },
-        methods: {
-            //跳转到登录页面
-            to_sign_in() {
-                this.$router.push({path: '/sign_in',})
-            },
-            //跳转到注册页面
-            to_sign_up() {
-                this.$router.push({path: '/sign_up',})
-            },
-            //注册字段验证
-            auth_params() {
-                if (this.reg_stu.pwd1 === this.reg_stu.pwd2) {
-                    this.authenticated = true;
-                } else {
-                    this.authenticated = false;
-                }
-            },
-            //注册验证
-            sign_up() {
-                this.auth_params();
-                if (this.authenticated) {
-                    axios.post('/user/register', {
-                        "userAccount": this.reg_stu.user_account,
-                        "userName": this.reg_stu.username,
-                        "userPass": this.reg_stu.pwd1,
-                        "userRole": this.reg_stu.user_role,
-                        "userSchool": this.reg_stu.user_school
-                    }).then(function (response) {
-                        var res_body = response['data'];
-                        console.log(res_body.data);
-                    }).catch(function (error) {
-                        console.log(error);
-                        alert("服务异常，请稍后重试！");
-                    });
-                } else {
-                    alert("注册信息有误！");
-                }
-            }
-        },
-
-        mounted() {
-            //组件挂载后过渡动画载入登录注册框
-            this.show = true;
-        }
+export default {
+  name: 'SignUp',
+  data () {
+    return {
+      show: false,
+      user: {
+        userAccount: '',
+        userName: '',
+        userPass: '',
+        userPassword2: '',
+        userSchool: '',
+        userRole: 1
+      },
+      authenticated: false
     }
+  },
+  methods: {
+    // 跳转到登录页面
+    toSignIn () {
+      this.$router.push({ path: '/signin' })
+    },
+    // 注册验证
+    signUp () {
+      if (this.user.userPass !== this.user.userPassword2) {
+        return
+      }
+      axios.post('/user/register', this.user).then((res) => {
+        console.log(res.data)
+      })
+    }
+  },
+
+  mounted () {
+    // 组件挂载后过渡动画载入登录注册框
+    this.show = true
+  }
+}
 </script>
 
 <style>

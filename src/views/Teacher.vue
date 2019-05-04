@@ -23,30 +23,29 @@
 </template>
 
 <script>
-    import ClassList from '../components/ClassList';
-    import NewHomework from '../components/NewHomework';
-    import NewClass from '../components/NewClass';
-    import JoinClass from '../components/JoinClass';
-    import ClassDetail from '../components/ClassDetail';
-    import NewDimension from '../components/NewDimension'
+import ClassList from '../components/ClassList'
+import NewHomework from '../components/NewHomework'
+import NewClass from '../components/NewClass'
+import JoinClass from '../components/JoinClass'
+import ClassDetail from '../components/ClassDetail'
+import NewDimension from '../components/NewDimension'
 
-
-	export default {
-		name: 'Teacher',
-		data () {
-			return {
-                name: '汪老师'
-			}
-		},
-		components: {
-            'class-list': ClassList,
-            'new-homework': NewHomework,
-            'new-class': NewClass,
-            'join-class': JoinClass,
-            'class-detail': ClassDetail,
-            'new-dimension': NewDimension
-		}
-	}
+export default {
+  name: 'Teacher',
+  data () {
+    return {
+      name: '汪老师'
+    }
+  },
+  components: {
+    'class-list': ClassList,
+    'new-homework': NewHomework,
+    'new-class': NewClass,
+    'join-class': JoinClass,
+    'class-detail': ClassDetail,
+    'new-dimension': NewDimension
+  }
+}
 </script>
 
 <style>
@@ -83,7 +82,6 @@
     /*    float: right;*/
     /*    display: inline-block;*/
     /*}*/
-
 
     #teacher .menu-content {
         width: 80%;

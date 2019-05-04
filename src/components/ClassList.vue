@@ -25,18 +25,18 @@
 </template>
 
 <script>
-    export default {
-        name: 'ClassList',
-        data () {
-            return {
-                fits: ['contain'],
-                url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
-                className: '2016级软件工程四班（福州大学）'
-            }
-        },
-        methods: {},
-        components: {}
+export default {
+  name: 'ClassList',
+  data () {
+    return {
+      fits: ['contain'],
+      url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
+      className: '2016级软件工程四班（福州大学）'
     }
+  },
+  methods: {},
+  components: {}
+}
 </script>
 
 <style scoped>

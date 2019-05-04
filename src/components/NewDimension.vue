@@ -26,30 +26,30 @@
 </template>
 
 <script>
-    export default {
-        name: 'NewDimension',
-        data () {
-            return {
-                form: {
-                    dimensionName: '',
-                    codeName: ''
-                },
-                dimensionTypeOptions: [{
-                    value: '选项1',
-                    label: '工程能力'
-                }, {
-                    value: '选项2',
-                    label: '选题报告得分'
-                }, {
-                    value: '选项3',
-                    label: '现场答辩'
-                }],
-                dimensionType: [],
-            }
-        },
-        methods: {},
-        components: {}
+export default {
+  name: 'NewDimension',
+  data () {
+    return {
+      form: {
+        dimensionName: '',
+        codeName: ''
+      },
+      dimensionTypeOptions: [{
+        value: '选项1',
+        label: '工程能力'
+      }, {
+        value: '选项2',
+        label: '选题报告得分'
+      }, {
+        value: '选项3',
+        label: '现场答辩'
+      }],
+      dimensionType: []
     }
+  },
+  methods: {},
+  components: {}
+}
 </script>
 
 <style scoped>
