@@ -19,6 +19,7 @@
       <el-menu :default-openeds="[]" v-if="user.userRole === 1" :default-active="activedMenu">
         <el-menu-item index="class" @click="$router.push({ path: '/class/list' })">班级管理</el-menu-item>
         <el-menu-item index="dimension" @click="$router.push({ path: '/dimension/list' })">评分维度管理</el-menu-item>
+        <el-menu-item index="homework" @click="$router.push({ path: '/homework/list' })">作业管理</el-menu-item>
       </el-menu>
       <el-menu :default-openeds="[]" v-if="user.userRole === 0" :default-active="activedMenu">
         <el-menu-item index="class" @click="$router.push({ path: '/class/list' })">班级管理</el-menu-item>
