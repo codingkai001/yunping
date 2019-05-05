@@ -5,6 +5,7 @@
         <h2>{{clazz.className}}</h2>
         <el-button size='small' @click="reorganizeTeam">团队重组</el-button>
         <el-button size='small'>统计分析</el-button>
+        <el-button size='small' v-if="false">创建团队</el-button>
       </div>
       <div style="margin-top: 1em">
         <el-tabs v-model="activeTab">
@@ -23,6 +24,9 @@
           <el-tab-pane label="学生" name="students">
             <el-table :data="clazz.classUserVOList"></el-table>
           </el-tab-pane>
+          <el-tab-pane label="团队" name="teams">
+            <el-table :data="clazz.classUserVOList"></el-table>
+          </el-tab-pane>
         </el-tabs>
       </div>
     </div>
@@ -39,6 +43,7 @@
 import Layout from '../../../components/Layout'
 import { classDetail } from '../../../api/class'
 import NewTeam from './NewTeam'
+import UserStorage from '../../../store/user'
 
 export default {
   data () {

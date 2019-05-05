@@ -1,17 +1,17 @@
 <template>
   <Layout>
-    <el-form :model="form" label-width="180px" ref="form" v-loading="loading">
-      <el-form-item label="名称">
-        <el-input placeholder=""></el-input>
+    <el-form :rules="rules" ref="ruleForm" :model="form" label-width="180px" v-loading="loading">
+      <el-form-item label="名称" prop="taskName">
+        <el-input v-model="form.taskName" placeholder=""></el-input>
       </el-form-item>
-      <el-form-item label="作业发布地址">
-        <el-input placeholder="例如在博客园的发布地址"></el-input>
+      <el-form-item label="作业发布地址" prop="taskUrl">
+        <el-input v-model="form.taskUrl" placeholder="例如在博客园的发布地址"></el-input>
       </el-form-item>
-      <el-form-item label="截止时间">
-        <el-date-picker placeholder="选择日期时间" type="datetime"></el-date-picker>
+      <el-form-item label="截止时间" prop="taskOverAt">
+        <el-date-picker v-model="form.taskOverAt" placeholder="选择日期时间" type="datetime"></el-date-picker>
       </el-form-item>
-      <el-form-item label="发布班级">
-        <el-select v-model="value" filterable placeholder="请选择">
+      <el-form-item label="发布班级" prop="taskClass">
+        <el-select v-model="form.taskClass" filterable placeholder="请选择">
           <el-option
             v-for="item in classList"
             :key="item.classId"
@@ -20,7 +20,7 @@
           </el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="考察维度">
+      <el-form-item label="考察维度" prop="skillList">
         <el-select v-model="selectDimension" @change="onDimensionChange" filterable placeholder="请选择">
           <el-option
             v-for="item in dimensionList"
@@ -30,7 +30,7 @@
           </el-option>
         </el-select>
         <div class="dimensions">
-          <div :key="item.skillId" v-for="(item, index) in form.dimensions" class="dimension">
+          <div :key="item.skillId" v-for="(item, index) in form.skillList" class="dimension">
             <span class="dimension-detail">
             {{item.dimension.skillName + '(' + item.dimension.skillShortName + ') / ' + item.dimension.skillType}}
             </span>
@@ -42,7 +42,7 @@
         </div>
       </el-form-item>
       <el-form-item>
-        <el-button @click="onSubmit" round type="primary">保存作业</el-button>
+        <el-button @click="onSubmit('ruleForm')" round type="primary">保存作业</el-button>
         <el-button @click="$router.back()" round>取消</el-button>
       </el-form-item>
     </el-form>
@@ -53,6 +53,7 @@
 import Layout from '../../../components/Layout'
 import { dimensionSearch } from '../../../api/dimension'
 import { classSearch } from '../../../api/class'
+import { taskAdd } from '../../../api/task'
 
 export default {
   data () {
@@ -61,9 +62,34 @@ export default {
       dimensionList: [],
       classList: [],
       form: {
-        dimensions: []
+        taskClass: '',
+        taskName: '',
+        taskOverAt: new Date(),
+        taskUrl: '',
+        skillList: []
       },
       selectDimension: ''
+    }
+  },
+  computed: {
+    rules () {
+      return {
+        taskName: [
+          { required: true, message: '请输入名称', trigger: ['blur', 'change'] }
+        ],
+        taskUrl: [
+          { required: true, message: '请输入博客园发布地址', trigger: ['blur', 'change'] }
+        ],
+        taskClass: [
+          { required: true, message: '请选择班级', trigger: ['blur', 'change'] }
+        ],
+        taskOverAt: [
+          { required: true, message: '请选择截止时间', trigger: ['blur', 'change'] }
+        ],
+        skillList: [
+          { required: true, message: '请选择截止时间', trigger: ['blur', 'change'] }
+        ]
+      }
     }
   },
   components: {
@@ -83,21 +109,29 @@ export default {
     })
   },
   methods: {
-    async onSubmit () {
+    async onSubmit (form) {
+      this.$refs[form].validate((valid) => {
+        if (!valid) return
+        this.loading = true
+        taskAdd(this.form).then(p => {
+          this.$router.push({ path: '/homework/list' })
+          this.loading = false
+        })
+      })
     },
     onDimensionChange (dimension) {
-      this.form.dimensions.push({
+      this.form.skillList.push({
         skillId: dimension.skillId,
         dimension,
-        score: 0
+        skillNumber: 0
       })
       this.dimensionList = this.dimensionList.filter(d => d.skillId !== dimension.skillId)
       this.selectDimension = ''
     },
     removeDimension (index) {
-      const dimension = this.form.dimensions[index].dimension
+      const dimension = this.form.skillList[index].dimension
       this.dimensionList.push(dimension)
-      this.form.dimensions.splice(index, 1)
+      this.form.skillList.splice(index, 1)
     }
   }
 }

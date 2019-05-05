@@ -78,7 +78,7 @@ export default new Router({
     { path: '/user/login', name: 'user-login', component: UserLogin },
     { path: '/user/register', name: 'user-register', component: UserRegister },
     login({ path: '/class/list', name: 'class-list', component: ClassList }),
-    teacherRoute(login({ path: '/class/detail/:id', name: 'class-detail', component: ClassDetail })),
+    login({ path: '/class/detail/:id', name: 'class-detail', component: ClassDetail }),
 
     teacherRoute(login({ path: '/dimension/list', name: 'dimension-list', component: DimensionList })),
     teacherRoute(login({ path: '/dimension/edit/:id', name: 'dimension-edit', component: DimensionEdit })),
