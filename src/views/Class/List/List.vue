@@ -2,8 +2,8 @@
   <Layout>
     <div v-loading="loading">
       <el-button type='primary' @click="showCreateClass = true" v-if="user.userRole === UserRole.teacher">新建班级</el-button>
-      <el-button v-if="user.userRole === UserRole.teacher">作为助教加入班级</el-button>
-      <el-button type='primary' v-if="user.userRole === UserRole.student">加入班级</el-button>
+      <el-button v-if="user.userRole === UserRole.teacher" @click="showJoinClass = true">作为助教加入班级</el-button>
+      <el-button type='primary' v-if="user.userRole === UserRole.student" @click="showJoinClass = true">加入班级</el-button>
       <el-table :data="classList" stripe>
         <el-table-column
           prop="classId"
@@ -25,6 +25,15 @@
         v-on:done="createClassDone"
         v-bind:show.sync="showCreateClass"
       />
+      <JoinClass
+        v-on:done="createClassDone"
+        v-bind:show.sync="showJoinClass"
+      />
+      <EditClass
+        v-on:done="createClassDone"
+        v-bind:show.sync="showEditClass"
+        :clazz="selectedClass"
+      />
     </div>
   </Layout>
 </template>
@@ -32,6 +41,8 @@
 <script>
 import Layout from '../../../components/Layout'
 import CreateClass from './CreateClass'
+import JoinClass from './JoinClass'
+import EditClass from './EditClass'
 import { classSearch } from '../../../api/class'
 import UserStorage from '../../../store/user'
 import { UserRole } from '../../../models/User'
@@ -41,7 +52,10 @@ export default {
     return {
       loading: false,
       classList: [],
-      showCreateClass: false
+      showCreateClass: false,
+      showJoinClass: false,
+      showEditClass: false,
+      selectedClass: {}
     }
   },
   computed: {
@@ -50,7 +64,9 @@ export default {
   },
   components: {
     Layout,
-    CreateClass
+    CreateClass,
+    JoinClass,
+    EditClass
   },
   mounted () {
     this.reloadList()
@@ -66,10 +82,13 @@ export default {
     },
     createClassDone () {
       this.showCreateClass = false
+      this.showJoinClass = false
+      this.showEditClass = false
       this.reloadList()
     },
     editClass (row) {
-      console.log(row)
+      this.selectedClass = row
+      this.showEditClass = true
     }
   }
 }
