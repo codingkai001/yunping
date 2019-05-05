@@ -11,7 +11,7 @@
         <el-form-item label="博客地址" prop="cuBlog">
           <el-input v-model="form.cuBlog" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="GitHub" props="cuGithub">
+        <el-form-item label="GitHub" prop="cuGithub">
           <el-input v-model="form.cuGithub" autocomplete="off"></el-input>
         </el-form-item>
       </el-form>
@@ -47,13 +47,16 @@ export default {
           { required: true, message: '请输入班级Token', trigger: 'blur' }
         ],
         cuEmail: [
-          { required: true, message: '请输入Email', trigger: 'blur' }
+          { required: true, message: '请输入Email', trigger: 'blur' },
+          { type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }
         ],
         cuGithub: [
-          { required: true, message: '请输入GitHub', trigger: 'blur' }
+          { required: true, message: '请输入GitHub地址', trigger: 'blur' },
+          { type: 'url', message: '请输入正确的GitHub地址', trigger: ['blur', 'change'] }
         ],
         cuBlog: [
-          { required: true, message: '请输入博客地址', trigger: 'blur' }
+          { required: true, message: '请输入博客地址', trigger: 'blur' },
+          { type: 'url', message: '请输入正确的博客地址', trigger: ['blur', 'change'] }
         ]
       }
       if (UserStorage.state.user.userRole === UserRole.teacher) {
