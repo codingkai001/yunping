@@ -1,11 +1,17 @@
 <template>
   <el-dialog title="编辑班级" :visible.sync="show" :show-close="false" :close-on-click-modal="false">
     <div v-loading="loading">
-      <el-form>
+      <el-form label-width="120px">
         <el-form-item label="班级名">
           <el-input v-model="form.className" autocomplete="off" disabled></el-input>
         </el-form-item>
-        <el-form-item label="允许重组团队">
+        <el-form-item label="学生Token">
+          <el-input @focus="copy" v-model="clazz.classStuToken" autocomplete="off" readonly></el-input>
+        </el-form-item>
+        <el-form-item label="助教Token">
+          <el-input @focus="copy" v-model="clazz.classAssistantToken" autocomplete="off" readonly></el-input>
+        </el-form-item>
+        <el-form-item label="编辑团队信息">
           <el-switch v-model="form.classTeamEdit"></el-switch>
         </el-form-item>
       </el-form>
@@ -35,14 +41,10 @@ export default {
     show: Boolean,
     clazz: Object
   },
-  watch: {
-    clazz (newClass, oldClass) {
-      if (newClass !== oldClass) {
-        this.form.classId = newClass.classId
-        this.form.className = newClass.className
-        this.form.classTeamEdit = newClass.classTeamEdit
-      }
-    }
+  mounted () {
+    this.form.classId = this.clazz.classId
+    this.form.className = this.clazz.className
+    this.form.classTeamEdit = this.clazz.classTeamEdit
   },
   methods: {
     hideThis () {
@@ -57,6 +59,12 @@ export default {
         console.error(e)
         this.loading = false
       })
+    },
+    copy (e) {
+      const target = e.target
+      target.select()
+      document.execCommand('copy')
+      this.$message.success('复制成功')
     }
   }
 }

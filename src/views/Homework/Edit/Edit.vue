@@ -7,6 +7,9 @@
       <el-form-item label="作业发布地址">
         <el-input placeholder="例如在博客园的发布地址"></el-input>
       </el-form-item>
+      <el-form-item label="截止时间">
+        <el-date-picker placeholder="选择日期时间" type="datetime"></el-date-picker>
+      </el-form-item>
       <el-form-item label="发布班级">
         <el-select v-model="value" filterable placeholder="请选择">
           <el-option
