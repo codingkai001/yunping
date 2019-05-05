@@ -17,6 +17,7 @@
         <el-table-column
           label="操作">
           <template slot-scope="scope">
+            <el-button size="mini" @click="showTokenDialog(scope.row)">Token</el-button>
             <el-button size="mini" @click="editClass(scope.row)">编辑</el-button>
           </template>
         </el-table-column>
@@ -30,8 +31,15 @@
         v-bind:show.sync="showJoinClass"
       />
       <EditClass
+        v-if="showEditClass"
         v-on:done="createClassDone"
         v-bind:show.sync="showEditClass"
+        :clazz="selectedClass"
+      />
+      <ShowToken
+        v-if="showToken"
+        v-on:done="createClassDone"
+        v-bind:show.sync="showToken"
         :clazz="selectedClass"
       />
     </div>
@@ -43,6 +51,7 @@ import Layout from '../../../components/Layout'
 import CreateClass from './CreateClass'
 import JoinClass from './JoinClass'
 import EditClass from './EditClass'
+import ShowToken from './ShowToken'
 import { classSearch } from '../../../api/class'
 import UserStorage from '../../../store/user'
 import { UserRole } from '../../../models/User'
@@ -55,6 +64,7 @@ export default {
       showCreateClass: false,
       showJoinClass: false,
       showEditClass: false,
+      showToken: false,
       selectedClass: {}
     }
   },
@@ -66,7 +76,8 @@ export default {
     Layout,
     CreateClass,
     JoinClass,
-    EditClass
+    EditClass,
+    ShowToken
   },
   mounted () {
     this.reloadList()
@@ -89,6 +100,10 @@ export default {
     editClass (row) {
       this.selectedClass = row
       this.showEditClass = true
+    },
+    showTokenDialog (row) {
+      this.selectedClass = row
+      this.showToken = true
     }
   }
 }

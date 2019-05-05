@@ -37,7 +37,7 @@ export default {
         cuEmail: '',
         cuBlog: '',
         token: ''
-      },
+      }
     }
   },
   computed: {
