@@ -137,7 +137,7 @@ export default {
 
   #sign-up .el-radio-button:last-child .el-radio-button__inner,
   #sign-up .el-radio-button:first-child .el-radio-button__inner {
-    border-radius: 10px;
+    /*border-radius: 10px;*/
     border: 1px solid white;
     font-size: 15px;
     font-weight: 600;

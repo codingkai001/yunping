@@ -1,9 +1,11 @@
 <template>
 <el-container style="border: 1px solid #eee">
 
-  <el-header>
+  <el-header style="padding-right: 20px;">
     <div class="navbar">
-      <span class="logo">云评</span>
+      <span class="logo">
+        <img src="../assets/img/logo.png" alt="加载失败">
+      </span>
       <span class="user-info">
         <span>欢迎，{{user.userName}}</span>
         <span class="actions">
@@ -74,10 +76,16 @@ export default {
     height: 100%;
 
     .logo {
-        float: left;
-        font-size: 24px;
-        vertical-align: middle;
-        margin-top: 12px;
+        /*float: left;*/
+        /*font-size: 24px;*/
+        /*vertical-align: middle;*/
+        /*margin-top: 12px;*/
+      width: 12%;
+      height: auto;
+      img{
+        width: 100%;
+        height: 100%;
+      }
     }
     .user-info  {
         float: right;

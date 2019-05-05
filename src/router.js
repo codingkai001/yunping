@@ -83,7 +83,7 @@ export default new Router({
     teacherRoute(login({ path: '/dimension/list', name: 'dimension-list', component: DimensionList })),
     teacherRoute(login({ path: '/dimension/edit/:id', name: 'dimension-edit', component: DimensionEdit })),
     teacherRoute(login({ path: '/homework/list', name: 'homework-list', component: HomeworkList })),
-    teacherRoute(login({ path: '/homework/edit/:id', name: 'homework-edit', component: HomeworkEdit })),
+    teacherRoute(login({ path: '/homework/edit/:id', name: 'homework-edit', component: HomeworkEdit }))
 
   ]
 })
