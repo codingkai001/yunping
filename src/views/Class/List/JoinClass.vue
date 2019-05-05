@@ -85,6 +85,7 @@ export default {
           this.$emit('done')
           this.loading = false
         }).catch(e => {
+          this.$message.error(e.message)
           console.error(e)
           this.loading = false
         })
