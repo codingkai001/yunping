@@ -25,6 +25,7 @@
       </el-menu>
       <el-menu :default-openeds="[]" v-if="user.userRole === 0" :default-active="activedMenu">
         <el-menu-item index="class" @click="$router.push({ path: '/class/list' })">班级管理</el-menu-item>
+        <el-menu-item index="team" @click="$router.push({ path: '/class/list' })">团队管理</el-menu-item>
       </el-menu>
     </el-aside>
 

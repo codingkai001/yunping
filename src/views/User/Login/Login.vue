@@ -40,16 +40,23 @@ export default {
     },
     // 登录验证
     login () {
-      this.loading = true
-      login(this.user).then(res => {
-        UserStore.commit('setUser', res)
-        this.$router.push({ path: '/class/list' })
-        this.loading = false
-      }).catch(e => {
-        this.$message.error(e.message)
-        console.log(e)
-        this.loading = false
-      })
+      // this.loading = true
+      if (this.user.userAccount === '') {
+        this.$message.error('用户名不能为空')
+      } else if (this.user.userPass === '') {
+        this.$message.error('密码不能为空')
+      } else {
+        login(this.user).then(res => {
+          // this.$message.error(res)
+          UserStore.commit('setUser', res)
+          this.$router.push({ path: '/class/list' })
+          // this.loading = false
+        }).catch(e => {
+          this.$message.error('用户名或密码错误')
+          console.log(e)
+          // this.loading = false
+        })
+      }
     }
   },
   mounted () {

@@ -52,22 +52,36 @@ export default {
     toLogin () {
       this.$router.push({ path: '/user/login' })
     },
+    // 验证注册表单字段
+    authRegParams () {
+      if (this.user.userAccount === '') {
+        return '学号/工号不能为空'
+      } else if (this.user.userName === '') {
+        return '姓名不能为空'
+      } else if (this.user.userPass === '' || this.user.userPassword2 === '' || this.user.userPass !== this.user.userPassword2){
+        return '两次输入密码不一致'
+      } else if (this.user.userSchool === '') {
+        return '学校不能为空'
+      } else {
+        this.authenticated = true
+        return 'ok'
+      }
+    },
     // 注册验证
     register () {
-      if (this.user.userPass !== this.user.userPassword2) {
-        return
+      var authResult = this.authRegParams()
+      if (this.authenticated !== true) {
+        this.$message.error(authResult)
+      } else {
+        register(this.user).then((res) => {
+          console.log(res.data)
+          this.$message.success('注册成功')
+          this.$router.push({ path: '/user/login' })
+        }).catch(e => {
+          this.$message.error('账号已存在')
+          console.log(e)
+        })
       }
-      this.loading = true
-      register(this.user).then((res) => {
-        console.log(res.data)
-        this.loading = false
-        this.$message.success('注册成功')
-        this.$router.push({ path: '/user/login' })
-      }).catch(e => {
-        this.$message.error(e.message)
-        console.log(e)
-        this.loading = false
-      })
     }
   },
 
