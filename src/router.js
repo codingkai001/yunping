@@ -10,9 +10,7 @@ import DimensionEdit from './views/Dimension/Edit'
 import HomeworkList from './views/Homework/List'
 import HomeworkEdit from './views/Homework/Edit'
 import { UserRole } from './models/User'
-
-// import Test from './components/Test'
-// import QuestionBank from './components/Test'
+import TeamList from './views/Team/List'
 
 Vue.use(Router)
 
@@ -83,7 +81,7 @@ export default new Router({
     teacherRoute(login({ path: '/dimension/list', name: 'dimension-list', component: DimensionList })),
     teacherRoute(login({ path: '/dimension/edit/:id', name: 'dimension-edit', component: DimensionEdit })),
     teacherRoute(login({ path: '/homework/list', name: 'homework-list', component: HomeworkList })),
-    teacherRoute(login({ path: '/homework/edit/:id', name: 'homework-edit', component: HomeworkEdit }))
-
+    teacherRoute(login({ path: '/homework/edit/:id', name: 'homework-edit', component: HomeworkEdit })),
+    studentRoute(login({ path: '/team/list', name: 'team-list', component: TeamList }))
   ]
 })
