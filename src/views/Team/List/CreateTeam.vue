@@ -3,13 +3,20 @@
     <div v-loading="loading">
       <el-form>
         <el-form-item label="团队名称">
-          <el-input autocomplete="off" v-model="teamName"></el-input>
+          <el-input autocomplete="off" placeholder="请输入团队名称" v-model="teamName"></el-input>
         </el-form-item>
         <el-form-item label="团队限制人数">
-          <el-input autocomplete="off" v-model="teamLimit"></el-input>
+          <el-input-number autocomplete="off" v-model="teamLimit"></el-input-number>
         </el-form-item>
         <el-form-item label="团队类型">
-          <el-input autocomplete="off" v-model="teamType"></el-input>
+          <el-select autocomplete="off" placeholder="请选择团队名称" v-model="teamType">
+            <el-option
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+              v-for="item in options">
+            </el-option>
+          </el-select>
         </el-form-item>
       </el-form>
       <div class="dialog-footer" slot="footer">
@@ -29,7 +36,15 @@
         loading: false,
         teamName: '',
         teamType: '',
-        teamLimit: ''
+        teamLimit: '',
+        options: [{
+          value: '0',
+          label: '结对'
+        }, {
+          value: '1',
+          label: '团队'
+        }],
+        value: ''
       }
     },
     props: {
