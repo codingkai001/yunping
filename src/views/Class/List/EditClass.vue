@@ -14,15 +14,6 @@
         <el-form-item label="编辑团队信息">
           <el-switch v-model="form.classTeamEdit"></el-switch>
         </el-form-item>
-        <!--        <el-form-item label="团队种类">-->
-        <!--          <el-input @focus="copy" v-model="clazz.classStuToken" autocomplete="off" readonly></el-input>-->
-        <!--        </el-form-item>-->
-        <!--        <el-form-item label="助教Token">-->
-        <!--          <el-input @focus="copy" v-model="clazz.classAssistantToken" autocomplete="off" readonly></el-input>-->
-        <!--        </el-form-item>-->
-        <!--        <el-form-item label="编辑团队信息">-->
-        <!--          <el-switch v-model="form.classTeamEdit"></el-switch>-->
-        <!--        </el-form-item>-->
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="hideThis">取 消</el-button>

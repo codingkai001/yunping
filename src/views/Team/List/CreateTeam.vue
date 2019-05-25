@@ -9,7 +9,7 @@
           <el-input-number autocomplete="off" v-model="teamLimit"></el-input-number>
         </el-form-item>
         <el-form-item label="团队类型">
-          <el-select autocomplete="off" placeholder="请选择团队名称" v-model="teamType">
+          <el-select autocomplete="off" placeholder="请选择团队类型" v-model="teamType">
             <el-option
               :key="item.value"
               :label="item.label"
@@ -58,7 +58,7 @@
         this.loading = true
         teamAdd(this.teamName, this.teamLimit, this.teamType).then(p => {
           this.$emit('done')
-          this.$message(p)//888888888888888
+          this.$message('你创建的团队Token为:' + p)//888888888888888
           this.loading = false
         }).catch(e => {
           console.error(e)

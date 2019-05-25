@@ -3,7 +3,8 @@
     <div v-loading="loading">
       <el-button @click="showCreateTeam = true" type='primary'>创建团队</el-button>
       <el-button @click="showJoinTeam = true" type='primary'>加入团队</el-button>
-      <el-button @click="showTeamInformation = true" type='primary'>团队信息</el-button>
+      <el-button @click="showEditTeam = true" type='primary'>编辑团队</el-button>
+      <el-button @click="quitTeam" type='primary'>退出团队</el-button>
       <el-table :data="teamList" stripe>
         <el-table-column
           label="成员ID"
@@ -31,13 +32,13 @@
             {{ scope.row.isCaptain===true ? '是' : '' }}
           </template>
         </el-table-column>
-        <!--        <el-table-column-->
-        <!--          label="操作">-->
-        <!--          <template slot-scope="scope">-->
-        <!--&lt;!&ndash;                        <el-button size="mini" @click="viewTeam(scope.row)">查看</el-button>&ndash;&gt;-->
-        <!--&lt;!&ndash;                        <el-button size="mini" @click="editTeam(scope.row)">编辑</el-button>&ndash;&gt;-->
-        <!--          </template>-->
-        <!--        </el-table-column>-->
+        <!--                <el-table-column-->
+        <!--                  label="操作">-->
+        <!--                  <template slot-scope="scope">-->
+        <!--                                <el-button size="mini" @click="viewTeam(scope.row)">查看</el-button>-->
+        <!--                                <el-button size="mini" @click="editTeam(scope.row)">编辑</el-button>-->
+        <!--                  </template>-->
+        <!--                </el-table-column>-->
       </el-table>
       <CreateTeam
         v-bind:show.sync="showCreateTeam"
@@ -47,6 +48,12 @@
         v-bind:show.sync="showJoinTeam"
         v-on:done="createTeamDone"
       />
+      <EditTeam
+        :clazz="selectedTeam"
+        v-bind:show.sync="showEditTeam"
+        v-if="showEditTeam"
+        v-on:done="createTeamDone"
+      />
     </div>
   </layout>
 </template>
@@ -54,7 +61,9 @@
   import Layout from '../../../components/Layout'
   import CreateTeam from './CreateTeam'
   import JoinTeam from './JoinTeam'
+  import EditTeam from './EditTeam'
   import { teamDetail } from '../../../api/team'
+  import { teamExit } from '../../../api/team'
 
   export default {
     data () {
@@ -62,21 +71,23 @@
         loading: false,
         showCreateTeam: false,
         showJoinTeam: false,
-        showTeamInformation: false,
+        showEditTeam: false,
         teamList: [],
+        selectedClass: {}
       }
     },
     components: {
       Layout,
       CreateTeam,
-      JoinTeam
+      JoinTeam,
+      EditTeam
     },
     mounted () {
       this.reloadList()
     },
     methods: {
       reloadList () {
-        this.loading = true
+        //this.loading = true
         teamDetail().then(p => {
           this.teamList = p.classUserVOList
           console.log(p)
@@ -86,13 +97,20 @@
       createTeamDone () {
         this.showCreateTeam = false
         this.showJoinTeam = false
-        this.showTeamInformation = false
+        this.showEditTeam = false
         this.reloadList()
       },
-      // editClass (row) {
-      //   this.selectedClass = row
-      //   this.showEditClass = true
-      // },
+      editTeam (row) {
+        this.selectedTeam = row
+        this.showEditTeam = true
+      },
+      quitTeam () {
+        teamExit().then(p => {
+          alert('退出团队成功！')
+          console.log(p)
+          this.loading = false
+        })
+      }
       // viewClass (row) {
       //   this.$router.push({ path: '/class/detail/' + row.classId })
       // }
