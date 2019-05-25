@@ -6,7 +6,7 @@
           <el-input autocomplete="off" placeholder="请输入团队名称" v-model="teamName"></el-input>
         </el-form-item>
         <el-form-item label="团队限制人数">
-          <el-input-number autocomplete="off" v-model="teamLimit"></el-input-number>
+          <el-input-number autocomplete="off" v-model="teamLimit" :min="0" :max="10"></el-input-number>
         </el-form-item>
         <el-form-item label="团队类型">
           <el-select autocomplete="off" placeholder="请选择团队类型" v-model="teamType">
@@ -39,7 +39,7 @@
         teamLimit: '',
         options: [{
           value: '0',
-          label: '结对'
+        label: '结对'
         }, {
           value: '1',
           label: '团队'

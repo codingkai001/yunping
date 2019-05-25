@@ -1,10 +1,13 @@
 <template>
   <layout>
     <div v-loading="loading">
-      <el-button @click="showCreateTeam = true" type='primary'>创建团队</el-button>
-      <el-button @click="showJoinTeam = true" type='primary'>加入团队</el-button>
-      <el-button @click="showEditTeam = true" type='primary'>编辑团队</el-button>
-      <el-button @click="quitTeam" type='primary'>退出团队</el-button>
+      <div>
+        <h2>{{teamName}}</h2>
+        <el-button size="small" @click="showCreateTeam = true" type='primary'>创建团队</el-button>
+        <el-button size="small" @click="showJoinTeam = true" type='primary'>加入团队</el-button>
+        <el-button size="small" @click="showEditTeam = true" type='primary'>编辑团队</el-button>
+        <el-button size="small" @click="quitTeam" type='primary'>退出团队</el-button>
+      </div>
       <el-table :data="teamList" stripe>
         <el-table-column
           label="成员ID"
@@ -29,7 +32,9 @@
         </el-table-column>
         <el-table-column label="是否队长">
           <template slot-scope="scope">
-            {{ scope.row.isCaptain===true ? '是' : '' }}
+<!--            {{ scope.row.isCaptain===true ? '是' : '' }}-->
+            <i class="el-icon-check" v-if="scope.row.isCaptain===true"></i>
+            <i class="el-icon-close" v-if="scope.row.isCaptain===false"></i>
           </template>
         </el-table-column>
         <!--                <el-table-column-->
@@ -73,7 +78,8 @@
         showJoinTeam: false,
         showEditTeam: false,
         teamList: [],
-        selectedClass: {}
+        selectedClass: {},
+        teamName: ''
       }
     },
     components: {
@@ -90,6 +96,7 @@
         //this.loading = true
         teamDetail().then(p => {
           this.teamList = p.classUserVOList
+          this.teamName = p.teamName
           console.log(p)
           this.loading = false
         })

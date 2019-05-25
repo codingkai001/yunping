@@ -3,22 +3,19 @@
     <div v-loading="loading">
       <el-form label-width="120px">
         <el-form-item label="团队Id">
-          <el-input autocomplete="off" readonly v-model="form.teamId"></el-input>
+          <el-input autocomplete="off" readonly v-model="teamId"></el-input>
         </el-form-item>
         <el-form-item label="团队名">
-          <el-input autocomplete="off" v-model="form.teamName"></el-input>
+          <el-input autocomplete="off" v-model="teamName"></el-input>
         </el-form-item>
         <el-form-item label="团队人数限制">
-          <el-input autocomplete="off" v-model="form.teamLimit"></el-input>
+          <el-input autocomplete="off" v-model="teamLimit"></el-input>
         </el-form-item>
         <el-form-item label="团队种类">
-          <el-input autocomplete="off" v-model="form.teamType"></el-input>
-        </el-form-item>
-        <el-form-item label="编辑团队信息">
-          <el-switch v-model="form.teamEdit"></el-switch>
+          <el-input autocomplete="off" v-model="teamType"></el-input>
         </el-form-item>
         <el-form-item label="团队队长">
-          <el-input autocomplete="off" v-model="form.teamCaptain"></el-input>
+          <el-input autocomplete="off" v-model="teamCaptain"></el-input>
         </el-form-item>
       </el-form>
       <div class="dialog-footer" slot="footer">
@@ -31,19 +28,17 @@
 
 <script>
   import { teamUpdate } from '../../../api/team'
+  import { teamDetail } from '../../../api/team'
 
   export default {
     data () {
       return {
         loading: false,
-        form: {
           teamId: 0,
           teamName: '',
           teamLimit: 0,
           teamType: 0,
-          teamEdit: false,
           teamCaptain: 0
-        }
       }
     },
     props: {
@@ -51,19 +46,29 @@
       //clazz: Object
     },
     mounted () {
-      // this.form.classId = this.clazz.classId
-      // this.form.className = this.clazz.className
-      // this.form.classTeamEdit = this.clazz.classTeamEdit
-    },
+      teamDetail().then(p => {
+        this.teamId = p.teamId
+        this.teamName = p.teamName
+        this.teamLimit = p.teamLimit
+        this.teamType = p.teamType
+        this.teamCaptain = p.teamCaptain
+        }).catch(e => {
+          console.error(e)
+          this.loading = false
+        })
+      }
+    ,
     methods: {
       hideThis () {
         this.$emit('update:show', false)
       },
       editTeam () {
-        this.loading = true
-        teamUpdate(this.form.teamId, this.form.teamName, this.form.teamLimit, this.form.teamType, this.form.teamEdit, this.form.teamCaptain).then(p => {
-          this.$emit('done')
-          this.loading = false
+        // this.loading = true
+        teamUpdate(this.teamId, this.teamName, this.teamLimit, this.teamType, this.teamCaptain)
+          .then(p => {
+            this.$emit('done')
+            this.$message.success('修改成功')
+            this.loading = false
         }).catch(e => {
           console.error(e)
           this.loading = false
