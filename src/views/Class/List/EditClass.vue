@@ -2,11 +2,17 @@
   <el-dialog title="编辑班级" :visible.sync="show" :show-close="false" :close-on-click-modal="false">
     <div v-loading="loading">
       <el-form label-width="120px">
-        <el-form-item label="团队Id">
-          <el-input autocomplete="off" disabled v-model="form.teamId"></el-input>
+        <el-form-item label="班级名">
+          <el-input autocomplete="off" disabled v-model="form.className"></el-input>
         </el-form-item>
-        <el-form-item label="团队名">
-          <el-input autocomplete="off" disabled v-model="form.teamName"></el-input>
+        <el-form-item label="学生Token">
+          <el-input @focus="copy" v-model="clazz.classStuToken" autocomplete="off" readonly></el-input>
+        </el-form-item>
+        <el-form-item label="助教Token">
+          <el-input @focus="copy" v-model="clazz.classAssistantToken" autocomplete="off" readonly></el-input>
+        </el-form-item>
+        <el-form-item label="编辑团队信息">
+          <el-switch v-model="form.classTeamEdit"></el-switch>
         </el-form-item>
         <!--        <el-form-item label="团队种类">-->
         <!--          <el-input @focus="copy" v-model="clazz.classStuToken" autocomplete="off" readonly></el-input>-->
