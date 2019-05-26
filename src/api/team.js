@@ -7,3 +7,4 @@ export const teamAdd = (teamName, teamLimit, teamType) => post('/team/add?teamNa
 export const teamDetail = () => get('/team/detail', '')
 export const teamUpdate = (teamId, teamName, teamLimit, teamType, teamCaptain) => post('/team/update?teamId=' + teamId + '&teamName=' + teamName + '&teamLimit=' + teamLimit + '&teamType=' + teamType + '&teamEdit=true' + '&teamCaptain=' + teamCaptain)
 export const teamExit = () => get('/team/exit', '')
+export const teamClear = (teamId) => get('/team/clear?teamId=' + teamId)

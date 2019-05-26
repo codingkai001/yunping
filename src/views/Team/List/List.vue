@@ -7,6 +7,7 @@
         <el-button size="small" @click="showJoinTeam = true" type='primary'>加入团队</el-button>
         <el-button size="small" @click="showEditTeam = true" type='primary'>编辑团队</el-button>
         <el-button size="small" @click="quitTeam" type='primary'>退出团队</el-button>
+        <el-button @click="clearTeam(teamId)" size="small" type='primary'>解散团队</el-button>
       </div>
       <el-table :data="teamList" stripe>
         <el-table-column
@@ -69,6 +70,7 @@
   import EditTeam from './EditTeam'
   import { teamDetail } from '../../../api/team'
   import { teamExit } from '../../../api/team'
+  import { teamClear } from '../../../api/team'
 
   export default {
     data () {
@@ -79,7 +81,8 @@
         showEditTeam: false,
         teamList: [],
         selectedClass: {},
-        teamName: ''
+        teamName: '',
+        teamId: 0
       }
     },
     components: {
@@ -97,6 +100,7 @@
         teamDetail().then(p => {
           this.teamList = p.classUserVOList
           this.teamName = p.teamName
+          this.teamId = p.teamId
           console.log(p)
           this.loading = false
         })
@@ -117,11 +121,14 @@
           console.log(p)
           this.loading = false
         })
+      },
+      clearTeam (teamId) {
+        teamClear(teamId).then(p => {
+          alert('解散团队成功！')
+          console.log(p)
+          this.loading = false
+        })
       }
-      // viewClass (row) {
-      //   this.$router.push({ path: '/class/detail/' + row.classId })
-      // }
     }
   }
-
 </script>
