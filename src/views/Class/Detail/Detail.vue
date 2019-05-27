@@ -42,7 +42,12 @@
             </el-table>
           </el-tab-pane>
           <el-tab-pane label="团队" name="teams">
-            <el-table :data="clazz.classTeamVOList"></el-table>
+            <el-table :data="teamList"></el-table>
+            <el-table-column label="团队ID" prop="teamId"></el-table-column>
+            <el-table-column label="团队名称" prop="teamName"></el-table-column>
+            <el-table-column label="团队类型" prop="teamType"></el-table-column>
+            <el-table-column label="团队人数" prop="teamSize"></el-table-column>
+            <el-table-column label="团队队长" prop="teamCaptain"></el-table-column>
           </el-tab-pane>
         </el-tabs>
       </div>
@@ -59,6 +64,7 @@
 <script>
 import Layout from '../../../components/Layout'
 import { classDetail } from '../../../api/class'
+import { teamSearch } from '../../../api/team'
 import NewTeam from './NewTeam'
 import UserStorage from '../../../store/user'
 
@@ -68,7 +74,8 @@ export default {
       loading: false,
       activeTab: 'homeworks',
       clazz: {},
-      showNewTeam: false
+      showNewTeam: false,
+      teamList: []
     }
   },
   components: {
@@ -85,6 +92,10 @@ export default {
       this.loading = true
       classDetail(id, 1, 1000).then(p => {
         this.clazz = p
+        //this.loading = false
+      })
+      teamSearch(id).then(p => {
+        this.teamList = p.teamVOList
         this.loading = false
       })
     },

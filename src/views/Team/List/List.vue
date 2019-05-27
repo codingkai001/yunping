@@ -33,18 +33,10 @@
         </el-table-column>
         <el-table-column label="是否队长">
           <template slot-scope="scope">
-<!--            {{ scope.row.isCaptain===true ? '是' : '' }}-->
             <i class="el-icon-check" v-if="scope.row.isCaptain===true"></i>
             <i class="el-icon-close" v-if="scope.row.isCaptain===false"></i>
           </template>
         </el-table-column>
-        <!--                <el-table-column-->
-        <!--                  label="操作">-->
-        <!--                  <template slot-scope="scope">-->
-        <!--                                <el-button size="mini" @click="viewTeam(scope.row)">查看</el-button>-->
-        <!--                                <el-button size="mini" @click="editTeam(scope.row)">编辑</el-button>-->
-        <!--                  </template>-->
-        <!--                </el-table-column>-->
       </el-table>
       <CreateTeam
         v-bind:show.sync="showCreateTeam"
