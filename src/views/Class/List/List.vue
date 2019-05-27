@@ -78,10 +78,17 @@ export default {
   methods: {
     reloadList () {
       this.loading = true
+      this.classList = []
       classSearch().then(p => {
-        this.classList = p.classVOList
-        this.classId = p.classId
-        console.log(p)
+        // this.classList = p.classVOList
+        var tempClassList = p.classVOList
+        for (var i=0;i<tempClassList.length;i++){
+          console.log(tempClassList[i])
+          if (tempClassList[i].classExist===false){
+            this.classList.push(tempClassList[i])
+          }
+        }
+        // console.log(p)
         this.loading = false
       })
     },
@@ -99,10 +106,18 @@ export default {
       this.$router.push({ path: '/class/detail/' + row.classId })
     },
     deleteClass (row) {
-      classDelete(row.classId).then(p => {
-        alert('删除班级成功')
-        console.log(p)
-        this.loading = false
+      var confirm = this.$confirm("确认删除当前班级？", "提示", {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(()=>{
+        this.loading = true
+          classDelete(row.classId).then(p => {
+            console.log(p)
+            this.$message.success("删除成功")
+            this.reloadList()
+            this.loading = false
+        })
       })
     }
   }

@@ -3,7 +3,7 @@
     <div v-loading="loading">
       <el-form>
         <el-form-item label="班级名称">
-          <el-input v-model="className" autocomplete="off"></el-input>
+          <el-input v-model="className" autocomplete="off" placeholder=""></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
