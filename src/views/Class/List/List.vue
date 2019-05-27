@@ -19,6 +19,7 @@
           <template slot-scope="scope">
             <el-button size="mini" @click="viewClass(scope.row)">查看</el-button>
             <el-button size="mini" @click="editClass(scope.row)">编辑</el-button>
+            <el-button @click="deleteClass(scope.row)" size="mini">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -46,6 +47,7 @@ import CreateClass from './CreateClass'
 import JoinClass from './JoinClass'
 import EditClass from './EditClass'
 import { classSearch } from '../../../api/class'
+import { classDelete } from '../../../api/class'
 import UserStorage from '../../../store/user'
 import { UserRole } from '../../../models/User'
 
@@ -78,6 +80,7 @@ export default {
       this.loading = true
       classSearch().then(p => {
         this.classList = p.classVOList
+        this.classId = p.classId
         console.log(p)
         this.loading = false
       })
@@ -94,6 +97,13 @@ export default {
     },
     viewClass (row) {
       this.$router.push({ path: '/class/detail/' + row.classId })
+    },
+    deleteClass (row) {
+      classDelete(row.classId).then(p => {
+        alert('删除班级成功')
+        console.log(p)
+        this.loading = false
+      })
     }
   }
 }
