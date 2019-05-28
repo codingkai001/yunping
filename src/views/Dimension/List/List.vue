@@ -24,6 +24,7 @@
           label="操作">
           <template slot-scope="scope">
             <el-button size="mini" @click="editDimension(scope.row)">编辑</el-button>
+            <el-button size="mini" @click="deleteDimension(scope.row)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -33,7 +34,7 @@
 
 <script>
 import Layout from '../../../components/Layout'
-import { dimensionSearch } from '../../../api/dimension'
+import {dimensionDelete, dimensionSearch} from '../../../api/dimension'
 
 export default {
   data () {
@@ -58,6 +59,21 @@ export default {
     },
     editDimension (row) {
       this.$router.push({ path: `/dimension/edit/${row.skillId}` })
+    },
+    deleteDimension (row) {
+      var confirm = this.$confirm("确认删除当前维度？", "提示", {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(()=>{
+        this.loading = true
+        dimensionDelete(row.skillId).then(p => {
+          // console.log(p)
+          this.$message.success("删除成功")
+          this.reloadList()
+          this.loading = false
+        })
+      })
     }
   }
 }
