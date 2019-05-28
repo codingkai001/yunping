@@ -84,7 +84,7 @@ export default {
         var tempClassList = p.classVOList
         for (var i=0;i<tempClassList.length;i++){
           console.log(tempClassList[i])
-          if (tempClassList[i].classExist===false){
+          if (tempClassList[i].classExist===true){
             this.classList.push(tempClassList[i])
           }
         }
@@ -113,7 +113,7 @@ export default {
       }).then(()=>{
         this.loading = true
           classDelete(row.classId).then(p => {
-            console.log(p)
+            // console.log(p)
             this.$message.success("删除成功")
             this.reloadList()
             this.loading = false
