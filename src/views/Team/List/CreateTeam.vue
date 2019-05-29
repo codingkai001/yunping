@@ -58,9 +58,10 @@
         this.loading = true
         teamAdd(this.teamName, this.teamLimit, this.teamType).then(p => {
           this.$emit('done')
-          this.$message('你创建的团队Token为:' + p)//888888888888888
+          this.$message.success('团队创建成功')
           this.loading = false
         }).catch(e => {
+          this.$message.error("当前用户未在当前班级中，无法创建团队")
           console.error(e)
           this.loading = false
         })
