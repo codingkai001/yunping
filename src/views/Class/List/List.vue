@@ -114,7 +114,7 @@ export default {
         this.loading = true
           classDelete(row.classId).then(p => {
             // console.log(p)
-            this.$message.success("删除成功")
+            this.$message.success('删除成功')
             this.reloadList()
             this.loading = false
         })
