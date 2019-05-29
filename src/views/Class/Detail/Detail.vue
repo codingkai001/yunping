@@ -4,7 +4,7 @@
       <div>
         <h2>{{clazz.className}}</h2>
         <el-button size='small' @click="reorganizeTeam">团队重组</el-button>
-        <el-button size='small'>统计分析</el-button>
+        <el-button size='small' @click="analysisClass">统计分析</el-button>
         <el-button size='small' v-if="false">创建团队</el-button>
       </div>
       <div style="margin-top: 1em">
@@ -108,6 +108,12 @@ export default {
         this.showNewTeam = true
       }).catch(() => {
       }) // do nothing
+    },
+    analysisClass () {
+      /*缺少班级ID*/
+      var href = location.href.split('/')
+      var classId = href[href.length-1]
+      this.$router.push({path: `/class/analysis/${classId}`})
     },
     copy (e) {
       const target = e.target
