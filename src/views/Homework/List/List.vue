@@ -54,6 +54,7 @@
           </template>
         </el-table-column>
       </el-table>
+      <div id="chart" style="height: 400px;width: 500px"></div>
     </div>
   </Layout>
 </template>
@@ -78,6 +79,7 @@ export default {
   mounted () {
     this.getUserRole()
     this.reloadList()
+    this.loadChart()
   },
   methods: {
     reloadList () {
@@ -108,6 +110,36 @@ export default {
     getUserRole(){
       this.userRole = document.cookie.split('=')[1]
       // alert(this.userRole)
+    },
+    loadChart(){
+      var myChart = this.$echarts.init(document.getElementById('chart'))
+      myChart.setOption({
+        tooltip: {
+          show: true
+        },
+        legend: {
+          data:['销量']
+        },
+        xAxis : [
+          {
+            type : 'category',
+            data : ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+          }
+        ],
+        yAxis : [
+          {
+            type : 'value'
+          }
+        ],
+        series : [
+          {
+            "name":"销量",
+            "type":"bar",
+            "data":[5, 20, 40, 10, 10, 20]
+          }
+        ]
+      })
+
     }
   }
 }
