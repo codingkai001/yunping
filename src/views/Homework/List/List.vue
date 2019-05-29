@@ -5,17 +5,24 @@
       <!--老师-->
       <el-table v-if="taskList.length!==0" :data="taskList" stripe>
         <el-table-column
-          label="ID"
+          label="作业ID"
           prop="taskId"
-          width="180">
+          width="100">
         </el-table-column>
         <el-table-column
           label="作业名"
-          prop="taskName">
+          prop="taskName"
+          width="100">
         </el-table-column>
         <el-table-column
           label="作业创建者"
-          prop="taskCreatorName">
+          prop="taskCreatorName"
+          width="100">
+        </el-table-column>
+        <el-table-column
+          label="发布班级"
+          prop="taskClassName"
+          width="100">
         </el-table-column>
         <el-table-column
           label="作业地址"
@@ -24,16 +31,17 @@
         <el-table-column
           label="操作">
           <template slot-scope="scope">
+            <el-button @click="editHomework(scope.row)" size="mini">查看详情</el-button>
             <el-button size="mini" @click="editHomework(scope.row)">编辑</el-button>
+            <el-button @click="deleteHomework(scope.row)" size="mini">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
       <!--学生-->
-      <el-table v-if="homeworkList.length!==0" :data="taskList" stripe>
+      <el-table :data="homeworkList" stripe v-if="homeworkList.length!==0">
         <el-table-column
           label="ID"
-          prop="taskId"
-          width="180">
+          prop="taskId">
         </el-table-column>
         <el-table-column
           label="作业名"
@@ -54,14 +62,13 @@
           </template>
         </el-table-column>
       </el-table>
-      <div id="chart" style="height: 400px;width: 500px"></div>
     </div>
   </Layout>
 </template>
 
 <script>
 import Layout from '../../../components/Layout'
-import { taskSearch, taskList } from '../../../api/task'
+import { taskSearch, taskList, taskDelete } from '../../../api/task'
 // import { dimensionSearch } from '../../../api/dimension'
 
 export default {
@@ -79,7 +86,6 @@ export default {
   mounted () {
     this.getUserRole()
     this.reloadList()
-    this.loadChart()
   },
   methods: {
     reloadList () {
@@ -105,41 +111,19 @@ export default {
       }
     },
     editHomework (row) {
-      this.$router.push({ path: `/homework/edit/${row.id}` })
+      this.$router.push({ path: `/homework/edit/${row.taskId}` })
     },
     getUserRole(){
       this.userRole = document.cookie.split('=')[1]
       // alert(this.userRole)
     },
-    loadChart(){
-      var myChart = this.$echarts.init(document.getElementById('chart'))
-      myChart.setOption({
-        tooltip: {
-          show: true
-        },
-        legend: {
-          data:['销量']
-        },
-        xAxis : [
-          {
-            type : 'category',
-            data : ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
-          }
-        ],
-        yAxis : [
-          {
-            type : 'value'
-          }
-        ],
-        series : [
-          {
-            "name":"销量",
-            "type":"bar",
-            "data":[5, 20, 40, 10, 10, 20]
-          }
-        ]
+    deleteHomework (row) {
+      taskDelete(row.taskId).then(p => {
+        // console.log(p)
+        this.$message.success('删除成功')
+        this.reloadList()
+        this.loading = false
       })
-
     }
   }
 }
