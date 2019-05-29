@@ -2,8 +2,7 @@
   <Layout>
     <div v-loading="loading">
       <el-button type='primary' @click="$router.push({ path: '/homework/edit/0' })">新建作业</el-button>
-      <!--老师-->
-      <el-table :data="taskList" stripe>
+      <el-table :data="taskList" stripe v-if="taskList.length!==0">
         <el-table-column
           label="作业ID"
           prop="taskId"
@@ -34,6 +33,31 @@
             <el-button @click="viewHomework(scope.row)" size="mini">查看详情</el-button>
             <el-button size="mini" @click="editHomework(scope.row)">编辑</el-button>
             <el-button @click="deleteHomework(scope.row)" size="mini">删除</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+      <!--学生-->
+      <el-table :data="homeworkList" stripe v-if="homeworkList.length!==0">
+        <el-table-column
+          label="ID"
+          prop="taskId">
+        </el-table-column>
+        <el-table-column
+          label="作业名"
+          prop="taskName">
+        </el-table-column>
+        <el-table-column
+          label="作业创建者"
+          prop="taskCreatorName">
+        </el-table-column>
+        <el-table-column
+          label="作业地址"
+          prop="taskUrl">
+        </el-table-column>
+        <el-table-column
+          label="操作">
+          <template slot-scope="scope">
+            <el-button @click="editHomework(scope.row)" size="mini">编辑</el-button>
           </template>
         </el-table-column>
       </el-table>

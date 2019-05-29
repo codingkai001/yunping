@@ -25,10 +25,14 @@
         <el-table-column
           label="操作">
           <template slot-scope="scope">
-            <el-button @click="viewHomework(scope.row)" size="mini">评分</el-button>
+            <el-button @click="showEvaluate=true" size="mini">评分</el-button>
           </template>
         </el-table-column>
       </el-table>
+      <Evaluate
+        v-bind:show.sync="showEvaluate"
+        v-on:done="evaluateDone"
+      />
     </div>
   </Layout>
 </template>
@@ -36,16 +40,19 @@
 <script>
   import Layout from '../../../components/Layout'
   import { taskStatus } from '../../../api/task'
+  import Evaluate from './Evaluate'
 
   export default {
     data () {
       return {
         loading: false,
-        clazz: {}
+        clazz: {},
+        showEvaluate: false
       }
     },
     components: {
-      Layout
+      Layout,
+      Evaluate
     },
     mounted () {
       this.reloadData()
@@ -58,6 +65,10 @@
           this.clazz = p
           this.loading = false
         })
+      },
+      evaluateDone () {
+        this.showEvaluate = false
+        this.reloadData()
       }
     }
   }
