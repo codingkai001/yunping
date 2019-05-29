@@ -1,10 +1,10 @@
 <template>
 <el-container style="border: 1px solid #eee">
 
-  <el-header style="padding-right: 20px;">
+  <el-header style="padding-right: 20px;padding-left: 0;">
     <div class="navbar">
       <span class="logo">
-        <img src="../assets/img/logo.png" alt="加载失败">
+        <img src="../assets/img/logo2.png" alt="加载失败">
       </span>
       <span class="user-info">
         <span>欢迎，{{user.userName}}</span>
@@ -19,7 +19,7 @@
 
     <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
       <el-menu :default-openeds="[]" v-if="user.userRole === 1" :default-active="activedMenu">
-        <el-menu-item index="class" @click="$router.push({ path: '/class/list' })">班级管理</el-menu-item>
+        <el-menu-item index="clas s" @click="$router.push({ path: '/class/list' })">班级管理</el-menu-item>
         <el-menu-item index="dimension" @click="$router.push({ path: '/dimension/list' })">评分维度管理</el-menu-item>
         <el-menu-item index="homework" @click="$router.push({ path: '/homework/list' })">作业管理</el-menu-item>
       </el-menu>

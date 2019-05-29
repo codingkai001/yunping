@@ -2,7 +2,7 @@
   <Layout>
     <el-form :rules="rules" ref="ruleForm" :model="form" label-width="180px" v-loading="loading">
       <el-form-item label="名称" prop="taskName">
-        <el-input v-model="form.taskName" placeholder=""></el-input>
+        <el-input v-model="form.taskName" placeholder="作业名称"></el-input>
       </el-form-item>
       <el-form-item label="作业发布地址" prop="taskUrl">
         <el-input v-model="form.taskUrl" placeholder="例如在博客园的发布地址"></el-input>
@@ -143,6 +143,8 @@ export default {
         this.form.taskName = p.taskName
         this.form.taskClass = p.taskClass
         this.form.taskUrl = p.taskUrl
+        this.form.skillList = p.skillList
+        console.log(this.form)
         this.loading = false
 
       }).catch(e=>{
