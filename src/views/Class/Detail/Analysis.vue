@@ -2,10 +2,10 @@
   <layout>
     <div v-loading="loading">
       <div>
-        <h2>分析</h2>
+        <h2></h2>
       </div>
       <div style="margin-top: 1em">
-        <div id="total-score-change-chart" style="width: 1200px;height: 400px;"></div>
+        <div id="total-score-change-chart" style="width: 1500px;height: 500px;margin: 0 auto;"></div>
       </div>
     </div>
   </layout>

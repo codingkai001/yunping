@@ -11,14 +11,15 @@
         <el-date-picker v-model="form.taskOverAt" placeholder="选择日期时间" type="datetime"></el-date-picker>
       </el-form-item>
       <el-form-item label="发布班级" prop="taskClass">
-        <el-select v-model="form.taskClass" filterable placeholder="请选择">
-          <el-option
-            v-for="item in classList"
-            :key="item.classId"
-            :label="item.className"
-            :value="item.classId">
-          </el-option>
-        </el-select>
+        <el-input v-model="form.taskClass" readonly></el-input>
+<!--        <el-select v-model="form.taskClass" filterable placeholder="请选择">-->
+<!--          <el-option-->
+<!--            v-for="item in classList"-->
+<!--            :key="item.classId"-->
+<!--            :label="item.className"-->
+<!--            :value="item.classId">-->
+<!--          </el-option>-->
+<!--        </el-select>-->
       </el-form-item>
       <el-form-item label="考察维度" prop="skillList">
         <el-select v-model="selectDimension" @change="onDimensionChange" filterable placeholder="请选择">
@@ -53,7 +54,7 @@
 import Layout from '../../../components/Layout'
 import { dimensionSearch } from '../../../api/dimension'
 import { classSearch } from '../../../api/class'
-import { taskAdd } from '../../../api/task'
+import { taskAdd, taskDetail } from '../../../api/task'
 
 export default {
   data () {
@@ -107,6 +108,7 @@ export default {
     ]).then(() => {
       this.loading = false
     })
+    this.reloadTaskDetail()
   },
   methods: {
     async onSubmit (form) {
@@ -132,6 +134,22 @@ export default {
       const dimension = this.form.skillList[index].dimension
       this.dimensionList.push(dimension)
       this.form.skillList.splice(index, 1)
+    },
+    reloadTaskDetail(){
+      this.loading = true
+      var href = location.href.split('/')
+      var taskId = href[href.length-1]
+      taskDetail(taskId).then(p=>{
+        this.form.taskName = p.taskName
+        this.form.taskClass = p.taskClass
+        this.form.taskUrl = p.taskUrl
+        this.loading = false
+
+      }).catch(e=>{
+        this.$message.error('数据加载异常')
+        console.log(e)
+        this.loading = false
+      })
     }
   }
 }
