@@ -8,11 +8,14 @@
         <el-form-item label="团队名">
           <el-input autocomplete="off" v-model="teamName"></el-input>
         </el-form-item>
+        <el-form-item label="团队Token">
+          <el-input autocomplete="off" @focus="copy" readonly v-model="teamToken"></el-input>
+        </el-form-item>
         <el-form-item label="团队人数限制">
           <el-input autocomplete="off" v-model="teamLimit"></el-input>
         </el-form-item>
-        <el-form-item label="团队种类">
-          <el-input autocomplete="off" v-model="teamType"></el-input>
+        <el-form-item label="团队类型">
+          <el-input autocomplete="off" v-model="teamTypeDscb"></el-input>
         </el-form-item>
         <el-form-item label="团队队长">
           <el-input autocomplete="off" v-model="teamCaptain"></el-input>
@@ -38,7 +41,9 @@
           teamName: '',
           teamLimit: 0,
           teamType: 0,
-          teamCaptain: 0
+          teamCaptain: 0,
+          teamToken: '',
+          teamTypeDscb: ''
       }
     },
     props: {
@@ -51,7 +56,13 @@
         this.teamName = p.teamName
         this.teamLimit = p.teamLimit
         this.teamType = p.teamType
+        if (this.teamType === 1){
+          this.teamTypeDscb = '团队'
+        } else {
+          this.teamTypeDscb = '结对'
+        }
         this.teamCaptain = p.teamCaptain
+        this.teamToken = p.teamToken
         }).catch(e => {
           console.error(e)
           this.loading = false
@@ -64,7 +75,15 @@
       },
       editTeam () {
         // this.loading = true
-        teamUpdate(this.teamId, this.teamName, this.teamLimit, this.teamType, this.teamCaptain)
+        var _team = {
+          "teamCaptain": this.teamCaptain,
+          "teamEdit": true,
+          "teamId": this.teamId,
+          "teamLimit": this.teamLimit,
+          "teamName": this.teamName,
+          "teamType": this.teamType
+        }
+        teamUpdate(_team)
           .then(p => {
             this.$emit('done')
             this.$message.success('修改成功')
@@ -73,6 +92,12 @@
           console.error(e)
           this.loading = false
         })
+      },
+      copy (e) {
+        const target = e.target
+        target.select()
+        document.execCommand('copy')
+        this.$message.success('复制成功')
       }
     }
   }

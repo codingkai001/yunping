@@ -52,9 +52,10 @@
               this.$emit('done')
               this.loading = false
             }).catch(e => {
-            this.$message.error(1)
-            console.error(e)
+            this.$message.error("当前用户未在当前班级中，无法加入团队")
+            // console.error(e)
             this.loading = false
+            this.hideThis()
           })
         })
       }

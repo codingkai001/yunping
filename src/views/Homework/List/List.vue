@@ -63,6 +63,9 @@ export default {
       taskSearch().then(p => {
         this.taskList = p.taskVOList
         this.loading = false
+      }).catch(e=>{
+        this.loading = false
+        this.$message.error("数据加载异常")
       })
     },
     editHomework (row) {
