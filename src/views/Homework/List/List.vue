@@ -31,7 +31,7 @@
         <el-table-column
           label="操作">
           <template slot-scope="scope">
-            <el-button @click="editHomework(scope.row)" size="mini">查看详情</el-button>
+            <el-button @click="viewHomework(scope.row)" size="mini">查看详情</el-button>
             <el-button size="mini" @click="editHomework(scope.row)">编辑</el-button>
             <el-button @click="deleteHomework(scope.row)" size="mini">删除</el-button>
           </template>
@@ -124,7 +124,10 @@ export default {
         this.reloadList()
         this.loading = false
       })
-    }
+    },
+    viewHomework (row) {
+      this.$router.push({ path: '/homework/detail/' + row.taskId })
+    },
   }
 }
 </script>

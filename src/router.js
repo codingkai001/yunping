@@ -9,6 +9,7 @@ import DimensionList from './views/Dimension/List'
 import DimensionEdit from './views/Dimension/Edit'
 import HomeworkList from './views/Homework/List'
 import HomeworkEdit from './views/Homework/Edit'
+import HomeworkDetail from './views/Homework/Detail'
 import { UserRole } from './models/User'
 import TeamList from './views/Team/List'
 
@@ -82,6 +83,7 @@ export default new Router({
     teacherRoute(login({ path: '/dimension/edit/:id', name: 'dimension-edit', component: DimensionEdit })),
     teacherRoute(login({ path: '/homework/list', name: 'homework-list', component: HomeworkList })),
     teacherRoute(login({ path: '/homework/edit/:id', name: 'homework-edit', component: HomeworkEdit })),
+    teacherRoute(login({ path: '/homework/detail/:id', name: 'homework-detail', component: HomeworkDetail })),
     studentRoute(login({ path: '/team/list', name: 'team-list', component: TeamList }))
   ]
 })
