@@ -1,7 +1,7 @@
 <template>
   <Layout>
     <div v-loading="loading">
-      <el-button type='primary' @click="$router.push({ path: '/homework/edit/0' })">新建作业</el-button>
+      <el-button type='primary' @click="$router.push({ path: '/homework/add' })">新建作业</el-button>
       <el-table :data="taskList" stripe v-if="taskList.length!==0">
         <el-table-column
           label="作业ID"
