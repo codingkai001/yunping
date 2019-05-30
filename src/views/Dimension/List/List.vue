@@ -34,7 +34,7 @@
 
 <script>
 import Layout from '../../../components/Layout'
-import {dimensionDelete, dimensionSearch} from '../../../api/dimension'
+import { dimensionDelete, dimensionSearch } from '../../../api/dimension'
 
 export default {
   data () {
@@ -61,15 +61,15 @@ export default {
       this.$router.push({ path: `/dimension/edit/${row.skillId}` })
     },
     deleteDimension (row) {
-      var confirm = this.$confirm("确认删除当前维度？", "提示", {
+      this.$confirm('确认删除当前维度？', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
-      }).then(()=>{
+      }).then(() => {
         this.loading = true
         dimensionDelete(row.skillId).then(p => {
           // console.log(p)
-          this.$message.success("删除成功")
+          this.$message.success('删除成功')
           this.reloadList()
           this.loading = false
         })

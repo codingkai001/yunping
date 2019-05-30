@@ -51,92 +51,92 @@
 </template>
 
 <script>
-  import Layout from '../../../components/Layout'
-  import { dimensionSearch } from '../../../api/dimension'
-  import { classSearch } from '../../../api/class'
-  import { taskAdd, taskDetail } from '../../../api/task'
+import Layout from '../../../components/Layout'
+import { dimensionSearch } from '../../../api/dimension'
+import { classSearch } from '../../../api/class'
+import { taskAdd, taskDetail } from '../../../api/task'
 
-  export default {
-    data () {
+export default {
+  data () {
+    return {
+      loading: false,
+      dimensionList: [],
+      classList: [],
+      form: {
+        taskClass: '',
+        taskName: '',
+        taskOverAt: new Date(),
+        taskUrl: '',
+        skillList: []
+      },
+      selectDimension: ''
+    }
+  },
+  computed: {
+    rules () {
       return {
-        loading: false,
-        dimensionList: [],
-        classList: [],
-        form: {
-          taskClass: '',
-          taskName: '',
-          taskOverAt: new Date(),
-          taskUrl: '',
-          skillList: []
-        },
-        selectDimension: ''
+        taskName: [
+          { required: true, message: '请输入名称', trigger: ['blur', 'change'] }
+        ],
+        taskUrl: [
+          { required: true, message: '请输入博客园发布地址', trigger: ['blur', 'change'] }
+        ],
+        taskClass: [
+          { required: true, message: '请选择班级', trigger: ['blur', 'change'] }
+        ],
+        taskOverAt: [
+          { required: true, message: '请选择截止时间', trigger: ['blur', 'change'] }
+        ],
+        skillList: [
+          { required: true, message: '请选择截止时间', trigger: ['blur', 'change'] }
+        ]
       }
-    },
-    computed: {
-      rules () {
-        return {
-          taskName: [
-            { required: true, message: '请输入名称', trigger: ['blur', 'change'] }
-          ],
-          taskUrl: [
-            { required: true, message: '请输入博客园发布地址', trigger: ['blur', 'change'] }
-          ],
-          taskClass: [
-            { required: true, message: '请选择班级', trigger: ['blur', 'change'] }
-          ],
-          taskOverAt: [
-            { required: true, message: '请选择截止时间', trigger: ['blur', 'change'] }
-          ],
-          skillList: [
-            { required: true, message: '请选择截止时间', trigger: ['blur', 'change'] }
-          ]
-        }
-      }
-    },
-    components: {
-      Layout
-    },
-    mounted () {
-      this.loading = true
-      Promise.all([
-        dimensionSearch({}).then(p => {
-          this.dimensionList = p.skillVOList
-        }),
-        classSearch().then(p => {
-          this.classList = p.classVOList
-        })
-      ]).then(() => {
-        this.loading = false
+    }
+  },
+  components: {
+    Layout
+  },
+  mounted () {
+    this.loading = true
+    Promise.all([
+      dimensionSearch({}).then(p => {
+        this.dimensionList = p.skillVOList
+      }),
+      classSearch().then(p => {
+        this.classList = p.classVOList
       })
-      // this.reloadTaskDetail()
+    ]).then(() => {
+      this.loading = false
+    })
+    // this.reloadTaskDetail()
+  },
+  methods: {
+    async onSubmit (form) {
+      this.$refs[form].validate((valid) => {
+        if (!valid) return
+        this.loading = true
+        taskAdd(this.form).then(p => {
+          this.$router.push({ path: '/homework/list' })
+          this.loading = false
+        })
+      })
     },
-    methods: {
-      async onSubmit (form) {
-        this.$refs[form].validate((valid) => {
-          if (!valid) return
-          this.loading = true
-          taskAdd(this.form).then(p => {
-            this.$router.push({ path: '/homework/list' })
-            this.loading = false
-          })
-        })
-      },
-      onDimensionChange (dimension) {
-        this.form.skillList.push({
-          skillId: dimension.skillId,
-          dimension,
-          skillNumber: 0
-        })
-        this.dimensionList = this.dimensionList.filter(d => d.skillId !== dimension.skillId)
-        this.selectDimension = ''
-      },
-      removeDimension (index) {
-        const dimension = this.form.skillList[index].dimension
-        this.dimensionList.push(dimension)
-        this.form.skillList.splice(index, 1)
-      },
+    onDimensionChange (dimension) {
+      this.form.skillList.push({
+        skillId: dimension.skillId,
+        dimension,
+        skillNumber: 0
+      })
+      this.dimensionList = this.dimensionList.filter(d => d.skillId !== dimension.skillId)
+      this.selectDimension = ''
+    },
+    removeDimension (index) {
+      const dimension = this.form.skillList[index].dimension
+      this.dimensionList.push(dimension)
+      this.form.skillList.splice(index, 1)
     }
   }
+}
 </script>
 <style lang="less" scoped>
   .dimensions {

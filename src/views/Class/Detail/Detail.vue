@@ -67,6 +67,7 @@ import Layout from '../../../components/Layout'
 import { classDetail } from '../../../api/class'
 import { teamSearch } from '../../../api/team'
 import NewTeam from './NewTeam'
+// eslint-disable-next-line no-unused-vars
 import UserStorage from '../../../store/user'
 
 export default {
@@ -94,7 +95,7 @@ export default {
       classDetail(id, 1, 1000).then(p => {
         this.clazz = p
         this.secondsToTime(this.clazz.taskVOList)
-        //this.loading = false
+        // this.loading = false
       })
       teamSearch(id).then(p => {
         this.teamList = p.teamVOList
@@ -110,14 +111,14 @@ export default {
       }) // do nothing
     },
     analysisClass () {
-      /*缺少班级ID*/
+      /* 缺少班级ID */
       var href = location.href.split('/')
-      var classId = href[href.length-1]
-      this.$router.push({path: `/class/analysis/${classId}`})
+      var classId = href[href.length - 1]
+      this.$router.push({ path: `/class/analysis/${classId}` })
     },
-    analyzeHomework(row){
+    analyzeHomework (row) {
       var taskId = row.taskId
-      this.$router.push('/homework/analysis/'+taskId)
+      this.$router.push('/homework/analysis/' + taskId)
     },
     copy (e) {
       const target = e.target
@@ -126,29 +127,27 @@ export default {
       this.$message.success('复制成功')
     },
     secondsToTime (s) {
-      for (var i = 0;i<s.length;i++){
-        var time_start =  new Date(parseInt(s[i].taskCreateAt))
-        var time_end =  new Date(parseInt(s[i].taskOverAt))
-        //开始时间
-        var year_start = time_start.getFullYear()
-        var month_start = time_start.getMonth() + 1
-        var day_start = time_start.getDate()
-        var hour_start = time_start.getHours()
-        var minute_start = time_start.getMinutes()
-        //结束时间
-        var year_end = time_end.getFullYear()
-        var month_end = time_end.getMonth() + 1
-        var day_end = time_end.getDate()
-        var hour_end = time_end.getHours()
-        var minute_end = time_end.getMinutes()
+      for (var i = 0; i < s.length; i++) {
+        var timeStart = new Date(parseInt(s[i].taskCreateAt))
+        var timeEnd = new Date(parseInt(s[i].taskOverAt))
+        // 开始时间
+        var yearStart = timeStart.getFullYear()
+        var monthStart = timeStart.getMonth() + 1
+        var dayStart = timeStart.getDate()
+        var hourStart = timeStart.getHours()
+        var minuteStart = timeStart.getMinutes()
+        // 结束时间
+        var yearEnd = timeEnd.getFullYear()
+        var monthEnd = timeEnd.getMonth() + 1
+        var dayEnd = timeEnd.getDate()
+        var hourEnd = timeEnd.getHours()
+        var minuteEnd = timeEnd.getMinutes()
 
-        console.log(time_start)
-        console.log(time_end)
+        console.log(timeStart)
+        console.log(timeEnd)
 
-        s[i].taskCreateAt = year_start.toString() + '年' + month_start.toString() + '月' + day_start.toString() + '日' + hour_start.toString() + ':' + minute_start.toString()
-        s[i].taskOverAt = year_end.toString() + '年' + month_end.toString() + '月' + day_end.toString() + '日' + hour_end.toString() + ':' + minute_end.toString()
-
-
+        s[i].taskCreateAt = yearStart.toString() + '年' + monthStart.toString() + '月' + dayStart.toString() + '日' + hourStart.toString() + ':' + minuteStart.toString()
+        s[i].taskOverAt = yearEnd.toString() + '年' + monthEnd.toString() + '月' + dayEnd.toString() + '日' + hourEnd.toString() + ':' + minuteEnd.toString()
       }
     }
   }

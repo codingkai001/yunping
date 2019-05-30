@@ -50,7 +50,7 @@ export default {
           // this.$message.error(res)
           UserStore.commit('setUser', res)
           // alert(res.user.userRole)
-          this.setCookie('userRole',res.user.userRole.toString(), 7)
+          this.setCookie('userRole', res.user.userRole.toString(), 7)
           this.$router.push({ path: '/class/list' })
           // this.loading = false
         }).catch(e => {
@@ -60,11 +60,11 @@ export default {
         })
       }
     },
-    setCookie(cname,cvalue,exdays){
-      var d = new Date();
-      d.setTime(d.getTime()+(exdays*24*60*60*1000));
-      var expires = "expires="+d.toGMTString()+"; path=/"
-      document.cookie = cname + "=" + cvalue + "; " + expires;
+    setCookie (cname, cvalue, exdays) {
+      var d = new Date()
+      d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000))
+      var expires = 'expires=' + d.toGMTString() + '; path=/'
+      document.cookie = cname + '=' + cvalue + '; ' + expires
     }
   },
   mounted () {

@@ -1,5 +1,5 @@
 <template>
-	<div id="teacher">
+  <div id="teacher">
         <div class="top-info">
             <h1>云评-高校学生成绩综合评估及可视化分析平台</h1>
             <!--            <span>{{name}}</span>-->
@@ -38,12 +38,12 @@ export default {
     }
   },
   components: {
-    'class-list': ClassList,
-    'new-homework': NewHomework,
-    'new-class': NewClass,
-    'join-class': JoinClass,
-    'class-detail': ClassDetail,
-    'new-dimension': NewDimension
+    class-list: ClassList,
+    new-homework: NewHomework,
+    new-class: NewClass,
+    join-class: JoinClass,
+    class-detail: ClassDetail,
+    new-dimension: NewDimension
   }
 }
 </script>

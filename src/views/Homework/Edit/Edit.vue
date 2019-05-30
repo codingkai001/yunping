@@ -135,19 +135,18 @@ export default {
       this.dimensionList.push(dimension)
       this.form.skillList.splice(index, 1)
     },
-    reloadTaskDetail(){
+    reloadTaskDetail () {
       this.loading = true
-      var href = location.href.split('/')
-      var taskId = href[href.length-1]
-      taskDetail(taskId).then(p=>{
+      const href = location.href.split('/')
+      const taskId = href[href.length - 1]
+      taskDetail(taskId).then(p => {
         this.form.taskName = p.taskName
         this.form.taskClass = p.taskClass
         this.form.taskUrl = p.taskUrl
         this.form.skillList = p.skillList
         console.log(this.form)
         this.loading = false
-
-      }).catch(e=>{
+      }).catch(e => {
         this.$message.error('数据加载异常')
         console.log(e)
         this.loading = false

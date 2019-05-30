@@ -56,71 +56,69 @@
   </layout>
 </template>
 <script>
-  import Layout from '../../../components/Layout'
-  import CreateTeam from './CreateTeam'
-  import JoinTeam from './JoinTeam'
-  import EditTeam from './EditTeam'
-  import { teamDetail } from '../../../api/team'
-  import { teamExit } from '../../../api/team'
-  import { teamClear } from '../../../api/team'
+import Layout from '../../../components/Layout'
+import CreateTeam from './CreateTeam'
+import JoinTeam from './JoinTeam'
+import EditTeam from './EditTeam'
+import { teamDetail, teamExit, teamClear } from '../../../api/team'
 
-  export default {
-    data () {
-      return {
-        loading: false,
-        showCreateTeam: false,
-        showJoinTeam: false,
-        showEditTeam: false,
-        teamList: [],
-        selectedClass: {},
-        teamName: '',
-        teamId: 0
-      }
+export default {
+  data () {
+    return {
+      loading: false,
+      showCreateTeam: false,
+      showJoinTeam: false,
+      showEditTeam: false,
+      teamList: [],
+      selectedClass: {},
+      teamName: '',
+      teamId: 0
+    }
+  },
+  components: {
+    Layout,
+    CreateTeam,
+    JoinTeam,
+    EditTeam
+  },
+  mounted () {
+    this.reloadList()
+  },
+  methods: {
+    reloadList () {
+      // this.loading = true
+      teamDetail().then(p => {
+        this.teamList = p.classUserVOList
+        this.teamName = p.teamName
+        this.teamId = p.teamId
+        console.log(p)
+        this.loading = false
+      })
     },
-    components: {
-      Layout,
-      CreateTeam,
-      JoinTeam,
-      EditTeam
-    },
-    mounted () {
+    createTeamDone () {
+      this.showCreateTeam = false
+      this.showJoinTeam = false
+      this.showEditTeam = false
       this.reloadList()
     },
-    methods: {
-      reloadList () {
-        //this.loading = true
-        teamDetail().then(p => {
-          this.teamList = p.classUserVOList
-          this.teamName = p.teamName
-          this.teamId = p.teamId
-          console.log(p)
-          this.loading = false
-        })
-      },
-      createTeamDone () {
-        this.showCreateTeam = false
-        this.showJoinTeam = false
-        this.showEditTeam = false
-        this.reloadList()
-      },
-      editTeam (row) {
-        this.selectedTeam = row
-        this.showEditTeam = true
-      },
-      quitTeam () {
-        teamExit().then(p => {
-          alert('退出团队成功！')
-          console.log(p)
-          this.loading = false
-        })
-      },
-      clearTeam (teamId) {
-        teamClear(teamId).then(p => {
-          alert('解散团队成功！')
-          console.log(p)
-          this.loading = false
-        })
-      }
+    editTeam (row) {
+      this.selectedTeam = row
+      this.showEditTeam = true
+    },
+    quitTeam () {
+      teamExit().then(p => {
+        alert('退出团队成功！')
+        console.log(p)
+        this.loading = false
+      })
+    },
+    clearTeam (teamId) {
+      teamClear(teamId).then(p => {
+        alert('解散团队成功！')
+        console.log(p)
+        this.loading = false
+      })
     }
   }
+}
 </script>

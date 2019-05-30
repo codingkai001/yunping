@@ -40,48 +40,48 @@
 </template>
 
 <script>
-  import Layout from '../../../components/Layout'
-  import { taskStatus } from '../../../api/task'
-  import Evaluate from './Evaluate'
+import Layout from '../../../components/Layout'
+import { taskStatus } from '../../../api/task'
+import Evaluate from './Evaluate'
 
-  export default {
-    data () {
-      return {
-        loading: false,
-        clazz: {},
-        showEvaluate: false,
-        information: {
-          taskId: 0,
-          teamId: 0
-        }
-      }
-    },
-    components: {
-      Layout,
-      Evaluate
-    },
-    mounted () {
-      this.reloadData()
-    },
-    methods: {
-      reloadData () {
-        const id = this.$route.params.id
-        this.loading = true
-        taskStatus(id).then(p => {
-          this.clazz = p
-          this.loading = false
-        })
-      },
-      evaluateDone () {
-        this.showEvaluate = false
-        this.reloadData()
-      },
-      evaluateHomework (row) {
-        this.showEvaluate = true
-        this.information.teamId = row.teamId
+export default {
+  data () {
+    return {
+      loading: false,
+      clazz: {},
+      showEvaluate: false,
+      information: {
+        taskId: 0,
+        teamId: 0
       }
     }
+  },
+  components: {
+    Layout,
+    Evaluate
+  },
+  mounted () {
+    this.reloadData()
+  },
+  methods: {
+    reloadData () {
+      const id = this.$route.params.id
+      this.loading = true
+      taskStatus(id).then(p => {
+        this.clazz = p
+        this.loading = false
+      })
+    },
+    evaluateDone () {
+      this.showEvaluate = false
+      this.reloadData()
+    },
+    evaluateHomework (row) {
+      this.showEvaluate = true
+      this.information.teamId = row.teamId
+    }
   }
+}
 </script>
 
 <style>

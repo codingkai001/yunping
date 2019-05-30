@@ -46,8 +46,7 @@ import Layout from '../../../components/Layout'
 import CreateClass from './CreateClass'
 import JoinClass from './JoinClass'
 import EditClass from './EditClass'
-import { classSearch } from '../../../api/class'
-import { classDelete } from '../../../api/class'
+import { classSearch, classDelete } from '../../../api/class'
 import UserStorage from '../../../store/user'
 import { UserRole } from '../../../models/User'
 
@@ -82,9 +81,9 @@ export default {
       classSearch().then(p => {
         // this.classList = p.classVOList
         var tempClassList = p.classVOList
-        for (var i=0;i<tempClassList.length;i++){
+        for (var i = 0; i < tempClassList.length; i++) {
           console.log(tempClassList[i])
-          if (tempClassList[i].classExist===true){
+          if (tempClassList[i].classExist === true) {
             this.classList.push(tempClassList[i])
           }
         }
@@ -106,17 +105,17 @@ export default {
       this.$router.push({ path: '/class/detail/' + row.classId })
     },
     deleteClass (row) {
-      var confirm = this.$confirm("确认删除当前班级？", "提示", {
+      this.$confirm('确认删除当前班级？', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
-      }).then(()=>{
+      }).then(() => {
         this.loading = true
-          classDelete(row.classId).then(p => {
-            // console.log(p)
-            this.$message.success('删除成功')
-            this.reloadList()
-            this.loading = false
+        classDelete(row.classId).then(p => {
+          // console.log(p)
+          this.$message.success('删除成功')
+          this.reloadList()
+          this.loading = false
         })
       })
     }

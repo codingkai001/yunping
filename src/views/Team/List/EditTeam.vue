@@ -30,77 +30,76 @@
 </template>
 
 <script>
-  import { teamUpdate } from '../../../api/team'
-  import { teamDetail } from '../../../api/team'
+import { teamUpdate, teamDetail } from '../../../api/team'
 
-  export default {
-    data () {
-      return {
-        loading: false,
-          teamId: 0,
-          teamName: '',
-          teamLimit: 0,
-          teamType: 0,
-          teamCaptain: 0,
-          teamToken: '',
-          teamTypeDscb: ''
+export default {
+  data () {
+    return {
+      loading: false,
+      teamId: 0,
+      teamName: '',
+      teamLimit: 0,
+      teamType: 0,
+      teamCaptain: 0,
+      teamToken: '',
+      teamTypeDscb: ''
+    }
+  },
+  props: {
+    show: Boolean
+    // clazz: Object
+  },
+  mounted () {
+    teamDetail().then(p => {
+      this.teamId = p.teamId
+      this.teamName = p.teamName
+      this.teamLimit = p.teamLimit
+      this.teamType = p.teamType
+      if (this.teamType === 1) {
+        this.teamTypeDscb = '团队'
+      } else {
+        this.teamTypeDscb = '结对'
       }
+      this.teamCaptain = p.teamCaptain
+      this.teamToken = p.teamToken
+    }).catch(e => {
+      console.error(e)
+      this.loading = false
+    })
+  },
+  methods: {
+    hideThis () {
+      this.$emit('update:show', false)
     },
-    props: {
-      show: Boolean,
-      //clazz: Object
-    },
-    mounted () {
-      teamDetail().then(p => {
-        this.teamId = p.teamId
-        this.teamName = p.teamName
-        this.teamLimit = p.teamLimit
-        this.teamType = p.teamType
-        if (this.teamType === 1){
-          this.teamTypeDscb = '团队'
-        } else {
-          this.teamTypeDscb = '结对'
-        }
-        this.teamCaptain = p.teamCaptain
-        this.teamToken = p.teamToken
+    editTeam () {
+      // this.loading = true
+      const _team = {
+        teamCaptain: this.teamCaptain,
+        teamEdit: true,
+        teamId: this.teamId,
+        teamLimit: this.teamLimit,
+        teamName: this.teamName,
+        teamType: this.teamType
+      }
+      this.loading = true
+      teamUpdate(_team)
+        .then(p => {
+          this.$emit('done')
+          this.$message.success('修改成功')
+          this.loading = false
         }).catch(e => {
           console.error(e)
           this.loading = false
         })
-      }
-    ,
-    methods: {
-      hideThis () {
-        this.$emit('update:show', false)
-      },
-      editTeam () {
-        // this.loading = true
-        var _team = {
-          "teamCaptain": this.teamCaptain,
-          "teamEdit": true,
-          "teamId": this.teamId,
-          "teamLimit": this.teamLimit,
-          "teamName": this.teamName,
-          "teamType": this.teamType
-        }
-        teamUpdate(_team)
-          .then(p => {
-            this.$emit('done')
-            this.$message.success('修改成功')
-            this.loading = false
-        }).catch(e => {
-          console.error(e)
-          this.loading = false
-        })
-      },
-      copy (e) {
-        const target = e.target
-        target.select()
-        document.execCommand('copy')
-        this.$message.success('复制成功')
-      }
+    },
+    copy (e) {
+      const target = e.target
+      target.select()
+      document.execCommand('copy')
+      this.$message.success('复制成功')
     }
   }
+}
 </script>
 
 <style>

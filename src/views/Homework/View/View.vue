@@ -44,58 +44,57 @@
 </template>
 
 <script>
-  import Layout from '../../../components/Layout'
-  import { taskSearch } from '../../../api/task'
+import Layout from '../../../components/Layout'
+import { taskSearch } from '../../../api/task'
 
-  export default {
-    data () {
-      return {
-        loading: false,
-        clazz: {}
-      }
+export default {
+  data () {
+    return {
+      loading: false,
+      clazz: {}
+    }
+  },
+  components: {
+    Layout
+  },
+  mounted () {
+    this.reloadData()
+  },
+  methods: {
+    reloadData () {
+      this.loading = true
+      taskSearch().then(p => {
+        this.clazz = p
+        this.secondsToTime(this.clazz.taskVOList)
+        this.loading = false
+      })
     },
-    components: {
-      Layout
-    },
-    mounted () {
-      this.reloadData()
-    },
-    methods: {
-      reloadData () {
-        this.loading = true
-        taskSearch().then(p => {
-          this.clazz = p
-          this.secondsToTime(this.clazz.taskVOList)
-          this.loading = false
-        })
-      },
-      secondsToTime (s) {
-        for (var i = 0; i < s.length; i++) {
-          var time_start = new Date(parseInt(s[i].taskCreateAt))
-          var time_end = new Date(parseInt(s[i].taskOverAt))
-          //开始时间
-          var year_start = time_start.getFullYear()
-          var month_start = time_start.getMonth() + 1
-          var day_start = time_start.getDate()
-          var hour_start = time_start.getHours()
-          var minute_start = time_start.getMinutes()
-          //结束时间
-          var year_end = time_end.getFullYear()
-          var month_end = time_end.getMonth() + 1
-          var day_end = time_end.getDate()
-          var hour_end = time_end.getHours()
-          var minute_end = time_end.getMinutes()
+    secondsToTime (s) {
+      for (var i = 0; i < s.length; i++) {
+        var timeStart = new Date(parseInt(s[i].taskCreateAt))
+        var timeEnd = new Date(parseInt(s[i].taskOverAt))
+        // 开始时间
+        var yearStart = timeStart.getFullYear()
+        var monthStart = timeStart.getMonth() + 1
+        var dayStart = timeStart.getDate()
+        var hourStart = timeStart.getHours()
+        var minuteStart = timeStart.getMinutes()
+        // 结束时间
+        var yearEnd = timeEnd.getFullYear()
+        var monthEnd = timeEnd.getMonth() + 1
+        var dayEnd = timeEnd.getDate()
+        var hourEnd = timeEnd.getHours()
+        var minuteEnd = timeEnd.getMinutes()
 
-          console.log(time_start)
-          console.log(time_end)
+        console.log(timeStart)
+        console.log(timeEnd)
 
-          s[i].taskCreateAt = year_start.toString() + '年' + month_start.toString() + '月' + day_start.toString() + '日' + hour_start.toString() + ':' + minute_start.toString()
-          s[i].taskOverAt = year_end.toString() + '年' + month_end.toString() + '月' + day_end.toString() + '日' + hour_end.toString() + ':' + minute_end.toString()
-
-        }
+        s[i].taskCreateAt = yearStart.toString() + '年' + monthStart.toString() + '月' + dayStart.toString() + '日' + hourStart.toString() + ':' + minuteStart.toString()
+        s[i].taskOverAt = yearEnd.toString() + '年' + monthEnd.toString() + '月' + dayEnd.toString() + '日' + hourEnd.toString() + ':' + minuteEnd.toString()
       }
     }
   }
+}
 </script>
 
 <style>

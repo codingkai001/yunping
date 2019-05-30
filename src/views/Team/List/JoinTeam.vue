@@ -15,52 +15,52 @@
 </template>
 
 <script>
-  import { teamJoin } from '../../../api/team'
+import { teamJoin } from '../../../api/team'
 
-  export default {
-    data () {
-      return {
-        loading: false,
-        form: {
-          token: ''
-        }
+export default {
+  data () {
+    return {
+      loading: false,
+      form: {
+        token: ''
       }
-    },
-    computed: {
-      rules () {
-        const ret = {
-          token: [
-            { required: true, message: '请输入团队Token', trigger: 'blur' }
-          ],
-        }
-        return ret
+    }
+  },
+  computed: {
+    rules () {
+      const ret = {
+        token: [
+          { required: true, message: '请输入团队Token', trigger: 'blur' }
+        ]
       }
+      return ret
+    }
+  },
+  props: {
+    show: Boolean
+  },
+  methods: {
+    hideThis () {
+      this.$emit('update:show', false)
     },
-    props: {
-      show: Boolean
-    },
-    methods: {
-      hideThis () {
-        this.$emit('update:show', false)
-      },
-      joinTeam (form) {
-        this.$refs[form].validate((valid) => {
-          if (!valid) return
-          this.loading = true
-          teamJoin(this.form.token)
-            .then(p => {
-              this.$emit('done')
-              this.loading = false
-            }).catch(e => {
-            this.$message.error("当前用户未在当前班级中，无法加入团队")
+    joinTeam (form) {
+      this.$refs[form].validate((valid) => {
+        if (!valid) return
+        this.loading = true
+        teamJoin(this.form.token)
+          .then(p => {
+            this.$emit('done')
+            this.loading = false
+          }).catch(e => {
+            this.$message.error('当前用户未在当前班级中，无法加入团队')
             // console.error(e)
             this.loading = false
             this.hideThis()
           })
-        })
-      }
+      })
     }
   }
+}
 </script>
 
 <style>

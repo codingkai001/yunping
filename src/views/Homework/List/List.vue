@@ -90,29 +90,29 @@ export default {
     reloadList () {
       // alert(this.userRole)
       // this.loading = true
-      if (this.userRole === '1'){
+      if (this.userRole === '1') {
         // alert(1)
-        taskList().then(p=>{
+        taskList().then(p => {
           this.taskList = p.taskVOList
           this.loading = false
-        }).catch(e=>{
+        }).catch(e => {
           this.loading = false
-          this.$message.error("数据加载异常")
+          this.$message.error('数据加载异常')
         })
       } else {
         taskSearch().then(p => {
           this.homeworkList = p.taskVOList
           this.loading = false
-        }).catch(e=>{
+        }).catch(e => {
           this.loading = false
-          this.$message.error("数据加载异常")
+          this.$message.error('数据加载异常')
         })
       }
     },
     editHomework (row) {
       this.$router.push({ path: `/homework/edit/${row.taskId}` })
     },
-    getUserRole(){
+    getUserRole () {
       this.userRole = document.cookie.split('=')[1]
       // alert(this.userRole)
     },
@@ -126,7 +126,7 @@ export default {
     },
     viewHomework (row) {
       this.$router.push({ path: '/homework/detail/' + row.taskId })
-    },
+    }
   }
 }
 </script>

@@ -6,7 +6,6 @@ import ElementUI from 'element-ui'
 import echarts from 'echarts'
 import 'element-ui/lib/theme-chalk/index.css'
 
-
 Vue.use(ElementUI)
 Vue.use(Vuex)
 Vue.use(echarts)

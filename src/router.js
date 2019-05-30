@@ -83,7 +83,7 @@ export default new Router({
     login({ path: '/class/list', name: 'class-list', component: ClassList }),
     login({ path: '/class/detail/:id', name: 'class-detail', component: ClassDetail }),
     login({ path: '/class/analysis/:id', name: 'class-analysis', component: ClassAnalysis }),
-    login({path: '/homework/analysis/:id', name: 'home-analysis', component: HomeworkAnalysis}),
+    login({ path: '/homework/analysis/:id', name: 'home-analysis', component: HomeworkAnalysis }),
 
     teacherRoute(login({ path: '/dimension/list', name: 'dimension-list', component: DimensionList })),
     teacherRoute(login({ path: '/dimension/edit/:id', name: 'dimension-edit', component: DimensionEdit })),
@@ -92,6 +92,6 @@ export default new Router({
     teacherRoute(login({ path: '/homework/detail/:id', name: 'homework-detail', component: HomeworkDetail })),
     studentRoute(login({ path: '/team/list', name: 'team-list', component: TeamList })),
     studentRoute(login({ path: '/homework/view', name: 'homework-view', component: HomeworkView })),
-    teacherRoute(login({ path: '/homework/add', name: 'homework-add', component: HomeworkAdd})),
+    teacherRoute(login({ path: '/homework/add', name: 'homework-add', component: HomeworkAdd }))
   ]
 })

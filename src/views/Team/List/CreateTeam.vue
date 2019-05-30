@@ -28,46 +28,46 @@
 </template>
 
 <script>
-  import { teamAdd } from '../../../api/team'
+import { teamAdd } from '../../../api/team'
 
-  export default {
-    data () {
-      return {
-        loading: false,
-        teamName: '',
-        teamType: '',
-        teamLimit: '',
-        options: [{
-          value: '0',
+export default {
+  data () {
+    return {
+      loading: false,
+      teamName: '',
+      teamType: '',
+      teamLimit: '',
+      options: [{
+        value: '0',
         label: '结对'
-        }, {
-          value: '1',
-          label: '团队'
-        }],
-        value: ''
-      }
+      }, {
+        value: '1',
+        label: '团队'
+      }],
+      value: ''
+    }
+  },
+  props: {
+    show: Boolean
+  },
+  methods: {
+    hideThis () {
+      this.$emit('update:show', false)
     },
-    props: {
-      show: Boolean
-    },
-    methods: {
-      hideThis () {
-        this.$emit('update:show', false)
-      },
-      createTeam () {
-        this.loading = true
-        teamAdd(this.teamName, this.teamLimit, this.teamType).then(p => {
-          this.$emit('done')
-          this.$message.success('团队创建成功')
-          this.loading = false
-        }).catch(e => {
-          this.$message.error("当前用户未在当前班级中，无法创建团队")
-          console.error(e)
-          this.loading = false
-        })
-      }
+    createTeam () {
+      this.loading = true
+      teamAdd(this.teamName, this.teamLimit, this.teamType).then(p => {
+        this.$emit('done')
+        this.$message.success('团队创建成功')
+        this.loading = false
+      }).catch(e => {
+        this.$message.error('当前用户未在当前班级中，无法创建团队')
+        console.error(e)
+        this.loading = false
+      })
     }
   }
+}
 </script>
 
 <style>
