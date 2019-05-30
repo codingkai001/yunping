@@ -25,13 +25,15 @@
         <el-table-column
           label="操作">
           <template slot-scope="scope">
-            <el-button @click="showEvaluate=true" size="mini">评分</el-button>
+            <el-button @click="evaluateHomework(scope.row)" size="mini">评分</el-button>
           </template>
         </el-table-column>
       </el-table>
       <Evaluate
+        :clazz="information"
         v-bind:show.sync="showEvaluate"
         v-on:done="evaluateDone"
+        v-if="showEvaluate"
       />
     </div>
   </Layout>
@@ -47,7 +49,11 @@
       return {
         loading: false,
         clazz: {},
-        showEvaluate: false
+        showEvaluate: false,
+        information: {
+          taskId: 0,
+          teamId: 0
+        }
       }
     },
     components: {
@@ -69,6 +75,10 @@
       evaluateDone () {
         this.showEvaluate = false
         this.reloadData()
+      },
+      evaluateHomework (row) {
+        this.showEvaluate = true
+        this.information.teamId = row.teamId
       }
     }
   }

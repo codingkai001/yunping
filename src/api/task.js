@@ -10,4 +10,5 @@ export const taskList = () => get('/task/list')
 export const taskDelete = (taskId) => get('/task/delete?taskId=' + taskId)
 export const taskStatus = (taskId) => get('/task/status?taskId=' + taskId)
 export const taskDetail = (taskId) => get('/task/detail?taskId=' + taskId)
-
+export const taskEvaluate = (form) => post('/task/evaluate', form)
+export const taskTeamStatus = (taskId, teamId) => get('/task/team/status?taskId=' + taskId + '&teamId=' + teamId)
