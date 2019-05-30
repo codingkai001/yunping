@@ -115,6 +115,10 @@ export default {
       var classId = href[href.length-1]
       this.$router.push({path: `/class/analysis/${classId}`})
     },
+    analyzeHomework(row){
+      var taskId = row.taskId
+      this.$router.push('/homework/analysis/'+taskId)
+    },
     copy (e) {
       const target = e.target
       target.select()
