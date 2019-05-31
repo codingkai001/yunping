@@ -98,6 +98,7 @@ export default {
       console.log(params)
       taskEvaluate(params).then(p => {
         this.$message.success('评分成功')
+        this.$emit('done')
       }).catch(e => {
         this.$message.error('数据异常')
       })
