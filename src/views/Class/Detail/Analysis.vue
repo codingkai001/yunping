@@ -5,7 +5,7 @@
         <h2></h2>
       </div>
       <div style="margin-top: 1em">
-        <div id="total-score-change-chart" style="width: 1500px;height: 500px;margin: 0 auto;"></div>
+        <div id="total-score-change-chart" style="width: 100%;height: 600px;margin: 0 auto;"></div>
       </div>
     </div>
   </layout>
@@ -20,14 +20,16 @@ export default {
     return {
       loading: false,
       classId: 0,
-      classTaskTotalMap: {}
+      stuNumList: [],
+      taskList: [],
+      series: []
     }
   },
   components: { Layout },
   mounted () {
     this.getClassId()
     this.initOptionData()
-    this.draw_chart()
+    // this.draw_chart()
   },
   methods: {
     getClassId () {
@@ -37,22 +39,68 @@ export default {
     initOptionData () {
       this.loading = true
       analysisClassTotal(this.classId).then(p => {
+        // 获取所有同学的学号
+        for (var k in p.classTaskTotalMap) {
+          this.stuNumList.push(k)
+        }
+        // 获取所有作业列表
+        var firstStudent = p.classTaskTotalMap[this.stuNumList[0]]
+        for (var i = 0; i < firstStudent.length; i++) {
+          this.taskList.push(firstStudent[i].taskName)
+          // console.log(firstStudent[i].taskName)
+        }
+        // console.log(this.stuNumList)
+        // console.log(this.taskList)
+        // 初始化series
+        for (var item in p.classTaskTotalMap) {
+          var stuItem = p.classTaskTotalMap[item]
+          // console.log(stuItem)
+          var dataItem = {
+            name: '',
+            type: 'line',
+            stack: '总量',
+            data: []
+          }
+          for (var j = 0; j < stuItem.length; j++) {
+            dataItem.data.push(parseInt(stuItem[j].totalScore))
+          }
+          // console.log(dataItem)
+          this.series.push(dataItem)
+        }
+        for (var l = 0; l < this.stuNumList.length; l++) {
+          this.series[l].name = this.stuNumList[l]
+        }
+        this.draw_chart()
+        console.log(this.stuNumList)
+        console.log(this.taskList)
+        console.log(this.series)
         this.loading = false
-        this.classTaskTotalMap = p.classTaskTotalMap
-        console.log(this.classTaskTotalMap)
+        // console.log(p.classTaskTotalMap)
       }).catch(e => {
         this.loading = false
+        // console.log(this.series)
+        console.log(e)
         this.$message.error('数据加载异常')
       })
     },
     draw_chart () {
       var chart = this.$echarts.init(document.getElementById('total-score-change-chart'))
+      chart.showLoading()
       var option = {
+        title: {
+          text: '学生作业成绩千帆竞发图',
+          x: 'center',
+          y: 'bottom',
+          padding: 0,
+          textStyle: {
+            fontSize: 25
+          }
+        },
         tooltip: {
           trigger: 'axis'
         },
         legend: {
-          data: ['邮件营销', '联盟广告', '视频广告', '直接访问', '搜索引擎']
+          data: this.stuNumList
         },
         toolbox: {
           show: true,
@@ -69,7 +117,7 @@ export default {
           {
             type: 'category',
             boundaryGap: false,
-            data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+            data: this.taskList
           }
         ],
         yAxis: [
@@ -77,40 +125,10 @@ export default {
             type: 'value'
           }
         ],
-        series: [
-          {
-            name: '邮件营销',
-            type: 'line',
-            stack: '总量',
-            data: [120, 132, 101, 134, 90, 230, 210]
-          },
-          {
-            name: '联盟广告',
-            type: 'line',
-            stack: '总量',
-            data: [220, 182, 191, 234, 290, 330, 310]
-          },
-          {
-            name: '视频广告',
-            type: 'line',
-            stack: '总量',
-            data: [150, 232, 201, 154, 190, 330, 410]
-          },
-          {
-            name: '直接访问',
-            type: 'line',
-            stack: '总量',
-            data: [320, 332, 301, 334, 390, 330, 320]
-          },
-          {
-            name: '搜索引擎',
-            type: 'line',
-            stack: '总量',
-            data: [820, 932, 901, 934, 1290, 1330, 1320]
-          }
-        ]
+        series: this.series
       }
       chart.setOption(option)
+      chart.hideLoading()
     }
   }
 }

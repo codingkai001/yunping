@@ -27,7 +27,6 @@ export default {
   mounted () {
     this.getTaskId()
     this.initOptionData()
-    this.drawChart()
   },
   methods: {
     getTaskId () {
@@ -39,6 +38,7 @@ export default {
       analysisSkillSum(this.taskId).then(p => {
         this.loading = false
         this.skillSumItemVOList = p.skillSumItemVOList
+        this.drawChart()
         console.log(this.skillSumItemVOList)
       }).catch(e => {
         this.loading = false

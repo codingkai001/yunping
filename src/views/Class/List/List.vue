@@ -15,11 +15,11 @@
           label="班级">
         </el-table-column>
         <el-table-column
-          label="操作">
+          label="操作" v-if="user.userRole === UserRole.teacher">
           <template slot-scope="scope">
-            <el-button size="mini" @click="viewClass(scope.row)">查看</el-button>
-            <el-button size="mini" @click="editClass(scope.row)">编辑</el-button>
-            <el-button @click="deleteClass(scope.row)" size="mini">删除</el-button>
+            <el-button size="mini" @click="viewClass(scope.row)" v-if="user.userRole === UserRole.teacher">查看</el-button>
+            <el-button size="mini" @click="editClass(scope.row)" v-if="user.userRole === UserRole.teacher">编辑</el-button>
+            <el-button @click="deleteClass(scope.row)" size="mini" v-if="user.userRole === UserRole.teacher">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -58,7 +58,8 @@ export default {
       showCreateClass: false,
       showJoinClass: false,
       showEditClass: false,
-      selectedClass: {}
+      selectedClass: {},
+      userRole: null
     }
   },
   computed: {
