@@ -7,15 +7,18 @@
       <el-table :data="classList" stripe>
         <el-table-column
           prop="classId"
-          label="ID"
-          width="180">
+          label="班级ID"
+          width="180"
+          align="center">
         </el-table-column>
         <el-table-column
           prop="className"
-          label="班级">
+          label="班级"
+          align="center">
         </el-table-column>
         <el-table-column
-          label="操作">
+          label="操作"
+          align="center">
           <template slot-scope="scope">
             <el-button size="mini" @click="viewClass(scope.row)">查看</el-button>
             <el-button size="mini" @click="editClass(scope.row)" v-if="user.userRole === UserRole.teacher">编辑</el-button>

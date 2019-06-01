@@ -11,13 +11,18 @@
         <el-tabs v-model="activeTab">
           <el-tab-pane label="作业" name="homeworks">
             <el-table :data="clazz.taskVOList">
-              <el-table-column label="ID" prop="taskId" width="70"></el-table-column>
-              <el-table-column label="名称" prop="taskName" width="200"></el-table-column>
-              <el-table-column label="发布地址" prop="taskUrl" width="300"></el-table-column>
-              <el-table-column label="发布者" prop="taskCreatorName" width="150"></el-table-column>
-              <el-table-column label="创建日期" prop="taskCreateAt" width="180"></el-table-column>
-              <el-table-column label="截止日期" prop="taskOverAt" width="180"></el-table-column>
-              <el-table-column label="操作">
+              <el-table-column label="作业ID" prop="taskId" width="70" align="center"></el-table-column>
+              <el-table-column label="名称" prop="taskName" width="230" align="center"></el-table-column>
+              <el-table-column label="发布地址" prop="taskUrl" width="200" align="center">
+                <template slot-scope="scope">
+                  <a :href="scope.row.taskUrl"
+                     target="_blank">{{scope.row.taskUrl}}</a>
+                </template>
+              </el-table-column>
+              <el-table-column label="发布者" prop="taskCreatorName" width="100" align="center"></el-table-column>
+              <el-table-column label="创建日期" prop="taskCreateAt" width="160" align="center"></el-table-column>
+              <el-table-column label="截止日期" prop="taskOverAt" width="160" align="center"></el-table-column>
+              <el-table-column label="操作" align="center">
                 <template slot-scope="scope">
                   <el-button size="mini" @click="analyzeHomework(scope.row)">分析</el-button>
                 </template>
@@ -25,14 +30,24 @@
             </el-table>
           </el-tab-pane>
           <el-tab-pane label="学生" name="students">
-            <el-table :data="clazz.classUserVOList">
-              <el-table-column label="ID" prop="userId" width="70"></el-table-column>
-              <el-table-column label="姓名" prop="userName" width="100"></el-table-column>
-              <el-table-column label="学号" prop="userAccount" width="100"></el-table-column>
-              <el-table-column label="博客园地址" prop="cuBlog"></el-table-column>
-              <el-table-column label="Github地址" prop="cuGithub"></el-table-column>
-              <el-table-column label="Email" prop="cuEmail"></el-table-column>
-              <el-table-column label="操作">
+            <el-table :data="clazz.classUserVOList" >
+              <el-table-column label="学生ID" prop="userId" align="center" width="70"></el-table-column>
+              <el-table-column label="姓名" prop="userName" align="center" width="100"></el-table-column>
+              <el-table-column label="学号" prop="userAccount" align="center" width="100"></el-table-column>
+              <el-table-column label="博客园地址" prop="cuBlog" align="center" width="250">
+                <template slot-scope="scope">
+                  <a :href="scope.row.cuBlog"
+                     target="_blank">{{scope.row.cuBlog}}</a>
+                </template>
+              </el-table-column>
+              <el-table-column label="Github地址" prop="cuGithub" align="center" >
+                <template slot-scope="scope">
+                  <a :href="scope.row.cuGithub"
+                     target="_blank">{{scope.row.cuGithub}}</a>
+                </template>
+              </el-table-column>
+              <el-table-column label="Email" prop="cuEmail" align="center"></el-table-column>
+              <el-table-column label="操作" align="center">
                 <template slot-scope="scope">
                   <el-button size="mini" @click="analyzeHomework(scope.row)">分析</el-button>
                 </template>
@@ -41,11 +56,11 @@
           </el-tab-pane>
           <el-tab-pane label="团队" name="teams">
             <el-table :data="teamList">
-              <el-table-column label="团队ID" prop="teamId"></el-table-column>
-              <el-table-column label="团队名称" prop="teamName"></el-table-column>
-              <el-table-column label="团队类型" prop="teamType"></el-table-column>
-              <el-table-column label="团队人数" prop="teamSize"></el-table-column>
-              <el-table-column label="团队队长" prop="teamCaptain"></el-table-column>
+              <el-table-column label="团队ID" prop="teamId"  align="center"></el-table-column>
+              <el-table-column label="团队名称" prop="teamName"  align="center"></el-table-column>
+              <el-table-column label="团队类型" prop="teamType"  align="center"></el-table-column>
+              <el-table-column label="团队人数" prop="teamSize"  align="center"></el-table-column>
+              <el-table-column label="团队队长" prop="teamCaptain"  align="center"></el-table-column>
             </el-table>
           </el-tab-pane>
         </el-tabs>

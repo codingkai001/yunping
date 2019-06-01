@@ -1,9 +1,11 @@
 <template>
   <layout>
     <div v-loading="loading">
-    <span>平均分：{{this.averageScore}}</span>
-      <span>排名：{{this.rank}}</span>
-      <span>总分：{{this.totalScore}}</span>
+    <span>该次作业平均分：{{this.averageScore}}</span>
+      <br />
+      <span>你的排名：{{this.rank}}</span>
+      <br />
+      <span>你的总分：{{this.totalScore}}</span>
     </div>
   </layout>
 </template>
