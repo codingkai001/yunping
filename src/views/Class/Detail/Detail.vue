@@ -47,11 +47,11 @@
                 </template>
               </el-table-column>
               <el-table-column label="Email" prop="cuEmail" align="center" min-width="100"></el-table-column>
-              <el-table-column label="操作" align="center">
-                <template slot-scope="scope">
-                  <el-button size="mini" @click="analyzeHomework(scope.row)">分析</el-button>
-                </template>
-              </el-table-column>
+<!--              <el-table-column label="操作" align="center">-->
+<!--                <template slot-scope="scope">-->
+<!--                  <el-button size="mini" @click="analyzeHomework(scope.row)">分析</el-button>-->
+<!--                </template>-->
+<!--              </el-table-column>-->
             </el-table>
           </el-tab-pane>
           <el-tab-pane label="团队" name="teams">
