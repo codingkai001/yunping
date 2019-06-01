@@ -6,29 +6,40 @@
         <el-table-column
           label="作业ID"
           prop="taskId"
-          width="100">
+          width="70"
+          align="center">
         </el-table-column>
         <el-table-column
           label="作业名"
           prop="taskName"
-          width="100">
+          width="150"
+          align="center">
         </el-table-column>
         <el-table-column
           label="作业创建者"
           prop="taskCreatorName"
-          width="100">
+          width="100"
+          align="center">
         </el-table-column>
         <el-table-column
           label="发布班级"
           prop="taskClassName"
-          width="100">
+          width="130"
+          align="center">
         </el-table-column>
         <el-table-column
           label="作业地址"
-          prop="taskUrl">
+          prop="taskUrl"
+          align="center"
+          min-width="120">
+          <template slot-scope="scope">
+            <a :href="scope.row.taskUrl"
+               target="_blank">{{scope.row.taskUrl}}</a>
+          </template>
         </el-table-column>
         <el-table-column
-          label="操作">
+          label="操作"
+          align="center">
           <template slot-scope="scope">
             <el-button @click="viewHomework(scope.row)" size="mini">查看详情</el-button>
             <el-button size="mini" @click="editHomework(scope.row)">编辑</el-button>
@@ -37,30 +48,30 @@
         </el-table-column>
       </el-table>
       <!--学生-->
-      <el-table :data="homeworkList" stripe v-if="homeworkList.length!==0">
-        <el-table-column
-          label="ID"
-          prop="taskId">
-        </el-table-column>
-        <el-table-column
-          label="作业名"
-          prop="taskName">
-        </el-table-column>
-        <el-table-column
-          label="作业创建者"
-          prop="taskCreatorName">
-        </el-table-column>
-        <el-table-column
-          label="作业地址"
-          prop="taskUrl">
-        </el-table-column>
-        <el-table-column
-          label="操作">
-          <template slot-scope="scope">
-            <el-button @click="editHomework(scope.row)" size="mini">编辑</el-button>
-          </template>
-        </el-table-column>
-      </el-table>
+<!--      <el-table :data="homeworkList" stripe v-if="homeworkList.length!==0">-->
+<!--        <el-table-column-->
+<!--          label="ID"-->
+<!--          prop="taskId">-->
+<!--        </el-table-column>-->
+<!--        <el-table-column-->
+<!--          label="作业名"-->
+<!--          prop="taskName">-->
+<!--        </el-table-column>-->
+<!--        <el-table-column-->
+<!--          label="作业创建者"-->
+<!--          prop="taskCreatorName">-->
+<!--        </el-table-column>-->
+<!--        <el-table-column-->
+<!--          label="作业地址"-->
+<!--          prop="taskUrl">-->
+<!--        </el-table-column>-->
+<!--        <el-table-column-->
+<!--          label="操作">-->
+<!--          <template slot-scope="scope">-->
+<!--            <el-button @click="editHomework(scope.row)" size="mini">编辑</el-button>-->
+<!--          </template>-->
+<!--        </el-table-column>-->
+<!--      </el-table>-->
     </div>
   </Layout>
 </template>

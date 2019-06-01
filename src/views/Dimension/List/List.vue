@@ -5,26 +5,31 @@
       <el-table :data="dimensionList" stripe>
         <el-table-column
           prop="skillId"
-          label="ID"
-          width="180">
+          label="维度ID"
+          width="180"
+          align="center">
         </el-table-column>
         <el-table-column
           prop="skillName"
-          label="能力名">
+          label="能力名"
+          align="center">
         </el-table-column>
         <el-table-column
           prop="skillShortName"
-          label="能力代号">
+          label="能力代号"
+          align="center">
         </el-table-column>
         <el-table-column
           prop="skillType"
-          label="能力类别">
+          label="能力类别"
+          align="center">
         </el-table-column>
         <el-table-column
-          label="操作">
+          label="操作"
+          align="center">
           <template slot-scope="scope">
             <el-button size="mini" @click="editDimension(scope.row)">编辑</el-button>
-            <el-button size="mini" @click="deleteDimension(scope.row)">删除</el-button>
+<!--            <el-button size="mini" @click="deleteDimension(scope.row)">删除</el-button>-->
           </template>
         </el-table-column>
       </el-table>

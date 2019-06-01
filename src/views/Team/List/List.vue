@@ -13,25 +13,42 @@
         <el-table-column
           label="成员ID"
           prop="userId"
-          width="180">
+          width="80"
+          align="center">
         </el-table-column>
         <el-table-column
           label="姓名"
-          prop="userName">
+          prop="userName"
+          align="center"
+          width="80">
         </el-table-column>
         <el-table-column
           label="Github地址"
-          prop="cuGithub">
+          prop="cuGithub"
+          align="center"
+          min-width="150">
+          <template slot-scope="scope">
+            <a :href="scope.row.cuGithub"
+               target="_blank">{{scope.row.cuGithub}}</a>
+          </template>
         </el-table-column>
         <el-table-column
           label="博客园地址"
-          prop="cuBlog">
+          prop="cuBlog"
+          align="center"
+          min-width="150">
+          <template slot-scope="scope">
+            <a :href="scope.row.cuBlog"
+               target="_blank">{{scope.row.cuBlog}}</a>
+          </template>
         </el-table-column>
         <el-table-column
           label="邮箱地址"
-          prop="cuEmail">
+          prop="cuEmail"
+          align="center"
+          min-width="150">
         </el-table-column>
-        <el-table-column label="是否队长">
+        <el-table-column label="是否队长" align="center">
           <template slot-scope="scope">
             <i class="el-icon-check" v-if="scope.row.isCaptain===true"></i>
             <i class="el-icon-close" v-if="scope.row.isCaptain===false"></i>

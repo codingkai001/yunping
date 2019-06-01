@@ -4,19 +4,27 @@
       <el-table :data="clazz.taskVOList" stripe>
         <el-table-column
           label="作业ID"
-          prop="taskId">
+          prop="taskId"
+          align="center"
+          width="70">
         </el-table-column>
         <el-table-column
           label="作业名称"
-          prop="taskName">
+          prop="taskName"
+          align="center"
+          width="150">
         </el-table-column>
         <el-table-column
           label="作业创建者"
-          prop="taskCreatorName">
+          prop="taskCreatorName"
+          align="center"
+          width="100">
         </el-table-column>
         <el-table-column
           label="作业地址"
-          prop="taskUrl">
+          prop="taskUrl"
+          align="center"
+          min-width="150">
           <template slot-scope="scope">
             <a :href="scope.row.taskUrl"
                target="_blank">{{scope.row.taskUrl}}</a>
@@ -24,14 +32,19 @@
         </el-table-column>
         <el-table-column
           label="作业创建时间"
-          prop="taskCreateAt">
+          prop="taskCreateAt"
+          align="center"
+          width="120">
         </el-table-column>
         <el-table-column
           label="作业结束时间"
-          prop="taskOverAt">
+          prop="taskOverAt"
+          align="center"
+          width="120">
         </el-table-column>
         <el-table-column
-          label="操作">
+          label="操作"
+          align="center">
           <template slot-scope="scope">
             <el-button @click="viewHomework(scope.row)" size="mini">查看</el-button>
           </template>

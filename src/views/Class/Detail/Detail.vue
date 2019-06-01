@@ -13,7 +13,7 @@
             <el-table :data="clazz.taskVOList">
               <el-table-column label="作业ID" prop="taskId" width="70" align="center"></el-table-column>
               <el-table-column label="名称" prop="taskName" width="230" align="center"></el-table-column>
-              <el-table-column label="发布地址" prop="taskUrl" width="200" align="center">
+              <el-table-column label="发布地址" prop="taskUrl" min-width="200" align="center">
                 <template slot-scope="scope">
                   <a :href="scope.row.taskUrl"
                      target="_blank">{{scope.row.taskUrl}}</a>
@@ -32,15 +32,15 @@
           <el-tab-pane label="学生" name="students">
             <el-table :data="clazz.classUserVOList" >
               <el-table-column label="学生ID" prop="userId" align="center" width="70"></el-table-column>
-              <el-table-column label="姓名" prop="userName" align="center" width="100"></el-table-column>
+              <el-table-column label="姓名" prop="userName" align="center" width="80"></el-table-column>
               <el-table-column label="学号" prop="userAccount" align="center" width="100"></el-table-column>
-              <el-table-column label="博客园地址" prop="cuBlog" align="center" width="250">
+              <el-table-column label="博客园地址" prop="cuBlog" align="center" min-width="110">
                 <template slot-scope="scope">
                   <a :href="scope.row.cuBlog"
                      target="_blank">{{scope.row.cuBlog}}</a>
                 </template>
               </el-table-column>
-              <el-table-column label="Github地址" prop="cuGithub" align="center" >
+              <el-table-column label="Github地址" prop="cuGithub" align="center" min-width="110">
                 <template slot-scope="scope">
                   <a :href="scope.row.cuGithub"
                      target="_blank">{{scope.row.cuGithub}}</a>
