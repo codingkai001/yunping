@@ -75,6 +75,7 @@ export default {
     },
     drawSkillChart () {
       const chart1 = this.$echarts.init(document.getElementById('analysis-skill-sum'))
+      chart1.showLoading()
       const option1 = {
         title: {
           text: '评分维度得分条形图',
@@ -137,9 +138,11 @@ export default {
         ]
       }
       chart1.setOption(option1)
+      chart1.hideLoading()
     },
     drawTaskChart () {
       const chart2 = this.$echarts.init(document.getElementById('analysis-task-total'))
+      chart2.showLoading()
       const option2 = {
         title: {
           text: '学生总分横向条形图',
@@ -184,6 +187,7 @@ export default {
         ]
       }
       chart2.setOption(option2)
+      chart2.hideLoading()
     }
   }
 }
