@@ -32,21 +32,21 @@
           <el-tab-pane label="学生" name="students">
             <el-table :data="clazz.classUserVOList" >
               <el-table-column label="学生ID" prop="userId" align="center" width="70"></el-table-column>
-              <el-table-column label="姓名" prop="userName" align="center" width="80"></el-table-column>
-              <el-table-column label="学号" prop="userAccount" align="center" width="100"></el-table-column>
-              <el-table-column label="博客园地址" prop="cuBlog" align="center" min-width="110">
+              <el-table-column label="姓名" prop="userName" align="center" width="100"></el-table-column>
+              <el-table-column label="学号" prop="userAccount" align="center" width="150"></el-table-column>
+              <el-table-column label="博客园地址" prop="cuBlog" align="center" min-width="150">
                 <template slot-scope="scope">
                   <a :href="scope.row.cuBlog"
                      target="_blank">{{scope.row.cuBlog}}</a>
                 </template>
               </el-table-column>
-              <el-table-column label="Github地址" prop="cuGithub" align="center" min-width="110">
+              <el-table-column label="Github地址" prop="cuGithub" align="center" min-width="150">
                 <template slot-scope="scope">
                   <a :href="scope.row.cuGithub"
                      target="_blank">{{scope.row.cuGithub}}</a>
                 </template>
               </el-table-column>
-              <el-table-column label="Email" prop="cuEmail" align="center"></el-table-column>
+              <el-table-column label="Email" prop="cuEmail" align="center" min-width="100"></el-table-column>
               <el-table-column label="操作" align="center">
                 <template slot-scope="scope">
                   <el-button size="mini" @click="analyzeHomework(scope.row)">分析</el-button>
@@ -58,7 +58,12 @@
             <el-table :data="teamList">
               <el-table-column label="团队ID" prop="teamId"  align="center"></el-table-column>
               <el-table-column label="团队名称" prop="teamName"  align="center"></el-table-column>
-              <el-table-column label="团队类型" prop="teamType"  align="center"></el-table-column>
+              <el-table-column label="团队类型" align="center">
+                <template slot-scope="scope">
+                  <span  v-if="scope.row.teamType===0">结对</span>
+                  <span  v-if="scope.row.teamType===1">团队</span>
+                </template>
+              </el-table-column>
               <el-table-column label="团队人数" prop="teamSize"  align="center"></el-table-column>
               <el-table-column label="团队队长" prop="teamCaptain"  align="center"></el-table-column>
             </el-table>
@@ -156,11 +161,15 @@ export default {
         var hourEnd = timeEnd.getHours()
         var minuteEnd = timeEnd.getMinutes()
 
-        console.log(timeStart)
-        console.log(timeEnd)
-
-        s[i].taskCreateAt = yearStart.toString() + '年' + monthStart.toString() + '月' + dayStart.toString() + '日' + hourStart.toString() + ':' + minuteStart.toString()
-        s[i].taskOverAt = yearEnd.toString() + '年' + monthEnd.toString() + '月' + dayEnd.toString() + '日' + hourEnd.toString() + ':' + minuteEnd.toString()
+        s[i].taskCreateAt = yearStart.toString() + '年' + this.fixLength(monthStart) + '月' + this.fixLength(dayStart) + '日' + this.fixLength(hourStart) + ':' + this.fixLength(minuteStart)
+        s[i].taskOverAt = yearEnd.toString() + '年' + this.fixLength(monthEnd) + '月' + this.fixLength(dayEnd) + '日' + this.fixLength(hourEnd) + ':' + this.fixLength(minuteEnd)
+      }
+    },
+    fixLength (e) {
+      if (e.toString().length < 2) {
+        return '0' + e.toString()
+      } else {
+        return e.toString()
       }
     }
   }
