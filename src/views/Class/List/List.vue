@@ -15,9 +15,9 @@
           label="班级">
         </el-table-column>
         <el-table-column
-          label="操作" v-if="user.userRole === UserRole.teacher">
+          label="操作">
           <template slot-scope="scope">
-            <el-button size="mini" @click="viewClass(scope.row)" v-if="user.userRole === UserRole.teacher">查看</el-button>
+            <el-button size="mini" @click="viewClass(scope.row)">查看</el-button>
             <el-button size="mini" @click="editClass(scope.row)" v-if="user.userRole === UserRole.teacher">编辑</el-button>
             <el-button @click="deleteClass(scope.row)" size="mini" v-if="user.userRole === UserRole.teacher">删除</el-button>
           </template>
