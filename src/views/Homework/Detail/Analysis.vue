@@ -1,18 +1,17 @@
 <template>
   <layout>
     <div v-loading="loading">
-      <div>
-        <h2>每个评分维度的平均分、该学生的该维度排名、该学生的该维度分数</h2>
-      </div>
       <div style="margin-top: 1em">
-        <div id="analysis-skill-sum" style="width: 100%;height: 600px;margin: 0 auto;"></div>
-        <div id="analysis-task-total" style="width: 100%;height: 600px;margin: 0 auto;"></div>
+        <div v-if="user.userRole === UserRole.student" id="analysis-skill-sum" style="width: 80%;height: 600px;margin: 0 auto;"></div>
+        <div id="analysis-task-total" style="width: 80%;height: 600px;margin: 0 auto;"></div>
       </div>
     </div>
   </layout>
 </template>
 
 <script>
+import UserStorage from '../../../store/user'
+import { UserRole } from '../../../models/User'
 import Layout from '../../../components/Layout'
 import { analysisSkillSum, analysisTaskTotal } from '../../../api/analysis'
 
@@ -30,6 +29,10 @@ export default {
     }
   },
   components: { Layout },
+  computed: {
+    user: () => UserStorage.state.user,
+    UserRole: () => UserRole
+  },
   mounted () {
     this.getTaskId()
     this.initOptionData()

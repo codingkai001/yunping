@@ -4,7 +4,7 @@
   <el-header style="padding-right: 20px;padding-left: 0;">
     <div class="navbar">
       <span class="logo">
-        <img src="../assets/img/logo2.png" alt="加载失败">
+        <img src="../assets/img/logo3.png" alt="加载失败" style="margin-left: 50px;">
       </span>
       <span class="user-info">
         <span>欢迎，{{user.userName}}</span>
