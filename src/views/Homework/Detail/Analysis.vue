@@ -44,21 +44,25 @@ export default {
     },
     initOptionData () {
       this.loading = true
-      analysisSkillSum(this.taskId).then(p => {
-        this.loading = false
-        this.skillSumItemVOList = p.skillSumItemVOList
-        for (var i = 0; i < this.skillSumItemVOList.length; i++) {
-          this.skillList.push(this.skillSumItemVOList[i].skillName)
-          this.averageScoreList.push(parseInt(this.skillSumItemVOList[i].averageScore))
-          this.scoreList.push(parseInt(this.skillSumItemVOList[i].score))
-        }
-        this.drawSkillChart()
-        console.log(this.skillSumItemVOList)
-      }).catch(e => {
-        console.log(e)
-        this.loading = false
-        this.$message.error('数据加载异常')
-      })
+      var userRole = document.cookie
+      // alert(userRole)
+      if (userRole === 'userRole=0') {
+        analysisSkillSum(this.taskId).then(p => {
+          this.loading = false
+          this.skillSumItemVOList = p.skillSumItemVOList
+          for (var i = 0; i < this.skillSumItemVOList.length; i++) {
+            this.skillList.push(this.skillSumItemVOList[i].skillName)
+            this.averageScoreList.push(parseInt(this.skillSumItemVOList[i].averageScore))
+            this.scoreList.push(parseInt(this.skillSumItemVOList[i].score))
+          }
+          this.drawSkillChart()
+          console.log(this.skillSumItemVOList)
+        }).catch(e => {
+          console.log(e)
+          this.loading = false
+          this.$message.warning('暂无数据')
+        })
+      }
       analysisTaskTotal(this.taskId).then(p => {
         this.loading = false
         for (var j = 0; j < p.taskTotalItemVOList.length; j++) {
@@ -70,13 +74,14 @@ export default {
       }).catch(e => {
         this.loading = false
         console.log(e)
-        this.$message.error('数据加载异常')
+        this.$message.warning('暂无数据')
       })
     },
     drawSkillChart () {
       const chart1 = this.$echarts.init(document.getElementById('analysis-skill-sum'))
       chart1.showLoading()
       const option1 = {
+        color: ['rgb(46, 199, 201)', 'rgb(203, 189, 231)', 'rgb(139, 200, 243)', 'rgb(255, 185, 128)'],
         title: {
           text: '评分维度得分条形图',
           x: 'center',
@@ -144,6 +149,7 @@ export default {
       const chart2 = this.$echarts.init(document.getElementById('analysis-task-total'))
       chart2.showLoading()
       const option2 = {
+        color: ['rgb(139, 200, 243)'],
         title: {
           text: '学生总分横向条形图',
           x: 'center',
@@ -161,7 +167,7 @@ export default {
           feature: {
             mark: { show: true },
             dataView: { show: true, readOnly: false },
-            magicType: { show: true, type: ['line', 'bar'] },
+            magicType: { show: true, type: ['bar'] },
             restore: { show: true },
             saveAsImage: { show: true }
           }

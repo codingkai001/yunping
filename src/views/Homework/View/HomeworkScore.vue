@@ -64,7 +64,7 @@ export default {
           this.scoreList.push(parseInt(this.skillSumItemVOList[i].score))
         }
         for (var j = 0; j < this.skillList.length; j++) {
-          this.indicator.push({ text: this.skillList[j] })
+          this.indicator.push({ text: this.skillList[j], min: 0, max: 10 })
         }
         this.drawRadarChart()
       }).catch(e => {
@@ -77,6 +77,7 @@ export default {
       const chart = this.$echarts.init(document.getElementById('analysis-skill-sum'))
       chart.showLoading()
       const option = {
+        color: ['rgb(139, 200, 243)', 'rgb(255, 185, 128)'],
         title: {
           text: '多维度得分对比雷达图',
           x: 'center',
