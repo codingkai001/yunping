@@ -57,7 +57,7 @@ export default {
           break
         case 'custom':
           this.form.minPerson = 3
-          this.form.maxPerson = 6
+          this.form.maxPerson = 8
           break
       }
     },

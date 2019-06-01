@@ -5,25 +5,31 @@
         <el-table-column
           label="团队ID"
           prop="teamId"
-          width="100">
+          width="100"
+          align="center">
         </el-table-column>
         <el-table-column
           label="团队名称"
           prop="teamName"
-          width="100">
+          min-width="200"
+          align="center">
         </el-table-column>
         <el-table-column
           label="团队得分"
           prop="teamScore"
-          width="100">
+          width="150"
+          align="center">
         </el-table-column>
         <el-table-column
           label="团队状态"
           prop="status"
-          width="100">
+          width="150"
+          align="center">
         </el-table-column>
         <el-table-column
-          label="操作">
+          label="操作"
+          align="center"
+          width="200">
           <template slot-scope="scope">
             <el-button @click="evaluateHomework(scope.row)" size="mini">评分</el-button>
           </template>
