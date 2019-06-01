@@ -144,7 +144,6 @@ export default {
         console.log(e)
         this.loading = false
       })
-
     }
   }
 }
