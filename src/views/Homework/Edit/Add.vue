@@ -54,7 +54,7 @@
 import Layout from '../../../components/Layout'
 import { dimensionSearch } from '../../../api/dimension'
 import { classSearch } from '../../../api/class'
-import { taskAdd, taskDetail } from '../../../api/task'
+import { taskAdd } from '../../../api/task'
 
 export default {
   data () {

@@ -19,7 +19,6 @@
               <el-table-column label="截止日期" prop="taskOverAt" width="180"></el-table-column>
               <el-table-column label="操作">
                 <template slot-scope="scope">
-                  <el-button size="mini" @click="importHomework(scope.row)">导入</el-button>
                   <el-button size="mini" @click="analyzeHomework(scope.row)">分析</el-button>
                 </template>
               </el-table-column>
@@ -35,7 +34,6 @@
               <el-table-column label="Email" prop="cuEmail"></el-table-column>
               <el-table-column label="操作">
                 <template slot-scope="scope">
-                  <el-button size="mini" @click="importHomework(scope.row)">导入</el-button>
                   <el-button size="mini" @click="analyzeHomework(scope.row)">分析</el-button>
                 </template>
               </el-table-column>

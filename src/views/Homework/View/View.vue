@@ -69,6 +69,9 @@ export default {
         this.loading = false
       })
     },
+    viewHomework (row) {
+      this.$router.push('/homework/homeworkScore/' + row.taskId)
+    },
     secondsToTime (s) {
       for (var i = 0; i < s.length; i++) {
         var timeStart = new Date(parseInt(s[i].taskCreateAt))
