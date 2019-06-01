@@ -1,7 +1,7 @@
 import axios from 'axios'
 import UserStore from '../store/user'
 
-export const apiUrl = '/api/'
+export const apiUrl = process.env.NODE_ENV === 'development' ? '/api/' : 'http://evaluation.huanglexing.com/'
 export const instance = axios.create({
   baseURL: apiUrl,
   withCredentials: true
