@@ -78,6 +78,9 @@ export default {
         this.clazz = p
         this.secondsToTime(this.clazz.taskVOList)
         this.loading = false
+      }).catch(e => {
+        this.loading = false
+        this.$message.error('暂无数据')
       })
     },
     viewHomework (row) {

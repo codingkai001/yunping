@@ -61,8 +61,14 @@ export default {
         this.$message.success('团队创建成功')
         this.loading = false
       }).catch(e => {
-        this.$message.error('当前用户未在当前班级中，无法创建团队')
-        console.error(e)
+        var message = JSON.parse(e.message)
+        if (message.status === 730) {
+          this.$message.error('你已加入团队，不能新建团队')
+          this.loading = false
+        } else if (message.status === 734) {
+          this.$message.error('团队已存在')
+        }
+        console.log(typeof e.message)
         this.loading = false
       })
     }

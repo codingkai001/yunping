@@ -130,11 +130,21 @@ export default {
       })
     },
     clearTeam (teamId) {
-      teamClear(teamId).then(p => {
-        alert('解散团队成功！')
-        console.log(p)
+      this.$confirm('此操作将解散当前团队，是否继续？', '提示', {
+        type: 'warning'
+      }).then(() => {
+        teamClear(teamId).then(p => {
+          this.$message.success('解散团队成功')
+          this.reloadList()
+          console.log(p)
+          this.loading = false
+        })
+      }).catch(e => {
+        this.$message.error('权限不足，不允许此操作')
+        console.log(e)
         this.loading = false
       })
+
     }
   }
 }

@@ -55,7 +55,7 @@ export default {
           // this.loading = false
         }).catch(e => {
           this.$message.error('用户名或密码错误')
-          console.log(e)
+          console.log(e.message)
           // this.loading = false
         })
       }
