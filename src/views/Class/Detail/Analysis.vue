@@ -5,7 +5,7 @@
         <h2></h2>
       </div>
       <div style="margin-top: 1em">
-        <div id="total-score-change-chart" style="width: 100%;height: 600px;margin: 0 auto;"></div>
+        <div id="total-score-change-chart" style="width: 100%;height: 700px;margin: 0 auto;"></div>
       </div>
     </div>
   </layout>
@@ -90,8 +90,8 @@ export default {
         title: {
           text: '学生作业成绩千帆竞发图',
           x: 'center',
-          y: 'bottom',
-          padding: 0,
+          y: 'top',
+          padding: 5,
           textStyle: {
             fontSize: 25
           }
@@ -100,14 +100,17 @@ export default {
           trigger: 'axis'
         },
         legend: {
-          data: this.stuNumList
+          data: this.stuNumList,
+          x: 'center',
+          y: 'bottom',
+          padding: 0
         },
         toolbox: {
           show: true,
           feature: {
             mark: { show: true },
             dataView: { show: true, readOnly: false },
-            magicType: { show: true, type: ['line', 'bar', 'stack', 'tiled'] },
+            magicType: { show: true, type: ['line', 'bar'] },
             restore: { show: true },
             saveAsImage: { show: true }
           }
@@ -117,9 +120,17 @@ export default {
           {
             type: 'category',
             boundaryGap: false,
-            data: this.taskList
+            data: this.taskList,
+            axisLabel: {
+              interval: 0,
+              rotate: -30
+            }
           }
         ],
+        grid: {
+          left: '5%',
+          bottom: '25%'
+        },
         yAxis: [
           {
             type: 'value'
