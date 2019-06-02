@@ -25,6 +25,10 @@
           prop="status"
           width="150"
           align="center">
+          <template slot-scope="scope">
+            <span  v-if="scope.row.status===true">已评分</span>
+            <span  v-if="scope.row.status===false">未评分</span>
+          </template>
         </el-table-column>
         <el-table-column
           label="操作"

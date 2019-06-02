@@ -3,7 +3,7 @@
     <div v-loading="loading">
       <div>
         <h2>{{clazz.className}}</h2>
-        <el-button size='small' @click="reorganizeTeam">团队重组</el-button>
+        <el-button size='small' @click="reorganizeTeam" v-if="userRole==='userRole===1'">团队重组</el-button>
         <el-button size='small' @click="analysisClass">统计分析</el-button>
         <el-button size='small' v-if="false">创建团队</el-button>
       </div>
@@ -20,8 +20,8 @@
                 </template>
               </el-table-column>
               <el-table-column label="发布者" prop="taskCreatorName" width="100" align="center"></el-table-column>
-              <el-table-column label="创建日期" prop="taskCreateAt" width="160" align="center"></el-table-column>
-              <el-table-column label="截止日期" prop="taskOverAt" width="160" align="center"></el-table-column>
+              <el-table-column label="创建日期" prop="taskCreateAt" width="170" align="center"></el-table-column>
+              <el-table-column label="截止日期" prop="taskOverAt" width="170" align="center"></el-table-column>
               <el-table-column label="操作" align="center">
                 <template slot-scope="scope">
                   <el-button size="mini" @click="analyzeHomework(scope.row)">分析</el-button>
@@ -95,7 +95,8 @@ export default {
       activeTab: 'homeworks',
       clazz: {},
       showNewTeam: false,
-      teamList: []
+      teamList: [],
+      userRole: null
     }
   },
   components: {
@@ -119,6 +120,11 @@ export default {
         this.teamList = p.teamVOList
         this.loading = false
       })
+      // 判断用户角色
+      var role = document.cookie
+      if (role !== null) {
+        this.userRole = role
+      }
     },
     reorganizeTeam () {
       this.$confirm('此操作将解散所有学生团队，是否继续？', '提示', {

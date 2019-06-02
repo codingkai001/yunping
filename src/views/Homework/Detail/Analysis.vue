@@ -3,6 +3,7 @@
     <div v-loading="loading">
       <div style="margin-top: 1em">
         <div v-if="user.userRole === UserRole.student" id="analysis-skill-sum" style="width: 80%;height: 600px;margin: 0 auto;"></div>
+        <br><br>
         <div id="analysis-task-total" style="width: 80%;height: 600px;margin: 0 auto;"></div>
       </div>
     </div>
@@ -85,8 +86,8 @@ export default {
         title: {
           text: '评分维度得分条形图',
           x: 'center',
-          y: 'bottom',
-          padding: 0,
+          y: 'top',
+          padding: 5,
           textStyle: {
             fontSize: 25
           }
@@ -95,7 +96,9 @@ export default {
           trigger: 'axis'
         },
         legend: {
-          data: ['平均分', '我的得分']
+          data: ['平均分', '我的得分'],
+          x: 'center',
+          y: 'bottom'
         },
         toolbox: {
           show: true,
@@ -153,8 +156,8 @@ export default {
         title: {
           text: '学生总分横向条形图',
           x: 'center',
-          y: 'bottom',
-          padding: 0,
+          y: 'top',
+          padding: 5,
           textStyle: {
             fontSize: 25
           }

@@ -1,11 +1,11 @@
 <template>
   <layout>
     <div v-loading="loading">
-    <span>该次作业平均分：{{this.averageScore}}</span>
+    <span>本次作业平均分：{{this.averageScore}}分</span>
       <br />
-      <span>你的排名：{{this.rank}}</span>
+      <span>我的本次作业得分：{{this.totalScore}}分</span>
       <br />
-      <span>你的总分：{{this.totalScore}}</span>
+      <span>我的本次作业得分排名：第{{this.rank}}名</span>
       <div style="margin-top: 1em">
         <div id="analysis-skill-sum" style="width: 80%;height: 600px;margin: 0 auto;"></div>
       </div>
@@ -81,16 +81,16 @@ export default {
         title: {
           text: '多维度得分对比雷达图',
           x: 'center',
-          y: 'bottom',
-          padding: 0,
+          y: 'top',
+          padding: 5,
           textStyle: {
             fontSize: 25
           }
         },
         legend: {
           orient: 'vertical',
-          x: 'left',
-          y: 'top',
+          x: 'right',
+          y: 'center',
           data: ['平均分', '我的得分']
         },
         tooltip: {

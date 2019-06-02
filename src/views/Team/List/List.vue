@@ -52,6 +52,7 @@
           <template slot-scope="scope">
             <i class="el-icon-check" v-if="scope.row.isCaptain===true"></i>
             <i class="el-icon-close" v-if="scope.row.isCaptain===false"></i>
+<!--            <i class="el-icon-close" v-if="isCaptain=scope.row.isCaptain" hidden></i>-->
           </template>
         </el-table-column>
       </el-table>
@@ -103,7 +104,7 @@ export default {
   },
   methods: {
     reloadList () {
-      // this.loading = true
+      this.loading = true
       teamDetail().then(p => {
         this.teamList = p.classUserVOList
         this.teamName = p.teamName
@@ -138,11 +139,12 @@ export default {
           this.reloadList()
           console.log(p)
           this.loading = false
+        }).catch(e => {
+          this.$message.error('权限不足，不允许此操作')
+          console.log(e)
+          this.loading = false
         })
       }).catch(e => {
-        this.$message.error('权限不足，不允许此操作')
-        console.log(e)
-        this.loading = false
       })
     }
   }
