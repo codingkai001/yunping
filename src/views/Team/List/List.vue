@@ -3,11 +3,11 @@
     <div v-loading="loading">
       <div>
         <h2>{{teamName}}</h2>
-        <el-button size="small" @click="showCreateTeam = true" type='primary'>创建团队</el-button>
-        <el-button size="small" @click="showJoinTeam = true" type='primary'>加入团队</el-button>
-        <el-button size="small" @click="showEditTeam = true" type='primary'>编辑团队</el-button>
-        <el-button size="small" @click="quitTeam" type='primary'>退出团队</el-button>
-        <el-button @click="clearTeam(teamId)" size="small" type='primary'>解散团队</el-button>
+        <el-button size="small" @click="showCreateTeam = true" type='primary' v-if="isCaptainShow===false">创建团队</el-button>
+        <el-button size="small" @click="showJoinTeam = true" type='primary' v-if="isCaptainShow===false">加入团队</el-button>
+        <el-button size="small" @click="showEditTeam = true" type='primary' v-if="isCaptainShow===true">编辑团队</el-button>
+        <el-button size="small" @click="quitTeam" type='primary' v-if="isCaptainShow===false">退出团队</el-button>
+        <el-button @click="clearTeam(teamId)" size="small" type='primary' v-if="isCaptainShow===true">解散团队</el-button>
       </div>
       <el-table :data="teamList" stripe>
         <el-table-column
@@ -52,7 +52,6 @@
           <template slot-scope="scope">
             <i class="el-icon-check" v-if="scope.row.isCaptain===true"></i>
             <i class="el-icon-close" v-if="scope.row.isCaptain===false"></i>
-<!--            <i class="el-icon-close" v-if="isCaptain=scope.row.isCaptain" hidden></i>-->
           </template>
         </el-table-column>
       </el-table>
@@ -78,7 +77,7 @@ import Layout from '../../../components/Layout'
 import CreateTeam from './CreateTeam'
 import JoinTeam from './JoinTeam'
 import EditTeam from './EditTeam'
-import { teamDetail, teamExit, teamClear } from '../../../api/team'
+import { teamDetail, teamExit, teamClear, teamIsCaptain } from '../../../api/team'
 
 export default {
   data () {
@@ -90,7 +89,8 @@ export default {
       teamList: [],
       selectedClass: {},
       teamName: '',
-      teamId: 0
+      teamId: 0,
+      isCaptainShow: false
     }
   },
   components: {
@@ -105,6 +105,9 @@ export default {
   methods: {
     reloadList () {
       this.loading = true
+      teamIsCaptain().then(p => {
+        this.isCaptainShow = p
+      })
       teamDetail().then(p => {
         this.teamList = p.classUserVOList
         this.teamName = p.teamName

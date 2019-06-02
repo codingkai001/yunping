@@ -43,7 +43,7 @@
           width="250">
           <template slot-scope="scope">
             <el-button @click="viewHomework(scope.row)" size="mini">查看详情</el-button>
-            <el-button size="mini" @click="editHomework(scope.row)">编辑</el-button>
+<!--            <el-button size="mini" @click="editHomework(scope.row)">编辑</el-button>-->
             <el-button @click="deleteHomework(scope.row)" size="mini">删除</el-button>
           </template>
         </el-table-column>
